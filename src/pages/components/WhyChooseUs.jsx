@@ -27,18 +27,26 @@ function WhyChooseUs() {
             </p>
           </Slide>
           {/* removed flex flex-wrap flex-col justify-between */}
-          <div className="sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto grid grid-cols-1 md:grid-cols-3 gap-5 mt-20 backdrop-blur-md">
+          <div className="grid grid-cols-[300px,300px,300px,300px,300px,300px] max-sm:overflow-x-scroll md:grid-cols-3 gap-5 mt-20 backdrop-blur-md">
             {chooseUsCardInfo.map((item, index) => (
               <Slide
                 key={item.title}
                 yAxis={90}
                 delay={index === 0 ? 0.2 : 0.2 * index}
-                className={`md:col-start-[${index + 1}] md:col-end-[${
+                className={`grid grid-cols-subgrid md:col-start-[${
+                  index + 1
+                }] md:col-end-[${
                   index + 3
-                }] bg-slate-800 highlight-white/5 rounded-lg p-6 text-white hover:bg-slate-700 hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col`}
+                }] bg-[#0e1a40] highlight-white/5 rounded-lg p-6 text-[#e3f9e5] hover:bg-[#162a6d] hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col`}
               >
                 {/* <i className="lni lni-thunder"></i> */}
-                <img src={item.image} alt="" className="rounded-lg w-full" />
+                <img
+                  src={item.image}
+                  alt=""
+                  width={252}
+                  height={178}
+                  className="rounded-lg w-full h-full object-center"
+                />
                 <h5 className="text-white font-semibold text-2xl capitalize mt-2">
                   {item.title}
                 </h5>

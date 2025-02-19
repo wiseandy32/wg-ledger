@@ -31,7 +31,7 @@ function Login() {
 
       if (userDoc.isDeleted) {
         // await deleteUserData(user.uid, user);
-        localStorage.removeItem("id");
+        localStorage.removeItem("wglid");
         signOut(auth);
         setIsSubmitting(false);
         setError("This user does not exist");

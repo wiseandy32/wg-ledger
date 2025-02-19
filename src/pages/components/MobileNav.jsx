@@ -17,7 +17,7 @@ function MobileNav() {
   const logout = async () => {
     try {
       await signOut(auth);
-      localStorage.clear();
+      localStorage.removeItem("wglid");
       setIsMenuVisible(false);
       navigate("/");
     } catch (error) {
@@ -53,7 +53,7 @@ function MobileNav() {
         }}
         initial="hidden"
         animate={!isMenuVisible ? "close" : "open"}
-        className="flex md:hidden flex-col md:flex-row gap-16 md:gap-0 pt-24 md:pt-0 md:justify-end items-center capitalize fixed md:static h-[100vh] md:h-auto w-[100vw] top-[0] left-[0] z-[999999] bg-[#0b1120]"
+        className="flex md:hidden flex-col md:flex-row gap-16 md:gap-0 pt-24 md:pt-0 md:justify-end items-center capitalize fixed md:static h-[100vh] md:h-auto w-[100vw] top-[0] left-[0] z-[999999] bg-[#021035]"
       >
         <ul className="flex flex-col md:flex-row justify-center md:w-auto w-full items-center gap-4">
           {[

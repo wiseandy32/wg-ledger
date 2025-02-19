@@ -21,11 +21,11 @@ function ForgotPassword() {
   };
 
   return (
-    <section className="h-[120vh] mb-[10vh] bg-bottom bg-no-repeat bg-[#0B1120] bottom-10 inset-0  sm:h-[100dvh] md:h-[105dvh] relative">
+    <section className="h-[120vh] mb-[10vh] bg-bottom bg-no-repeat bg-[#021035] bottom-10 inset-0  sm:h-[100dvh] md:h-[105dvh] relative">
       <div className="mt-[12vh] md:pt-[6vh] px-5 absolute inset-0 h-[135vh] w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px] md:h-full">
         <div
           className="p-2 md:p-0 md:flex md:justify-center md:items-center max-w-[600px] md:m-auto md:py-5"
-          style={{ backgroundColor: "#0B1120" }}
+          style={{ backgroundColor: "#021035" }}
         >
           {!isResetLinkSent ? (
             <div>

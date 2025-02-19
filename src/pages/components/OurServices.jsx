@@ -10,7 +10,7 @@ function OurServices() {
   return (
     <section
       // className="relative pb-[17rem] mb:pb-[7rem] h-[750px] h-[350dvh] bottom-10 sm:h-[140dvh] lg:h-[260dvh]"
-      className="bg-[#0B1120] mt-[5rem]"
+      className="mt-[5rem]"
     >
       <div className="pb-10 w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px]">
         {/* removed max-w-5xl  */}
@@ -58,7 +58,7 @@ function OurServices() {
               // style={{ border: "2px solid blue" }}
             >
               {/*  className="bg-green-700 max-w-[95%] overflow-scroll" */}
-              <TabsList className="text-white bg-slate-800 max-w-full w-full overflow-scroll md:overflow-hidden pl-[8rem] xxs:pl-[6rem] xs:pl-0 sm:pl-[10.5rem] lg:pl-0">
+              <TabsList className="text-white bg-[#0e1a40] max-w-full w-full overflow-scroll md:overflow-hidden pl-[8rem] xxs:pl-[6rem] xs:pl-0 sm:pl-[10.5rem] lg:pl-0">
                 <TabsTrigger value="free" className="capitalize">
                   Free trial accounts
                 </TabsTrigger>
@@ -144,7 +144,7 @@ function OurServices() {
           </Slide>
           <div
             className="px-3 flex flex-wrap flex-col justify-between sm:flex-row gap-5 mt-20 sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
-            style={{ boxShadow: "20px 20px 20px #0B1120" }}
+            style={{ boxShadow: "20px 20px 20px #021035" }}
           >
             {[
               {
@@ -171,7 +171,7 @@ function OurServices() {
                 xAxis={100}
                 delay={0.4 * (index + 1)}
                 className={
-                  "bg-slate-800 highlight-white/5 rounded-lg p-6 text-white sm:w-[30%] hover:bg-[#0a1120] hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col"
+                  "bg-[#0e1a40] text-[#e3f9e5] highlight-white/5 rounded-lg p-6 sm:w-[30%] hover:bg-[#162a6d] hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col"
                 }
               >
                 {/* <div

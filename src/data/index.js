@@ -106,38 +106,38 @@ export const chooseUsCardInfo = [
   {
     title: "Digital Adaptation",
     subtext:
-      "The Quantum Financial System (QFS) is indeed a real concept and a subject of ongoing research and development but has yet to be fully implemented globally.",
+      "The Quantum Financial System (QFS) is indeed a real concept and a subject of ongoing research and development but has yet to be fully implemented globally. It aims to revolutionize the financial world.",
     start: 1,
     image: chooseUsImage1,
   },
   {
     title: "Quantum Financial System",
     subtext:
-      "The Quantum Financial System (QFS) originally began as a concept that was then developed by various researchers, scientists, and experts in the fields of finance, physics, and computer science over a period of time. There is no single person or entity that created the quantum financial system (QFS).",
+      "The Quantum Financial System (QFS) originally began as a concept that was then developed by various researchers, scientists, and experts in the fields of finance, physics, and computer science over a period of time.",
     image: chooseUsImage2,
   },
   {
     title: "How it Works",
     subtext:
-      "One of the key features of the new quantum financial system is its use of quantum computing technology. Quantum computing is a form of computing that uses quantum-mechanical phenomena, such as superposition and entanglement, to perform operations on data.",
+      "One of the key features of the new quantum financial system is its use of quantum computing technology. This technology can process complex transactions at unprecedented speeds.",
     image: chooseUsImage3,
   },
   {
     title: "Near Instantaneous Transaction",
     subtext:
-      "One of the more exciting aspects of the new quantum financial system is its potential for near-instantaneous financial transactions. With the use of quantum computing and blockchain technology, it will become possible to conduct financial transactions in real-time and without the need for intermediaries (like banks).",
+      "With the use of quantum computing and blockchain technology, it will become possible to conduct financial transactions in real-time and without the need for intermediaries (like banks). This will significantly reduce transaction times and costs.",
     image: chooseUsImage4,
   },
   {
     title: "Increased Security",
     subtext:
-      "Increased Security Another benefit of the new quantum financial system is increased (transactional) security. With the use of quantum computing and blockchain technology, it will be much more difficult for hackers to steal financial information or conduct fraudulent transactions. This will increase the security of financial transactions, making it safer for businesses and individuals to conduct financial transactions.",
+      "With the use of quantum computing and blockchain technology, it will be much more difficult for hackers to steal financial information or conduct fraudulent transactions. This will make it safer for businesses and individuals to conduct financial transactions.",
     image: chooseUsImage5,
   },
   {
     title: "Blockchain Utilization",
     subtext:
-      "A key component of the quantum financial system is its utilization of blockchain technology (a decentralized digital ledger that records transactions across a network of computers). In this new quantum financial system, blockchain technology will be used to assist in the creation of a secure and transparent financial system.",
+      "A key component of the quantum financial system is its utilization of blockchain technology. In this new quantum financial system, blockchain technology will be used to assist in the creation of a secure and transparent financial system.",
     image: chooseUsImage6,
   },
 ];

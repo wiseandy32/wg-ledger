@@ -8,7 +8,7 @@ import sixthPartner from "../../assets/sixth-partner.webp";
 
 function Partners() {
   return (
-    <section className="bg-bottom bg-no-repeat bg-[#0B1120] bottom-10 inset-0 mb-20">
+    <section className="bg-bottom bg-no-repeat bottom-10 inset-0 mb-20">
       <div className="w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px] ">
         {/* removed max-w-5xl px-3 sm:px-0 */}
         <div className="relative mx-auto pt-20 mt-[40px] sm:pt-0 px-5 sm:px-10">
@@ -17,7 +17,7 @@ function Partners() {
               our partners
             </h2>
           </Slide>
-          <div className="sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto w-full grid grid-cols-1 md:grid-cols-3 gap-5 sm:py-10 backdrop-blur-md">
+          <div className="w-full grid grid-cols-[98px,98px,98px,98px,98px,98px] max-sm:overflow-x-scroll md:grid-cols-3 gap-5 sm:py-10 py-4 backdrop-blur-md sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto bg-[#0e1a40]">
             {[
               firstPartner,
               secondPartner,

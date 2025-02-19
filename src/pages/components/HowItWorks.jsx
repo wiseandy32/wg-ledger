@@ -2,7 +2,7 @@ import Slide from "./Slide";
 
 function HowItWorks() {
   return (
-    <section className="h-[155dvh] bg-bottom bg-no-repeat bg-[#0B1120] bottom-10 inset-0 sm:h-[100dvh]">
+    <section className="h-[155dvh] bg-bottom bg-no-repeat bg-[#021035] bottom-10 inset-0 sm:h-[100dvh]">
       <div className="inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px] ">
         <div className="relative max-w-5xl mx-auto pt-20 mt-[40px] px-3 sm:px-0 sm:pt-0">
           <Slide yAxis={90}>
@@ -17,7 +17,7 @@ function HowItWorks() {
           </Slide>
           <div
             className="flex flex-wrap flex-col justify-between sm:flex-row gap-5 mt-20  sm:p-10 backdrop-blur-md"
-            style={{ boxShadow: "20px 20px 20px #0B1120" }}
+            style={{ boxShadow: "20px 20px 20px #021035" }}
           >
             {[
               {
