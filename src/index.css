@@ -1,0 +1,395 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+  /* grid-area: header main footer; */
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  background-color: #0b1120;
+  /* background-color: hsl(223, 49%, 8%); */
+  /* background-color: rgb(11, 17, 32);
+  background-color: #0a1120; */
+}
+
+#root {
+  width: 100%;
+  max-width: 1440px;
+}
+main {
+  flex: 1;
+}
+
+footer {
+  min-height: 60px;
+}
+
+.a {
+  fill: #e2761b;
+  stroke: #e2761b;
+}
+
+.a,
+.b,
+.c,
+.d,
+.e,
+.f,
+.g,
+.h,
+.i,
+.j {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.b {
+  fill: #e4761b;
+  stroke: #e4761b;
+}
+.c {
+  fill: #d7c1b3;
+  stroke: #d7c1b3;
+}
+.d {
+  fill: #233447;
+  stroke: #233447;
+}
+.e {
+  fill: #cd6116;
+  stroke: #cd6116;
+}
+.f {
+  fill: #e4751f;
+  stroke: #e4751f;
+}
+.g {
+  fill: #f6851b;
+  stroke: #f6851b;
+}
+.h {
+  fill: #c0ad9e;
+  stroke: #c0ad9e;
+}
+.i {
+  fill: #161616;
+  stroke: #161616;
+}
+.j {
+  fill: #763d16;
+  stroke: #763d16;
+}
+
+.fullscreen-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: -20px;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 100%;
+    height: auto;
+  }
+  #lo {
+    height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullscreen-bg__video {
+    width: 1005px;
+    height: 100%;
+  }
+  .fullscreen-bg {
+    width: 100%;
+  }
+  #loo {
+    height: 565px;
+  }
+}
+
+#overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  background-color: rgba(11, 17, 32, 0.3);
+
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* About section styles */
+.about-description-box {
+  list-style: none;
+  padding-left: 32px;
+  margin: 32px 0;
+}
+
+.about-description-box li {
+  position: relative;
+}
+
+.about-description-box p:before {
+  content: "\2713";
+  font-family: LineIcons, sans-serif;
+  font-size: 9px;
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translate(0, -50%);
+  background: linear-gradient(96deg, #105907 0%, #136b09 100%);
+  /* background: #0ea5e9; */
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.c {
+  background-color: rgb(11, 17, 32);
+}
+
+.h,
+.p {
+  position: relative;
+  padding: 0 !important;
+}
+
+.h::after,
+.p:after {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+}
+
+.h::after {
+  content: "secure your financial future with quantum financial system.";
+}
+
+.p::after {
+  content: "qfswrdledger Ledger stands as the world's most secure ledger and a decentralized digital banking system. It's specially crafted by the Quantum Financial System in collaboration with Nesara/Gesara, introducing a revolutionary banking system with robustly backed digital assets to ensure the safety of your finances. It's simple, seamless, and secure, equipped to manage your ISO20022 coins (XRP/XLM) and various other crypto assets like Bitcoin, USDT, Ethereum, Dogecoin, Litecoin, TRX, etc., guarding against crashes and cyberattacks.";
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    /* my app background color */
+    /* --background: 223, 49%, 8%; */
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    /* my app color */
+    /* --sidebar-background: 223, 49%, 8%; */
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  /* .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  } */
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/*--------------------------------
+            Skills
+-------------------------------*/
+.skill-box {
+  margin-top: 80px;
+}
+
+.skill-box .skillbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-radius: 16px;
+  transition: 0.1s linear;
+  background-color: rgba(103, 148, 241, 0.3);
+}
+
+.skill-box .skillbar:not(:last-child) {
+  margin-bottom: 60px;
+}
+
+.skill-box .skillbar-title {
+  position: absolute;
+  top: -40px;
+  left: -17px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.skill-box .skillbar-title span {
+  margin-left: 18px;
+}
+
+.skill-box .fill-skillbar {
+  height: 10px;
+  width: 0;
+  border-radius: 8px;
+  float: left;
+  background-image: linear-gradient(96deg, #105907 0%, #136b09 50%, #105907);
+  /* background-color: #0ea5e9; */
+  background-size: 200% auto;
+}
+
+.skill-box .skill-bar-percent {
+  position: absolute;
+  font-weight: 500;
+  bottom: 26px;
+  right: 0;
+}
+
+.tradingview-widget-copyright {
+  display: none !important;
+}
+
+.customModal {
+  background-color: #1e1e1e !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  border-radius: 10px;
+}
