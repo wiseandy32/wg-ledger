@@ -401,6 +401,7 @@ export const handleRequestApproval = (
             request_method: `${capitalizeWord(transaction.coin)}`,
             request_amount: `$${formatNumberWithCommas(+transaction.amount)}`,
             to_email: `${transaction.email}`,
+            company_name: "World Global Ledger",
           });
 
           toast.success(`${doc.name} ${requestType} request has been approved`);
