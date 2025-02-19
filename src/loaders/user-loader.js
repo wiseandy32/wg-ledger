@@ -15,7 +15,7 @@ export const userDetailsLoader = (queryClient, uid) => async () => {
 };
 
 export const adminLoader = async () => {
-  const uid = JSON.parse(localStorage.getItem("id"));
+  const uid = JSON.parse(localStorage.getItem("wglid"));
   const user = await fetchUserByID(uid);
 
   if (!user?.isAdmin) {

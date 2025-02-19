@@ -24,7 +24,7 @@ const router = createBrowserRouter(
     {
       path: "/",
       loader: () => {
-        const uid = localStorage.getItem("id");
+        const uid = localStorage.getItem("wglid");
         if (uid) {
           return redirect("/user");
         }
@@ -54,7 +54,7 @@ const router = createBrowserRouter(
     },
     {
       loader: async ({ request }) => {
-        const uid = localStorage.getItem("id");
+        const uid = localStorage.getItem("wglid");
         const from = "/" + request.url.split("/").slice(3).join("/");
         if (!uid) {
           return redirect("/login", { state: { from } });
@@ -107,7 +107,7 @@ const router = createBrowserRouter(
     },
     {
       loader: async ({ request }) => {
-        const uid = localStorage.getItem("id");
+        const uid = localStorage.getItem("wglid");
         const from = "/" + request.url.split("/").slice(3).join("/");
 
         if (!uid) {

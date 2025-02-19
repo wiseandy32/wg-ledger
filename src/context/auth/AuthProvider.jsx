@@ -25,7 +25,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        localStorage.setItem("id", user?.uid);
+        localStorage.setItem("wglid", user?.uid);
         setUid(user?.uid);
       }
     });

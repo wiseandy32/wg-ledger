@@ -47,7 +47,7 @@ export const updateUserProfile = async (newInfo) => {
 export const logout = async (navigate) => {
   try {
     await signOut(auth);
-    localStorage.removeItem("id");
+    localStorage.removeItem("wglid");
     navigate("/");
   } catch (error) {
     console.error(error);
