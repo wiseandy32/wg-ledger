@@ -62,7 +62,7 @@ function UserDashboard() {
         </p>
         <TotalAssets balance={ledgerBalance} />
       </div>
-      <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4 mb-10 mt-3">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10 mt-3">
         {dashboardWallets.map((wallet, index) => (
           <div
             key={wallet?.name}

@@ -26,7 +26,7 @@ function TotalAssets({ balance, bitcoin_price }) {
 
   return (
     <div className="bg-black text-white p-4 mt-8 bg-muted/50 rounded-lg">
-      <div className="flex items-center justify-between">
+      <div className="flex max-sm:flex-col max-sm:gap-4 md:items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-gray-400 text-sm">Total Assets</h2>
@@ -67,7 +67,7 @@ function TotalAssets({ balance, bitcoin_price }) {
         <div className="flex justify-center">
           <Link
             to={"deposit"}
-            className="bg-[#FFA800] hover:bg-[#FF9500] text-black font-semibold px-8 py-2 rounded-lg"
+            className="bg-[#FFA800] hover:bg-[#FF9500] max-sm:w-full text-center text-black font-semibold px-8 py-2 rounded-lg"
           >
             Deposit
           </Link>
