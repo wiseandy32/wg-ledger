@@ -37,7 +37,7 @@ function Footer() {
                   yAxis={90}
                   delay={index === 0 ? 0.2 : 0.2 * index}
                 >
-                  <li key={link.title} className="hover:text-sky-400 mt-4">
+                  <li key={link.title} className="hover:text-[#1c8d0c] mt-4">
                     <Link href={link.path}>{link.title}</Link>
                   </li>
                 </Slide>
@@ -57,7 +57,7 @@ function Footer() {
                   yAxis={90}
                   delay={index === 0 ? 0.2 : 0.2 * index}
                 >
-                  <li key={link.title} className="hover:text-sky-400 mt-4">
+                  <li key={link.title} className="hover:text-[#1c8d0c] mt-4">
                     <Link href={link.path}>{link.title}</Link>
                   </li>
                 </Slide>
@@ -76,7 +76,7 @@ function Footer() {
               />
             </Slide>
             <Slide yAxis={90} delay={0.3}>
-              <button className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400">
+              <button className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-[#136b09] hover:bg-[#1c8d0c] highlight-white/20">
                 Subscribe
               </button>
             </Slide>

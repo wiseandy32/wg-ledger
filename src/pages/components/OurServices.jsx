@@ -34,7 +34,7 @@ function OurServices() {
             className="px-5 sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
           >
             <p className="text-base mt-7 text-sky-500 font-bold">
-              Why QFS Ledger
+              Why World Global Ledger
             </p>
             <h2 className="md:mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-left text-white py-1 md:max-w-[400px] mb-[32px]">
               {/* Our Services */}

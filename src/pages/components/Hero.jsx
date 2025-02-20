@@ -35,15 +35,15 @@ function Hero() {
           </h1>
           {/* removed p */}
           <p className="mt-[40px] md:mt-6 md:text-lg text-left md:text-center max-w-3xl text-sm mx-auto text-white">
-            qfswrdledger Ledger stands as the world&apos;s most secure ledger
-            and a decentralized digital banking system. It&apos;s specially
-            crafted by the Quantum Financial System in collaboration with
-            Nesara/Gesara, introducing a revolutionary banking system with
-            robustly backed digital assets to ensure the safety of your
-            finances. It&apos;s simple, seamless, and secure, equipped to manage
-            your ISO20022 coins (XRP/XLM) and various other crypto assets like
-            Bitcoin, USDT, Ethereum, Dogecoin, Litecoin, TRX, etc., guarding
-            against crashes and cyberattacks.
+            World Global Ledger is the world&apos;s most secure ledger and a
+            decentralized digital banking system. It&apos;s specially crafted by
+            the Quantum Financial System in collaboration with Nesara/Gesara,
+            introducing a revolutionary banking system with robustly backed
+            digital assets to ensure the safety of your finances. It&apos;s
+            simple, seamless, and secure, equipped to manage your ISO20022 coins
+            (XRP/XLM) and various other crypto assets like Bitcoin, USDT,
+            Ethereum, Dogecoin, Litecoin, TRX, etc., guarding against crashes
+            and cyberattacks.
           </p>
         </Slide>
         <Slide
@@ -52,13 +52,13 @@ function Hero() {
           className="w-[92%] absolute z-[100] bottom-[-10rem] md:bottom-[-7rem] mt-10 md:mt-6 sm:mt-10 flex flex-col md:flex-row gap-2 sm:justify-center sm:space-x-6 text-sm sm:w-[100%] m-auto"
         >
           <Link
-            className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto highlight-white/20 bg-sky-500 hover:bg-sky-400 md:w-[30%]"
+            className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto highlight-white/20 bg-[#136b09] hover:bg-[#1c8d0c] md:w-[30%]"
             to="register"
           >
             Get started
           </Link>
           <Link
-            className="  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto border-solid border-2 highlight-white/20 border-sky-500 hover:bg-sky-400 md:w-[30%]"
+            className="  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto border-solid border-2 highlight-white/20 border-[#136b09] hover:border-[#1c8d0c] md:w-[30%]"
             to="Login"
           >
             Login

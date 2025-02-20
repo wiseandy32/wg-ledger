@@ -50,7 +50,7 @@ function AboutUs() {
             <Link
               to={"login"}
               // removed bg-slate-900
-              className=" focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-[fit-content] highlight-white/20 bg-sky-500 hover:bg-sky-400"
+              className=" focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-[fit-content] highlight-white/20 bg-[#136b09] hover:bg-[#1c8d0c]"
             >
               Connect wallet
             </Link>
