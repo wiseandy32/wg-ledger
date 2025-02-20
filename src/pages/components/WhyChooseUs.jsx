@@ -13,7 +13,7 @@ function WhyChooseUs() {
       <div className="flex flex-col-reverse sm:flex-row justify-between sm:mt-0  gap-16 sm:gap-0">
         <div className="flex flex-col gap-y-4 sm:gap-y-10 px-5">
           <Slide yAxis={90}>
-            <p className="text-sm mb-2 text-sky-500 capitalize">
+            <p className="text-sm mb-2 text-[#1c8d0c] font-bold capitalize">
               World Global Ledger
             </p>
             <h2 className="md:mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-50 capitalize">

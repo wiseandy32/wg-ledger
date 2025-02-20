@@ -22,14 +22,14 @@ function Header() {
             ].map((link) => (
               <li
                 key={link.title}
-                className="hover:text-sky-400 text-2xl md:text-sm font-semibold"
+                className="hover:text-[#1c8d0c] text-2xl md:text-sm font-semibold"
               >
                 <Link to={link.path}>{link.title}</Link>
               </li>
             ))}
           </ul>
           {!path.includes("admin") || !path.includes("user") ? (
-            <div className="flex items-center flex-col md:flex-row px-5 md:px-0 gap-4 w-full md:w-auto md:border-l-2 md:border-slate-200 md:border-solid md:ml-6 md:pl-6 ">
+            <div className="flex items-center flex-col md:flex-row px-5 md:px-0 gap-4 w-full md:w-auto md:border-l-2 md:border-slate-200 md:hover:border-[#1c8d0c] md:border-solid md:ml-6 md:pl-6 ">
               {[
                 { title: "sign up", path: "register" },
                 { title: "login", path: "login" },
@@ -38,8 +38,8 @@ function Header() {
                   key={link.title}
                   className={`focus:outline-none ${
                     link.path === "register"
-                      ? "bg-sky-500 hover:bg-sky-400 md:bg-transparent md:hover:bg-transparent md:hover:text-sky-400"
-                      : "border-solid border-2 border-sky-500 hover:bg-sky-400 md:border-none md:hover:bg-transparent md:hover:text-sky-400"
+                      ? "bg-[#136b09] hover:bg-[#1c8d0c] md:bg-transparent md:hover:bg-transparent md:hover:text-[#1c8d0c]"
+                      : "border-solid border-2 border-[#1c8d0c] hover:bg-[#1c8d0c] md:border-none md:hover:bg-transparent md:hover:text-[#1c8d0c]"
                   }  text-white font-semibold h-12 px-6 md:px-0 rounded-lg w-full flex items-center justify-center sm:w-auto`}
                   to={link.path}
                 >

@@ -64,7 +64,7 @@ function MobileNav() {
             <Link
               to={link.path}
               key={link.title}
-              className="hover:text-sky-400 text-2xl md:text-sm font-semibold"
+              className="text-2xl md:text-sm font-semibold"
             >
               <li onClick={() => setIsMenuVisible(false)}>{link.title}</li>
             </Link>
@@ -81,8 +81,8 @@ function MobileNav() {
                   key={link.title}
                   className={`focus:outline-none ${
                     link.path === "register"
-                      ? "bg-sky-500 hover:bg-sky-400 md:bg-transparent md:hover:bg-transparent md:hover:text-sky-400"
-                      : "border-solid border-2 border-sky-500 hover:bg-sky-400 md:border-none md:hover:bg-transparent md:hover:text-sky-400"
+                      ? "bg-[#136b09] md:bg-transparent md:hover:bg-transparent"
+                      : "border-solid border-2 border-[#136b09] hover:border-[#1c8d0c] md:border-none md:hover:bg-transparent md:hover:text-sky-400"
                   } focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 md:px-0 rounded-lg w-full flex items-center justify-center sm:w-auto`}
                   to={link.path}
                 >

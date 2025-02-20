@@ -17,7 +17,7 @@ function AboutUs() {
           }
         >
           <div className="flex flex-col sm:max-w-full px-5 sm:px-2 md:px-0 text-slate-50">
-            <p className="text-sm mb-2 text-sky-500 capitalize">
+            <p className="text-sm mb-2 text-[#1c8d0c] font-bold capitalize">
               Manage your digital assets
             </p>
             <h2 className="md:mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-50 capitalize md:max-w-[60%] lg:max-w-full">
