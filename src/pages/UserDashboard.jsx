@@ -60,7 +60,7 @@ function UserDashboard() {
           Here&apos;s an overview of your account and the latest crypto currency
           prices.
         </p>
-        <TotalAssets balance={ledgerBalance} />
+        <TotalAssets balance={ledgerBalance.toFixed(2)} />
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10 mt-3">
         {dashboardWallets.map((wallet, index) => (
