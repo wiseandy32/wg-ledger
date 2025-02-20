@@ -23,12 +23,12 @@ const data = {
       icon: LayoutGrid,
     },
     {
-      title: "Add Fund",
+      title: "Deposit",
       url: "deposit",
       icon: Download,
     },
     {
-      title: "Withdraw fund",
+      title: "Withdraw",
       url: "withdraw",
       icon: GrUploadOption,
     },
