@@ -143,12 +143,12 @@ export const chooseUsCardInfo = [
 ];
 
 export const wallets = [
-  {
-    name: "Ledger",
-    icon: DollarSign,
-    balance: 0.0,
-    value: "ledger_balance",
-  },
+  // {
+  //   name: "Ledger",
+  //   icon: DollarSign,
+  //   balance: 0.0,
+  //   value: "ledger_balance",
+  // },
   {
     name: "BTC",
     id: "bitcoin",

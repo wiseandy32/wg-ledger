@@ -517,6 +517,18 @@ export const getCoinsData = async (coinList) => {
   }
 };
 
+export const getCurrentBitcoinPrice = async () => {
+  const response = await fetch(
+    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+    options
+  );
+
+  const data = await response.json();
+  const currentBitcoinPrice = data.bitcoin.usd;
+
+  return currentBitcoinPrice;
+};
+
 export const getActiveWallets = (wallets) => {
   return wallets.reduce((acc, wallet) => {
     if (wallet?.id && wallet?.balance > 0) {

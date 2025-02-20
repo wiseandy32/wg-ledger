@@ -20,7 +20,7 @@ function Deposit() {
             key={wallet.name}
             className={`md:col-start-[${index + 1}] md:col-end-[${
               index + 3
-            }] cursor-pointer bg-muted/50 flex gap-6 min-w-[200px] items-center  p-4 rounded-sm shadow-[0_.5rem_1rem_rgba(255,_255,_255,_0.15)]"
+            }] cursor-pointer hover:bg-dashboard-card-bg-hover bg-muted/50 flex gap-6 min-w-[200px] items-center  p-4 rounded-sm shadow-[0_.5rem_1rem_rgba(255,_255,_255,_0.15)]"
             `}
             onClick={() => navigate(wallet.path)}
           >

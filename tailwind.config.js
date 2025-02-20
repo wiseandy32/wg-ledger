@@ -73,6 +73,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        dashboard: {
+          "card-bg": "hsl(var(--dashboard-card-bg))",
+          "card-bg-hover": "hsl(var(--dashboard-card-bg-hover))",
+          "card-heading-text": "hsl(var(--dashboard-card-heading-text))",
+          "card-sub-text": "hsl(var(--dashboard-card-sub-text))",
+        },
       },
     },
   },

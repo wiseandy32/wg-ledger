@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import { useAsyncValue } from "react-router-dom";
 import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
+import TotalAssets from "./components/total-assets";
 
 function UserDashboard() {
   const user = useAsyncValue();
@@ -42,7 +43,7 @@ function UserDashboard() {
   });
 
   const ledgerBalance = dashboardWallets
-    .slice(1, dashboardWallets.length - 1)
+    .slice(0, dashboardWallets.length - 1)
     .reduce((total, wallet) => total + +wallet.balance, 0);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ function UserDashboard() {
           Here&apos;s an overview of your account and the latest crypto currency
           prices.
         </p>
+        <TotalAssets balance={ledgerBalance} />
       </div>
       <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4 mb-10 mt-3">
         {dashboardWallets.map((wallet, index) => (
@@ -66,7 +68,7 @@ function UserDashboard() {
             key={wallet?.name}
             className={`md:col-start-[${index + 1}] md:col-end-[${
               index + 3
-            }] bg-muted/50 flex gap-6 min-w-[200px] items-center  p-4 rounded-sm shadow-[0_.5rem_1rem_rgba(255,_255,_255,_0.15)]"
+            }] bg-muted/50 hover:bg-dashboard-card-bg-hover flex gap-6 min-w-[200px] items-center  p-4 rounded-sm shadow-[0_.5rem_1rem_rgba(255,_255,_255,_0.15)]"
           `}
           >
             <div
@@ -81,7 +83,7 @@ function UserDashboard() {
               )}
             </div>
             <div>
-              <p className="font-bold flex gap-2">
+              <p className="font-bold flex gap-2 text-dashboard-card-heading-text">
                 <AnimatePresence mode="wait">
                   <motion.span
                     initial={{ y: "100%" }}
@@ -118,7 +120,7 @@ function UserDashboard() {
                   ) : null;
                 })}
               </p>
-              <p>
+              <p className="text-sm text-dashboard-card-sub-text">
                 {wallet?.name}{" "}
                 {!wallet?.name?.includes("Withdrawal") ? "Balance" : ""}
               </p>
