@@ -22,121 +22,125 @@ import TransactionHistoryPage from "@/pages/Transactions";
 const router = createBrowserRouter(
   [
     {
-      path: "/",
-      loader: () => {
-        const uid = localStorage.getItem("wglid");
-        if (uid) {
-          return redirect("/user");
-        }
-
-        return null;
-      },
-      element: <Layout />,
-      errorElement: <NotFoundError />,
-      children: [
-        {
-          index: true,
-          element: <Landing />,
-        },
-        {
-          path: "login",
-          element: <Login />,
-        },
-        {
-          path: "register",
-          element: <Register />,
-        },
-        {
-          path: "login/forgot-password",
-          element: <ForgotPassword />,
-        },
-      ],
+      path: "/*",
+      element: <NotFoundError />,
     },
-    {
-      loader: async ({ request }) => {
-        const uid = localStorage.getItem("wglid");
-        const from = "/" + request.url.split("/").slice(3).join("/");
-        if (!uid) {
-          return redirect("/login", { state: { from } });
-        }
-        const userPromise = fetchUserByID(uid);
+    // {
+    //   path: "/",
+    //   loader: () => {
+    //     const uid = localStorage.getItem("wglid");
+    //     if (uid) {
+    //       return redirect("/user");
+    //     }
 
-        return { user: userPromise };
-      },
-      path: "/user",
-      element: <DashboardLayout />,
-      errorElement: <NotFoundError />,
-      children: [
-        {
-          index: true,
-          element: <UserDashboard />,
-        },
-        {
-          path: "profile",
-          element: <UserProfile />,
-        },
-        {
-          path: "deposit",
-          element: <Deposit />,
-        },
-        {
-          path: "withdraw",
-          element: <Withdrawal />,
-        },
-        {
-          path: "deposit/:gateway",
-          loader: ({ params }) => {
-            const [data] = paymentGateways.filter(
-              (gateway) =>
-                gateway.type.toLowerCase() === params.gateway.toLowerCase()
-            );
+    //     return null;
+    //   },
+    //   element: <Layout />,
+    //   errorElement: <NotFoundError />,
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <Landing />,
+    //     },
+    //     {
+    //       path: "login",
+    //       element: <Login />,
+    //     },
+    //     {
+    //       path: "register",
+    //       element: <Register />,
+    //     },
+    //     {
+    //       path: "login/forgot-password",
+    //       element: <ForgotPassword />,
+    //     },
+    //   ],
+    // },
+    // {
+    //   loader: async ({ request }) => {
+    //     const uid = localStorage.getItem("wglid");
+    //     const from = "/" + request.url.split("/").slice(3).join("/");
+    //     if (!uid) {
+    //       return redirect("/login", { state: { from } });
+    //     }
+    //     const userPromise = fetchUserByID(uid);
 
-            if (!data) {
-              return null;
-            }
+    //     return { user: userPromise };
+    //   },
+    //   path: "/user",
+    //   element: <DashboardLayout />,
+    //   errorElement: <NotFoundError />,
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <UserDashboard />,
+    //     },
+    //     {
+    //       path: "profile",
+    //       element: <UserProfile />,
+    //     },
+    //     {
+    //       path: "deposit",
+    //       element: <Deposit />,
+    //     },
+    //     {
+    //       path: "withdraw",
+    //       element: <Withdrawal />,
+    //     },
+    //     {
+    //       path: "deposit/:gateway",
+    //       loader: ({ params }) => {
+    //         const [data] = paymentGateways.filter(
+    //           (gateway) =>
+    //             gateway.type.toLowerCase() === params.gateway.toLowerCase()
+    //         );
 
-            return data;
-          },
-          element: <GateWay />,
-        },
-        {
-          path: "transactions",
-          element: <TransactionHistoryPage />,
-        },
-      ],
-    },
-    {
-      loader: async ({ request }) => {
-        const uid = localStorage.getItem("wglid");
-        const from = "/" + request.url.split("/").slice(3).join("/");
+    //         if (!data) {
+    //           return null;
+    //         }
 
-        if (!uid) {
-          return redirect("/login", { state: { from } });
-        }
+    //         return data;
+    //       },
+    //       element: <GateWay />,
+    //     },
+    //     {
+    //       path: "transactions",
+    //       element: <TransactionHistoryPage />,
+    //     },
+    //   ],
+    // },
+    // {
+    //   loader: async ({ request }) => {
+    //     const uid = localStorage.getItem("wglid");
+    //     const from = "/" + request.url.split("/").slice(3).join("/");
 
-        const user = await fetchUserByID(uid);
-        if (!user.isAdmin) {
-          return redirect("/user");
-        }
-        return user;
-      },
-      path: "admin",
-      element: <DashboardLayout />,
-      children: [
-        {
-          index: true,
-          element: <UsersList />,
-        },
-        {
-          path: "Deposits",
-          element: <DepositRequestsList />,
-        },
-        {
-          path: "withdrawals",
-          element: <WithdrawalRequestsList />,
-        },
-      ],
-    },
+    //     if (!uid) {
+    //       return redirect("/login", { state: { from } });
+    //     }
+
+    //     const user = await fetchUserByID(uid);
+    //     if (!user.isAdmin) {
+    //       return redirect("/user");
+    //     }
+    //     return user;
+    //   },
+    //   path: "admin",
+    //   element: <DashboardLayout />,
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <UsersList />,
+    //     },
+    //     {
+    //       path: "Deposits",
+    //       element: <DepositRequestsList />,
+    //     },
+    //     {
+    //       path: "withdrawals",
+    //       element: <WithdrawalRequestsList />,
+    //     },
+    //   ],
+    // },
   ],
   {
     future: {
