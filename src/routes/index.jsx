@@ -21,126 +21,126 @@ import TransactionHistoryPage from "@/pages/Transactions";
 
 const router = createBrowserRouter(
   [
+    // {
+    //   path: "/*",
+    //   element: <NotFoundError />,
+    // },
     {
-      path: "/*",
-      element: <NotFoundError />,
+      path: "/",
+      loader: () => {
+        const uid = localStorage.getItem("wglid");
+        if (uid) {
+          return redirect("/user");
+        }
+
+        return null;
+      },
+      element: <Layout />,
+      errorElement: <NotFoundError />,
+      children: [
+        {
+          index: true,
+          element: <Landing />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "register",
+          element: <Register />,
+        },
+        {
+          path: "login/forgot-password",
+          element: <ForgotPassword />,
+        },
+      ],
     },
-    // {
-    //   path: "/",
-    //   loader: () => {
-    //     const uid = localStorage.getItem("wglid");
-    //     if (uid) {
-    //       return redirect("/user");
-    //     }
+    {
+      loader: async ({ request }) => {
+        const uid = localStorage.getItem("wglid");
+        const from = "/" + request.url.split("/").slice(3).join("/");
+        if (!uid) {
+          return redirect("/login", { state: { from } });
+        }
+        const userPromise = fetchUserByID(uid);
 
-    //     return null;
-    //   },
-    //   element: <Layout />,
-    //   errorElement: <NotFoundError />,
-    //   children: [
-    //     {
-    //       index: true,
-    //       element: <Landing />,
-    //     },
-    //     {
-    //       path: "login",
-    //       element: <Login />,
-    //     },
-    //     {
-    //       path: "register",
-    //       element: <Register />,
-    //     },
-    //     {
-    //       path: "login/forgot-password",
-    //       element: <ForgotPassword />,
-    //     },
-    //   ],
-    // },
-    // {
-    //   loader: async ({ request }) => {
-    //     const uid = localStorage.getItem("wglid");
-    //     const from = "/" + request.url.split("/").slice(3).join("/");
-    //     if (!uid) {
-    //       return redirect("/login", { state: { from } });
-    //     }
-    //     const userPromise = fetchUserByID(uid);
+        return { user: userPromise };
+      },
+      path: "/user",
+      element: <DashboardLayout />,
+      errorElement: <NotFoundError />,
+      children: [
+        {
+          index: true,
+          element: <UserDashboard />,
+        },
+        {
+          path: "profile",
+          element: <UserProfile />,
+        },
+        {
+          path: "deposit",
+          element: <Deposit />,
+        },
+        {
+          path: "withdraw",
+          element: <Withdrawal />,
+        },
+        {
+          path: "deposit/:gateway",
+          loader: ({ params }) => {
+            const [data] = paymentGateways.filter(
+              (gateway) =>
+                gateway.type.toLowerCase() === params.gateway.toLowerCase()
+            );
 
-    //     return { user: userPromise };
-    //   },
-    //   path: "/user",
-    //   element: <DashboardLayout />,
-    //   errorElement: <NotFoundError />,
-    //   children: [
-    //     {
-    //       index: true,
-    //       element: <UserDashboard />,
-    //     },
-    //     {
-    //       path: "profile",
-    //       element: <UserProfile />,
-    //     },
-    //     {
-    //       path: "deposit",
-    //       element: <Deposit />,
-    //     },
-    //     {
-    //       path: "withdraw",
-    //       element: <Withdrawal />,
-    //     },
-    //     {
-    //       path: "deposit/:gateway",
-    //       loader: ({ params }) => {
-    //         const [data] = paymentGateways.filter(
-    //           (gateway) =>
-    //             gateway.type.toLowerCase() === params.gateway.toLowerCase()
-    //         );
+            if (!data) {
+              return null;
+            }
 
-    //         if (!data) {
-    //           return null;
-    //         }
+            return data;
+          },
+          element: <GateWay />,
+        },
+        {
+          path: "transactions",
+          element: <TransactionHistoryPage />,
+        },
+      ],
+    },
+    {
+      loader: async ({ request }) => {
+        const uid = localStorage.getItem("wglid");
+        const from = "/" + request.url.split("/").slice(3).join("/");
 
-    //         return data;
-    //       },
-    //       element: <GateWay />,
-    //     },
-    //     {
-    //       path: "transactions",
-    //       element: <TransactionHistoryPage />,
-    //     },
-    //   ],
-    // },
-    // {
-    //   loader: async ({ request }) => {
-    //     const uid = localStorage.getItem("wglid");
-    //     const from = "/" + request.url.split("/").slice(3).join("/");
+        if (!uid) {
+          return redirect("/login", { state: { from } });
+        }
 
-    //     if (!uid) {
-    //       return redirect("/login", { state: { from } });
-    //     }
-
-    //     const user = await fetchUserByID(uid);
-    //     if (!user.isAdmin) {
-    //       return redirect("/user");
-    //     }
-    //     return user;
-    //   },
-    //   path: "admin",
-    //   element: <DashboardLayout />,
-    //   children: [
-    //     {
-    //       index: true,
-    //       element: <UsersList />,
-    //     },
-    //     {
-    //       path: "Deposits",
-    //       element: <DepositRequestsList />,
-    //     },
-    //     {
-    //       path: "withdrawals",
-    //       element: <WithdrawalRequestsList />,
-    //     },
-    //   ],
-    // },
+        const user = await fetchUserByID(uid);
+        if (!user.isAdmin) {
+          return redirect("/user");
+        }
+        return user;
+      },
+      path: "admin",
+      element: <DashboardLayout />,
+      children: [
+        {
+          index: true,
+          element: <UsersList />,
+        },
+        {
+          path: "Deposits",
+          element: <DepositRequestsList />,
+        },
+        {
+          path: "withdrawals",
+          element: <WithdrawalRequestsList />,
+        },
+      ],
+    },
   ],
   {
     future: {
