@@ -15,14 +15,14 @@ export default function NotFoundError() {
           It seems like the page you&apos;re looking for does not exist or might
           have been removed.
         </p>
-{/*         <div className="mt-6 flex gap-4">
+        <div className="mt-6 flex gap-4">
           <Button variant="outline" onClick={() => navigate(-1)}>
             Go back
           </Button>
           <Button variant="gooeyLeft" onClick={() => navigate("/")}>
             Back to home
           </Button>
-        </div> */}
+        </div>
       </div>
     </div>
   );
