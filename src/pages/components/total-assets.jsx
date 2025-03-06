@@ -43,7 +43,7 @@ function TotalAssets({ balance, bitcoin_price }) {
           </div>
 
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-medium tabular-nums">
+            <span className="text-4xl text-black dark:text-white font-medium tabular-nums">
               {isVisible
                 ? `$${formatNumberWithCommas(balance)}`
                 : formatHiddenNumber(8)}
