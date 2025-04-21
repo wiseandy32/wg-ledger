@@ -206,13 +206,13 @@ export const wallets = [
     balance: 0.0,
     value: "SOL_balance",
   },
-  {
-    name: "TRUMP",
-    id: "official-trump",
-    icon: trumpIcon,
-    balance: 0.0,
-    value: "TRUMP_balance",
-  },
+  // {
+  //   name: "TRUMP",
+  //   id: "official-trump",
+  //   icon: trumpIcon,
+  //   balance: 0.0,
+  //   value: "TRUMP_balance",
+  // },
   { name: "BNB", id: "binancecoin", icon: bnbIcon, balance: 0.0 },
   { name: "QTUM", id: "qtum", icon: qtumIcon, balance: 0.0 },
   { name: "TEZOS", id: "tezos", icon: tezosIcon, balance: 0.0 },
@@ -237,7 +237,7 @@ export const depositMethods = [
   { name: "DOGEcoin", id: "doge", icon: dogeIcon, path: "dogecoin" },
   { name: "ALGO", id: "algorand", icon: algoIcon, path: "algo" },
   { name: "Solana", id: "solana", icon: solIcon, path: "sol" },
-  { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
+  // { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
 ];
 
 export const paymentGateways = [
@@ -306,14 +306,14 @@ export const paymentGateways = [
     qrCode: algoQRCode,
     walletAddress: "YCAFLK3SGL4EHGKI7FG2NBWP5JWCMNID3PINF5F3QLQXJMOKRC4SDA36TM",
   },
-  {
-    type: "Trump",
-    value: "Trump_balance",
-    id: "official-trump",
-    icon: trumpIcon,
-    qrCode: trumpQRCode,
-    walletAddress: "2perJNJLGXiVgqEK8HJLbgrDRKmfGLRAyvZZh9GPAzx6",
-  },
+  // {
+  //   type: "Trump",
+  //   value: "Trump_balance",
+  //   id: "official-trump",
+  //   icon: trumpIcon,
+  //   qrCode: trumpQRCode,
+  //   walletAddress: "2perJNJLGXiVgqEK8HJLbgrDRKmfGLRAyvZZh9GPAzx6",
+  // },
 ];
 
 export const withdrawalOptions = [
@@ -381,8 +381,8 @@ export const withdrawalOptions = [
     title: "SHIBA",
     value: "shiba_balance",
   },
-  {
-    title: "TRUMP",
-    value: "TRUMP_balance",
-  },
+  // {
+  //   title: "TRUMP",
+  //   value: "TRUMP_balance",
+  // },
 ];
