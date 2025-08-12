@@ -39,7 +39,7 @@ function Login() {
       }
 
       if (!user.emailVerified) {
-        if (!user?.isAccountVerified) {
+        if (!userDoc?.isAccountVerified) {
           signOut(auth);
           setIsSubmitting(false);
           setError(
