@@ -14,16 +14,15 @@ export default function VerifyPage() {
       setStatus("Invalid verification link.");
       return;
     }
-    console.log("Verifying account for UID:", uid, "with token:", token);
+
     const verifyAccount = async () => {
       try {
-        // const userRef = doc(db, "users", uid);
         await updateFirebaseDb("users", uid, {
           isAccountVerified: true,
           verificationToken: token,
         });
         setStatus("Account successfully verified!");
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/login"), 3000);
       } catch (error) {
         console.error(error);
         setStatus("Unable to verify your account.");
@@ -38,7 +37,7 @@ export default function VerifyPage() {
       <h1>{status}</h1>
       <p>
         {status.includes("Unable") && "Contact support for further assistance."}
-        {!status.includes("Unable") && "Redirecting to login page..."}
+        {status.includes("successfully") && "Redirecting to login page..."}
       </p>
     </div>
   );
