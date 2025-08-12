@@ -18,6 +18,7 @@ import WithdrawalRequestsList from "@/pages/WithdrawalRequestsList";
 import UsersList from "@/pages/UsersList";
 import { fetchUserByID } from "@/lib/helpers";
 import TransactionHistoryPage from "@/pages/Transactions";
+import VerifyPage from "@/pages/VerifyAccount";
 
 const router = createBrowserRouter(
   [
@@ -27,14 +28,14 @@ const router = createBrowserRouter(
     // },
     {
       path: "/",
-      loader: () => {
-        const uid = localStorage.getItem("wglid");
-        if (uid) {
-          return redirect("/user");
-        }
+      // loader: () => {
+      //   const uid = localStorage.getItem("wglid");
+      //   if (uid) {
+      //     return redirect("/user");
+      //   }
 
-        return null;
-      },
+      //   return null;
+      // },
       element: <Layout />,
       errorElement: <NotFoundError />,
       children: [
@@ -53,6 +54,10 @@ const router = createBrowserRouter(
         {
           path: "login/forgot-password",
           element: <ForgotPassword />,
+        },
+        {
+          path: "verify/:uid",
+          element: <VerifyPage />,
         },
       ],
     },

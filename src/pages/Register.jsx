@@ -2,7 +2,12 @@ import { Link } from "react-router-dom";
 import { registrationFormField } from "../data";
 import { useState } from "react";
 import registrationImage from "../assets/registration-image.webp";
-import { addDataToDb, createUser, updateUserProfile } from "../utils/auth";
+import {
+  addDataToDb,
+  createUser,
+  generateVerificationLink,
+  updateUserProfile,
+} from "../utils/auth";
 import { sendEmailVerification, signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
 import MessageCard from "./components/MessageCard";
@@ -10,6 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import { v4 as uuidv4 } from "uuid";
+import { serverTimestamp } from "firebase/firestore";
 
 function Register() {
   const [error, setError] = useState("");
@@ -34,6 +42,8 @@ function Register() {
       });
 
       const uid = auth.currentUser.uid;
+      const verificationToken = uuidv4();
+
       const user = {
         name: auth.currentUser.displayName,
         username: formData.get("username"),
@@ -41,17 +51,30 @@ function Register() {
         uid,
         isDeleted: false,
         isAdmin: false,
+        isAccountVerified: false,
+        verificationToken,
+        verificationTokenCreatedAt: serverTimestamp(),
       };
-      // save user details to db
-      await addDataToDb("users", user);
-      await sendEmailVerification(auth.currentUser);
+
+      const ref = await addDataToDb("users", user);
+      const verificationLink = `${window.location.origin}/verify/${ref}?token=${verificationToken}`;
+
+      await emailjs.send("service_q3ofwss", "template_czq2peb", {
+        subject: "Email Verification",
+        User_name: `${user.name}`,
+        verification_link: `${verificationLink}`,
+        send_to: `${user.email}`,
+      });
+
       // sign the user out
       await signOut(auth);
+
       setIsVerificationLinkSent(true);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   useEffect(() => {

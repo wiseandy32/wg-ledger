@@ -39,13 +39,16 @@ function Login() {
       }
 
       if (!user.emailVerified) {
-        signOut(auth);
-        setIsSubmitting(false);
-        setError(
-          "Email verification is required. Please verify your email to proceed"
-        );
-        return;
+        if (!user?.isAccountVerified) {
+          signOut(auth);
+          setIsSubmitting(false);
+          setError(
+            "Email verification is required. Please verify your email to proceed"
+          );
+          return;
+        }
       }
+
       navigate(!state ? "/user" : state.from);
     } catch (error) {
       const { code } = error;

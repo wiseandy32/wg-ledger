@@ -234,10 +234,11 @@ export const updateFirebaseDb = async (documentPath, docId, data, callback) => {
   } catch (error) {
     if (error.message.includes("is longer than")) {
       toast.error("File size should be less than 1mb");
-      callback();
+      callback && callback();
       return;
     }
     toast.error("Something went wrong. Try again later");
+    throw new Error(error);
   }
 };
 
