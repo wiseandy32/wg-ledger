@@ -11,10 +11,10 @@ function Layout() {
     <>
       <Header />
       <main className="overflow-x-hidden">
+        <ScrollRestoration />
         <Outlet />
       </main>
       <Footer />
-      <ScrollRestoration />
     </>
   );
 }
