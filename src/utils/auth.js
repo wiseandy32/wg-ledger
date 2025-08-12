@@ -28,9 +28,7 @@ export const addDataToDb = async (field, data) => {
       docRef: docRef.id,
     };
     await setDoc(docRef, updatedData);
-    if (field === "withdrawalRequests" || field === "depositRequests") {
-      return docRef.id;
-    }
+    return docRef.id;
   } catch (error) {
     console.error(error);
   }
