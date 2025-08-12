@@ -9,15 +9,16 @@ import MessageCard from "./components/MessageCard";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom/dist";
 
 function Register() {
   const [error, setError] = useState("");
   const [isVerificationLinkSent, setIsVerificationLinkSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -52,29 +53,23 @@ function Register() {
       };
 
       const ref = await addDataToDb("users", user);
-      const verificationLink = `${window.location.origin}/verify/${ref}?token=${verificationToken}`;
 
       await emailjs.send("service_q3ofwss", "template_czq2peb", {
-        subject: "Email Verification",
+        subject: "Welcome to Quantum Assets Ledger",
         User_name: `${user.name}`,
-        verification_link: `${verificationLink}`,
         send_to: `${user.email}`,
       });
 
-      // sign the user out
+      // sign the user out, so they can login manually
       await signOut(auth);
 
-      setIsVerificationLinkSent(true);
+      navigate("/login");
     } catch (error) {
       console.error(error);
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
 
   return (
     <section className=" px-3 mt-[14vh] mb-[10vh] bg-bottom bg-no-repeat bottom-10">
