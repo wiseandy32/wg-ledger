@@ -2,13 +2,8 @@ import { Link } from "react-router-dom";
 import { registrationFormField } from "../data";
 import { useState } from "react";
 import registrationImage from "../assets/registration-image.webp";
-import {
-  addDataToDb,
-  createUser,
-  generateVerificationLink,
-  updateUserProfile,
-} from "../utils/auth";
-import { sendEmailVerification, signOut } from "firebase/auth";
+import { addDataToDb, createUser, updateUserProfile } from "../utils/auth";
+import { signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
 import MessageCard from "./components/MessageCard";
 import { Button } from "@/components/ui/button";
