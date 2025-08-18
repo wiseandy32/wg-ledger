@@ -165,7 +165,7 @@ function Register() {
         <MessageCard
           title={"Verification email sent"}
           subtext={
-            "We've sent a verification link to your email. Please check your inbox."
+            "We have sent a verification link to your registered email address. Please check your inbox. If you do not receive it within a few minutes, check your spam folder."
           }
           cta={"Login"}
           to={"/login"}
