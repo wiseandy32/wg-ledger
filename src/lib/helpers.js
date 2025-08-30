@@ -394,16 +394,20 @@ export const handleRequestApproval = (
             }
           );
 
-          await emailjs.send("service_q3ofwss", "template_8xsvj38", {
-            subject: `${capitalizeWord(requestType)} Request Approval`,
-            customer_name: `${capitalizeWord(transaction.name)}`,
-            request_type: `${capitalizeWord(requestType)}`,
-            transaction_id: `${transaction.docRef.slice(0, 7)}`,
-            request_method: `${capitalizeWord(transaction.coin)}`,
-            request_amount: `$${formatNumberWithCommas(+transaction.amount)}`,
-            to_email: `${transaction.email}`,
-            company_name: "World Global Ledger",
-          });
+          await emailjs.send(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID_REQUEST,
+            {
+              subject: `${capitalizeWord(requestType)} Request Approval`,
+              customer_name: `${capitalizeWord(transaction.name)}`,
+              request_type: `${capitalizeWord(requestType)}`,
+              transaction_id: `${transaction.docRef.slice(0, 7)}`,
+              request_method: `${capitalizeWord(transaction.coin)}`,
+              request_amount: `$${formatNumberWithCommas(+transaction.amount)}`,
+              to_email: `${transaction.email}`,
+              company_name: "Quantum Assets Ledger",
+            }
+          );
 
           toast.success(`${doc.name} ${requestType} request has been approved`);
         },

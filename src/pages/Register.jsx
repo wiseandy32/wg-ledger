@@ -53,12 +53,17 @@ function Register() {
       const ref = await addDataToDb("users", user);
       const verificationLink = `${window.location.origin}/verify/${ref}?token=${verificationToken}`;
 
-      await emailjs.send("service_q3ofwss", "template_czq2peb", {
-        subject: "Email Verification",
-        User_name: `${user.name}`,
-        verification_link: `${verificationLink}`,
-        send_to: `${user.email}`,
-      });
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID_REGISTER,
+        {
+          subject: "Email Verification",
+          User_name: `${user.name}`,
+          verification_link: `${verificationLink}`,
+          send_to: `${user.email}`,
+          company_name: "Quantum Assets Ledger",
+        }
+      );
 
       // sign the user out, so they can login manually
       await signOut(auth);
