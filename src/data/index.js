@@ -8,7 +8,7 @@ import btcIcon from "@/assets/btc-logo.png";
 import ethIcon from "@/assets/eth-logo.png";
 import usdtIcon from "@/assets/usdt-logo.png";
 import xlmIcon from "@/assets/xlm-logo.png";
-import xrpIcon from "@/assets/xrp-logo.png";
+import xrpIcon from "@/assets/xrp-logo.webp";
 import dogeIcon from "@/assets/doge-logo.png";
 import ltcIcon from "@/assets/ltc-logo.png";
 import algoIcon from "@/assets/algo-logo.png";
