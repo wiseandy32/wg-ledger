@@ -12,7 +12,7 @@ function ForgotPassword() {
     const email = formData.get("email");
     try {
       await sendPasswordResetEmail(auth, email, {
-        url: "https://ledger-two-olive.vercel.app/login",
+        url: "https://www.worldglobal-ledger.com/login",
       });
       setIsResetLinkSent(true);
     } catch (error) {
