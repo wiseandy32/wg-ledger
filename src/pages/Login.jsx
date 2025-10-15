@@ -102,7 +102,7 @@ function Login() {
                     required
                     id={field.name}
                     name={field.name}
-                    className="py-5"
+                    className="py-5 text-white"
                   />
                 </div>
               ))}
