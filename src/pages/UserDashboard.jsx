@@ -31,8 +31,9 @@ function UserDashboard() {
       return {
         ...wallet,
         balance: currentBalance.toFixed(2),
-        last_1h_change_percentage:
-          matchingCoin.price_change_percentage_1h_in_currency,
+        last_1h_change_percentage: Number(
+          matchingCoin.price_change_percentage_1h_in_currency
+        ).toFixed(1),
       };
     } else {
       return {
@@ -99,26 +100,21 @@ function UserDashboard() {
                   </motion.span>
                 </AnimatePresence>
 
-                {coinsData?.map((coin) => {
-                  const last_1h_Percentage =
-                    coin?.price_change_percentage_1h_in_currency.toFixed(2);
-                  return wallet?.id?.toLowerCase() ===
-                    coin?.id?.toLowerCase() ? (
-                    <span
-                      className={`font-normal ${
-                        last_1h_Percentage < 0
-                          ? "text-red-600"
-                          : "text-green-600"
-                      }`}
-                    >
-                      {" "}
-                      {last_1h_Percentage < 0
-                        ? last_1h_Percentage
-                        : `+${last_1h_Percentage}`}
-                      %
-                    </span>
-                  ) : null;
-                })}
+                {wallet?.last_1h_change_percentage ? (
+                  <span
+                    className={`font-normal ${
+                      wallet.last_1h_change_percentage < 0
+                        ? "text-red-600"
+                        : "text-green-600"
+                    }`}
+                  >
+                    {" "}
+                    {wallet.last_1h_change_percentage < 0
+                      ? wallet.last_1h_change_percentage
+                      : `+${wallet.last_1h_change_percentage}`}
+                    %
+                  </span>
+                ) : null}
               </p>
               <p className="text-sm text-dashboard-card-sub-text">
                 {wallet?.name}{" "}
