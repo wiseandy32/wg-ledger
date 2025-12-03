@@ -21,6 +21,8 @@ import fileCoinIcon from "@/assets/filecoin-logo.png";
 import nanoIcon from "@/assets/nano-logo.png";
 import shibaIcon from "@/assets/shiba-logo.png";
 import trumpIcon from "@/assets/trump-logo.png";
+import adaIcon from "@/assets/ada-logo.webp";
+import xdceIcon from "@/assets/xdce-logo.svg";
 // import stellarIcon from "@/assets/stellar-logo.jfif";
 // import rippleIcon from "@/assets/ripple-logo.png";
 // import tetherIcon from "@/assets/tether-logo.png";
@@ -34,6 +36,8 @@ import dogeQRCode from "@/assets/doge-qr.jpg";
 import algoQRCode from "@/assets/algo-qr.jpg";
 import solQRCode from "@/assets/sol-qr.jpg";
 import trumpQRCode from "@/assets/trump-qr.jpg";
+import adaQRCode from "@/assets/ada-qr.jpg";
+import xdceQRCode from "@/assets/xdce-qr.jpg";
 import { DollarSign } from "lucide-react";
 
 export const registrationFormField = [
@@ -220,6 +224,8 @@ export const wallets = [
   { name: "Filecoin", id: "filecoin", icon: fileCoinIcon, balance: 0.0 },
   { name: "NANO", id: "nano", icon: nanoIcon, balance: 0.0 },
   { name: "SHIBA", id: "shiba", icon: shibaIcon, balance: 0.0 },
+  { name: "ADA", id: "ada", icon: adaIcon, balance: 0.0 },
+  { name: "XDCE", id: "xdce", icon: xdceIcon, balance: 0.0 },
   {
     name: "Total Withdrawals",
     icon: thetaIcon,
@@ -237,6 +243,8 @@ export const depositMethods = [
   { name: "DOGEcoin", id: "doge", icon: dogeIcon, path: "dogecoin" },
   { name: "ALGO", id: "algorand", icon: algoIcon, path: "algo" },
   { name: "Solana", id: "solana", icon: solIcon, path: "sol" },
+  { name: "ADA", id: "ADA", icon: adaIcon, path: "ada" },
+  { name: "XDCE", id: "xdce", icon: xdceIcon, path: "xdce" },
   // { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
 ];
 
@@ -305,6 +313,25 @@ export const paymentGateways = [
     icon: algoIcon,
     qrCode: algoQRCode,
     walletAddress: "YCAFLK3SGL4EHGKI7FG2NBWP5JWCMNID3PINF5F3QLQXJMOKRC4SDA36TM",
+  },
+  {
+    type: "ADA",
+    value: "ada_balance",
+    id: "ada",
+    extra: "(cardano)",
+    icon: adaIcon,
+    qrCode: adaQRCode,
+    walletAddress:
+      "addr1q8lvmeymcwq3nrm6rzwnyn73t6edlvzppt6qzp735x08hvzshcgz0a2vlgd0mhr4nwlw89r3zkg36me9hf99rz04j9nqwncmvs",
+  },
+  {
+    type: "XDCE",
+    value: "xdce_balance",
+    id: "XDCE",
+    extra: "(ERC20)",
+    icon: xdceIcon,
+    qrCode: xdceQRCode,
+    walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
   },
   // {
   //   type: "Trump",
@@ -380,6 +407,14 @@ export const withdrawalOptions = [
   {
     title: "SHIBA",
     value: "shiba_balance",
+  },
+  {
+    title: "ADA (Cardano)",
+    value: "ada_balance",
+  },
+  {
+    title: "XDCE (ERC20)",
+    value: "xdce_balance",
   },
   // {
   //   title: "TRUMP",
