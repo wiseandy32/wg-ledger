@@ -37,6 +37,11 @@ const data = {
       url: "transactions",
       icon: ArrowRightLeft,
     },
+    {
+      title: "Convert",
+      url: "convert",
+      icon: ArrowRightLeft,
+    },
   ],
   admin: [
     {

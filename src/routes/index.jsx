@@ -19,6 +19,7 @@ import UsersList from "@/pages/UsersList";
 import { fetchUserByID } from "@/lib/helpers";
 import TransactionHistoryPage from "@/pages/Transactions";
 import VerifyPage from "@/pages/VerifyAccount";
+import CoinConversion from "@/pages/CoinConversion";
 
 const router = createBrowserRouter(
   [
@@ -111,6 +112,10 @@ const router = createBrowserRouter(
         {
           path: "transactions",
           element: <TransactionHistoryPage />,
+        },
+        {
+          path: "convert",
+          element: <CoinConversion />,
         },
       ],
     },
