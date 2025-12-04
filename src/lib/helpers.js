@@ -569,6 +569,22 @@ export const convertCoin = async (
     toCoinBalanceField,
   });
 
+  if (
+    !userId ||
+    !fromCoinId ||
+    !toCoinId ||
+    !fromAmount ||
+    !toAmount ||
+    !exchangeRate ||
+    !fromCoinSymbol ||
+    !toCoinSymbol ||
+    !fromCoinBalanceField ||
+    !toCoinBalanceField
+  ) {
+    console.error("Missing parameters for convertCoin");
+    return { success: false, error: "Missing parameters" };
+  }
+
   const userRef = doc(db, "users", userId);
   const transactionRef = doc(collection(db, "users", userId, "transactions"));
 
