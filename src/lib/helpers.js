@@ -11,6 +11,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  runTransaction,
 } from "firebase/firestore";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
@@ -542,4 +543,73 @@ export const getActiveWallets = (wallets) => {
 
     return acc;
   }, []);
+};
+export const convertCoin = async (
+  userId,
+  fromCoinId,
+  toCoinId,
+  fromAmount,
+  toAmount,
+  exchangeRate,
+  fromCoinSymbol,
+  toCoinSymbol,
+  fromCoinBalanceField,
+  toCoinBalanceField
+) => {
+  console.log({
+    userId,
+    fromCoinId,
+    toCoinId,
+    fromAmount,
+    toAmount,
+    exchangeRate,
+    fromCoinSymbol,
+    toCoinSymbol,
+    fromCoinBalanceField,
+    toCoinBalanceField,
+  });
+
+  const userRef = doc(db, "users", userId);
+  const transactionRef = doc(collection(db, "users", userId, "transactions"));
+
+  try {
+    await runTransaction(db, async (transaction) => {
+      const userDoc = await transaction.get(userRef);
+      if (!userDoc.exists()) {
+        throw "User does not exist!";
+      }
+
+      const userData = userDoc.data();
+      const currentBalance = userData[fromCoinBalanceField] || 0;
+
+      if (currentBalance < fromAmount) {
+        throw "Insufficient balance!";
+      }
+
+      transaction.update(userRef, {
+        [fromCoinBalanceField]: increment(-fromAmount),
+        [toCoinBalanceField]: increment(toAmount),
+      });
+
+      transaction.set(transactionRef, {
+        id: transactionRef.id,
+        type: "conversion",
+        fromCoinId,
+        toCoinId,
+        fromCoinSymbol,
+        toCoinSymbol,
+        fromAmount,
+        toAmount,
+        exchangeRate,
+        date: getCurrentDate(),
+        timestamp: getTimeInMilliseconds(),
+        status: "completed",
+        docRef: transactionRef.id,
+      });
+    });
+    return { success: true };
+  } catch (e) {
+    console.error("Transaction failed: ", e);
+    return { success: false, error: e };
+  }
 };
