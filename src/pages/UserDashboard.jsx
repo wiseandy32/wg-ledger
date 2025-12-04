@@ -11,7 +11,7 @@ import TotalAssets from "./components/total-assets";
 function UserDashboard() {
   const user = useAsyncValue();
   const { theme } = useTheme();
-  const { setCoins, coinsData } = useCoinData();
+  const { coinsData } = useCoinData();
 
   const dashboardWallets = wallets.map((wallet) => {
     if (!user) {
@@ -28,13 +28,18 @@ function UserDashboard() {
           totalBalance +
         totalBalance;
 
-      return {
+      const walletData = {
         ...wallet,
         balance: currentBalance.toFixed(2),
-        last_1h_change_percentage: Number(
-          matchingCoin.price_change_percentage_1h_in_currency
-        ).toFixed(1),
       };
+
+      if (totalBalance > 0) {
+        walletData.last_1h_change_percentage = Number(
+          matchingCoin.price_change_percentage_1h_in_currency
+        ).toFixed(1);
+      }
+
+      return walletData;
     } else {
       return {
         ...wallet,
@@ -46,10 +51,6 @@ function UserDashboard() {
   const ledgerBalance = dashboardWallets
     .slice(0, dashboardWallets.length - 1)
     .reduce((total, wallet) => total + +wallet.balance, 0);
-
-  useEffect(() => {
-    setCoins(getActiveWallets(dashboardWallets));
-  }, []);
 
   return (
     <>

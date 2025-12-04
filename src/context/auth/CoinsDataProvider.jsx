@@ -2,9 +2,10 @@ import { getCoinsData } from "@/lib/helpers";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { CoinsDataContext } from "./use-coin-data";
+import { wallets } from "@/data";
 
 function CoinsDataProvider({ children }) {
-  const [coins, setCoins] = useState([]);
+  const coins = wallets.map((w) => w.id).filter(Boolean);
   const { data: coinsData } = useQuery({
     queryKey: ["coinsData", coins],
     queryFn: async () => {
@@ -16,7 +17,6 @@ function CoinsDataProvider({ children }) {
   // TODO: Add coingecko api key to vercel before pushing
   const values = {
     coins,
-    setCoins,
     coinsData,
   };
 
