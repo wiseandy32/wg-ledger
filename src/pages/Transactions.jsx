@@ -23,7 +23,7 @@ function TransactionHistoryPage() {
         user.docRef,
         "transactions"
       );
-      return documents;
+      return (documents || []).sort((a, b) => b.timestamp - a.timestamp);
     },
   });
 
