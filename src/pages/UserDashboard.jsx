@@ -23,14 +23,16 @@ function UserDashboard() {
 
     const matchingCoin = coinsData?.find((coin) => coin.id === wallet.id);
     if (matchingCoin) {
-      const currentBalance =
-        (matchingCoin?.price_change_percentage_1h_in_currency / 100) *
-          totalBalance +
-        totalBalance;
+      // totalBalance is the USD value from DB
+      const coinAmount =
+        matchingCoin.current_price > 0
+          ? totalBalance / matchingCoin.current_price
+          : 0;
 
       const walletData = {
         ...wallet,
-        balance: currentBalance.toFixed(2),
+        balance: totalBalance.toFixed(2),
+        coinAmount: coinAmount,
       };
 
       if (totalBalance > 0) {
@@ -44,6 +46,7 @@ function UserDashboard() {
       return {
         ...wallet,
         balance: totalBalance,
+        coinAmount: 0,
       };
     }
   });
@@ -97,7 +100,7 @@ function UserDashboard() {
                       wallet.name === "Ledger"
                         ? ledgerBalance.toFixed(2)
                         : +wallet?.balance
-                    )}`}
+                    )} USD`}
                   </motion.span>
                 </AnimatePresence>
 
@@ -117,7 +120,14 @@ function UserDashboard() {
                   </span>
                 ) : null}
               </p>
-              <p className="text-sm text-dashboard-card-sub-text">
+              
+              {!wallet?.name?.includes("Withdrawal") && wallet.coinAmount > 0 && (
+                 <p className="text-xs text-muted-foreground mt-1">
+                  ≈ {wallet.coinAmount} {wallet.name}
+                 </p>
+              )}
+
+              <p className="text-sm text-dashboard-card-sub-text mt-1">
                 {wallet?.name}{" "}
                 {!wallet?.name?.includes("Withdrawal") ? "Balance" : ""}
               </p>
