@@ -305,7 +305,7 @@ const CoinConversion = () => {
             See more
           </Button>
         </div>
-        <div className="max-w-[calc(100vw-2rem)] md:max-w-full">
+        <div className="max-w-[calc(100vw-4rem)] md:max-w-full">
             <DataTable
                 columns={conversionColumns}
                 conversionColumns={conversionColumns}
