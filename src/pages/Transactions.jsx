@@ -51,12 +51,14 @@ function TransactionHistoryPage() {
         </p>
       </div>
       <div className="container mx-auto py-5">
-        <DataTable
-          columns={columns}
-          conversionColumns={conversionColumns}
-          data={transactions || []}
-          defaultType={defaultType}
-        />
+        <div className="max-w-[calc(100vw-2rem)] md:max-w-full">
+            <DataTable
+            columns={columns}
+            conversionColumns={conversionColumns}
+            data={transactions || []}
+            defaultType={defaultType}
+            />
+        </div>
       </div>
     </>
   );
