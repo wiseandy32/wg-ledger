@@ -18,12 +18,13 @@ import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { DataTable } from "@/components/data-table";
 import { conversionColumns } from "@/components/columns";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSubCollectionDocuments } from "@/lib/helpers";
 import { useNavigate } from "react-router-dom";
 
 const CoinConversion = () => {
   const { user } = useAuth();
+  const qc = useQueryClient();
   const { coinsData } = useCoinData();
   const [fromCoin, setFromCoin] = useState("");
   const [toCoin, setToCoin] = useState("");
@@ -136,6 +137,7 @@ const CoinConversion = () => {
 
       if (result.success) {
         toast.success("Conversion successful");
+        qc.invalidateQueries({ queryKey: ["user", user?.uid, "transactions"] });
         setAmount("");
         setFromCoin("");
         setToCoin("");
