@@ -13,7 +13,7 @@ function UserDashboard() {
   const { theme } = useTheme();
   const { coinsData } = useCoinData();
 
-  const dashboardWallets = wallets.map((wallet) => {
+  const mappedWallets = wallets.map((wallet) => {
     if (!user) {
       return wallet;
     }
@@ -51,9 +51,18 @@ function UserDashboard() {
     }
   });
 
-  const ledgerBalance = dashboardWallets
-    .slice(0, dashboardWallets.length - 1)
-    .reduce((total, wallet) => total + +wallet.balance, 0);
+  const coins = mappedWallets.filter((w) => w.id);
+  const otherWallets = mappedWallets.filter((w) => !w.id);
+
+  // Sort coins: active (balance > 0) first, then by balance descending
+  coins.sort((a, b) => parseFloat(b.balance) - parseFloat(a.balance));
+
+  const dashboardWallets = [...coins, ...otherWallets];
+
+  const ledgerBalance = coins.reduce(
+    (total, wallet) => total + +wallet.balance,
+    0
+  );
 
   return (
     <>
@@ -120,12 +129,13 @@ function UserDashboard() {
                   </span>
                 ) : null}
               </p>
-              
-              {!wallet?.name?.includes("Withdrawal") && wallet.coinAmount > 0 && (
-                 <p className="text-xs text-muted-foreground mt-1">
-                  ≈ {wallet.coinAmount} {wallet.name}
-                 </p>
-              )}
+
+              {!wallet?.name?.includes("Withdrawal") &&
+                wallet.coinAmount > 0 && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    ≈ {wallet.coinAmount} {wallet.name}
+                  </p>
+                )}
 
               <p className="text-sm text-dashboard-card-sub-text mt-1">
                 {wallet?.name}{" "}
