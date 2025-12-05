@@ -27,21 +27,32 @@ import {
 } from "@/components/ui/select";
 import { DateRangePicker } from "./date-range-picker";
 
-export function DataTable({ columns, data }) {
+export function DataTable({
+  columns,
+  conversionColumns,
+  data,
+  hideFilters = false,
+  defaultType,
+}) {
   const [sorting, setSorting] = useState([]);
-  const [columnFilters, setColumnFilters] = useState([]);
-  //   const [dateRange, setDateRange] = useState({
-  //     from: undefined,
-  //     to: undefined,
-  //   });
+  const [columnFilters, setColumnFilters] = useState(
+    defaultType ? [{ id: "type", value: defaultType }] : []
+  );
   const [, setDateRange] = useState({
     from: undefined,
     to: undefined,
   });
 
+  // Determine which columns to use based on the "type" filter
+  const typeFilterValue = columnFilters.find((f) => f.id === "type")?.value;
+  const activeColumns =
+    typeFilterValue === "conversion" && conversionColumns
+      ? conversionColumns
+      : columns;
+
   const table = useReactTable({
     data,
-    columns,
+    columns: activeColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
@@ -73,55 +84,73 @@ export function DataTable({ columns, data }) {
     setDateRange({ from: undefined, to: undefined });
   }, [table]);
 
+  // Effect to handle status filter when type is conversion
+  const typeFilter = table.getColumn("type")?.getFilterValue();
+  useState(() => {
+    if (typeFilter === "conversion") {
+      // Auto set status to undefined/all or specific logic if needed, but per requirements we just disable the UI
+      // If we strictly want to show ONLY completed conversions, we might set status, but "conversion" type implies completed usually.
+      // Let's clear status filter to ensure we see all conversions.
+      table.getColumn("status")?.setFilterValue("");
+    }
+  }, [typeFilter]);
+
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-4 py-4">
-        <Select
-          value={table.getColumn("type")?.getFilterValue() ?? "all"}
-          onValueChange={(value) =>
-            table
-              .getColumn("type")
-              ?.setFilterValue(value === "all" ? "" : value)
-          }
-        >
-          <SelectTrigger className="md:max-w-[180px]">
-            {/* <SelectTrigger> */}
-            <SelectValue placeholder="Select type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="deposit">Deposit</SelectItem>
-            <SelectItem value="withdrawal">Withdrawal</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select
-          value={table.getColumn("status")?.getFilterValue() ?? "all"}
-          onValueChange={(value) =>
-            table
-              .getColumn("status")
-              ?.setFilterValue(value === "all" ? "" : value)
-          }
-        >
-          <SelectTrigger className="md:max-w-[180px]">
-            {/* <SelectTrigger> */}
-            <SelectValue placeholder="Select status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="confirmed">Confirmed</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="declined">Declined</SelectItem>
-          </SelectContent>
-        </Select>
-        <DateRangePicker onDateRangeChange={handleDateRangeChange} />
-        <Button
-          variant="outline"
-          onClick={handleClearFilters}
-          className="ml-auto"
-        >
-          Clear Filters
-        </Button>
-      </div>
+      {!hideFilters && (
+        <div className="flex flex-wrap items-center gap-4 py-4">
+          <Select
+            value={table.getColumn("type")?.getFilterValue() ?? "all"}
+            onValueChange={(value) =>
+              table
+                .getColumn("type")
+                ?.setFilterValue(value === "all" ? "" : value)
+            }
+          >
+            <SelectTrigger className="md:max-w-[180px]">
+              {/* <SelectTrigger> */}
+              <SelectValue placeholder="Select type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="deposit">Deposit</SelectItem>
+              <SelectItem value="withdrawal">Withdrawal</SelectItem>
+              <SelectItem value="conversion">Conversion</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select
+            value={table.getColumn("status")?.getFilterValue() ?? "all"}
+            onValueChange={(value) =>
+              table
+                .getColumn("status")
+                ?.setFilterValue(value === "all" ? "" : value)
+            }
+            disabled={
+              table.getColumn("type")?.getFilterValue() === "conversion"
+            }
+          >
+            <SelectTrigger className="md:max-w-[180px]">
+              {/* <SelectTrigger> */}
+              <SelectValue placeholder="Select status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="confirmed">Confirmed</SelectItem>
+              <SelectItem value="pending">Pending</SelectItem>
+              <SelectItem value="declined">Declined</SelectItem>
+              {/* "completed" is not a selectable option for normal transactions per user request implicitly */}
+            </SelectContent>
+          </Select>
+          <DateRangePicker onDateRangeChange={handleDateRangeChange} />
+          <Button
+            variant="outline"
+            onClick={handleClearFilters}
+            className="ml-auto"
+          >
+            Clear Filters
+          </Button>
+        </div>
+      )}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
