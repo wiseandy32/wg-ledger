@@ -272,10 +272,16 @@ export const wallets = [
     balance: 0.0,
     value: "shiba_balance",
   },
-  { name: "ADA", id: "ada", icon: adaIcon, balance: 0.0, value: "ada_balance" },
+  {
+    name: "ADA",
+    id: "cardano",
+    icon: adaIcon,
+    balance: 0.0,
+    value: "ada_balance",
+  },
   {
     name: "XDCE",
-    id: "xdce",
+    id: "xdce-crowd-sale",
     icon: xdceIcon,
     balance: 0.0,
     value: "xdce_balance",
@@ -297,8 +303,8 @@ export const depositMethods = [
   { name: "DOGEcoin", id: "doge", icon: dogeIcon, path: "dogecoin" },
   { name: "ALGO", id: "algorand", icon: algoIcon, path: "algo" },
   { name: "Solana", id: "solana", icon: solIcon, path: "sol" },
-  { name: "ADA", id: "ADA", icon: adaIcon, path: "ada" },
-  { name: "XDCE", id: "xdce", icon: xdceIcon, path: "xdce" },
+  { name: "ADA", id: "cardano", icon: adaIcon, path: "cardano" },
+  { name: "XDCE", id: "xdce-crowd-sale", icon: xdceIcon, path: "xdce" },
   // { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
 ];
 
@@ -371,7 +377,7 @@ export const paymentGateways = [
   {
     type: "ADA",
     value: "ada_balance",
-    id: "ada",
+    id: "cardano",
     extra: "(cardano)",
     icon: adaIcon,
     qrCode: adaQRCode,
