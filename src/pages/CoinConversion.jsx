@@ -36,7 +36,7 @@ const CoinConversion = () => {
   const navigate = useNavigate();
 
   const { data: transactions } = useQuery({
-    queryKey: ["user", user?.uid, "transactions"],
+    queryKey: ["user", user?.uid],
     queryFn: async () => {
       const documents = await getSubCollectionDocuments(
         "users",
@@ -137,7 +137,8 @@ const CoinConversion = () => {
 
       if (result.success) {
         toast.success("Conversion successful");
-        qc.invalidateQueries({ queryKey: ["user", user?.uid, "transactions"] });
+        qc.invalidateQueries({ queryKey: ["user", user?.uid] });
+        qc.invalidateQueries({ queryKey: ["uid", user?.uid] });
         setAmount("");
         setFromCoin("");
         setToCoin("");
