@@ -311,6 +311,7 @@ const CoinConversion = () => {
                 conversionColumns={conversionColumns}
                 data={recentConversions || []}
                 hideFilters={true}
+                hidePagination={true}
             />
         </div>
       </div>
