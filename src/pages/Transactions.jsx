@@ -1,4 +1,4 @@
-import { columns } from "@/components/columns";
+import { columns, conversionColumns } from "@/components/columns";
 import { DataTable } from "@/components/data-table";
 import { useAuth } from "@/context/auth/use-auth";
 import {
@@ -7,10 +7,14 @@ import {
 } from "@/lib/helpers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function TransactionHistoryPage() {
   const { user } = useAuth();
   const qc = useQueryClient();
+  const [searchParams] = useSearchParams();
+  const defaultType = searchParams.get("type");
+
   const { data: transactions } = useQuery({
     queryKey: ["user", user?.uid],
     queryFn: async () => {
@@ -47,7 +51,12 @@ function TransactionHistoryPage() {
         </p>
       </div>
       <div className="container mx-auto py-5">
-        <DataTable columns={columns} data={transactions || []} />
+        <DataTable
+          columns={columns}
+          conversionColumns={conversionColumns}
+          data={transactions || []}
+          defaultType={defaultType}
+        />
       </div>
     </>
   );
