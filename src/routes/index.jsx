@@ -98,7 +98,8 @@ const router = createBrowserRouter(
           loader: ({ params }) => {
             const [data] = paymentGateways.filter(
               (gateway) =>
-                gateway.type.toLowerCase() === params.gateway.toLowerCase()
+                gateway.type.toLowerCase() === params.gateway.toLowerCase() ||
+                gateway.id.toLowerCase() === params.gateway.toLowerCase()
             );
 
             if (!data) {
