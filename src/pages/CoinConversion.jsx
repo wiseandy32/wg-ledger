@@ -158,7 +158,7 @@ const CoinConversion = () => {
   };
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Convert Coins</h2>
       </div>
@@ -302,16 +302,14 @@ const CoinConversion = () => {
             See more
           </Button>
         </div>
-        <Card>
-          <CardContent className="p-0">
+        <div className="max-w-[calc(100vw-2rem)] md:max-w-full">
             <DataTable
-              columns={conversionColumns} // Just use conversion columns directly since we know the type
-              conversionColumns={conversionColumns}
-              data={recentConversions || []}
-              hideFilters={true}
+                columns={conversionColumns}
+                conversionColumns={conversionColumns}
+                data={recentConversions || []}
+                hideFilters={true}
             />
-          </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   );
