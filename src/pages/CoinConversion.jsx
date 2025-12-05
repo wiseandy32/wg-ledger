@@ -16,6 +16,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
+import { DataTable } from "@/components/data-table";
+import { conversionColumns } from "@/components/columns";
+import { useQuery } from "@tanstack/react-query";
+import { getSubCollectionDocuments } from "@/lib/helpers";
+import { useNavigate } from "react-router-dom";
 
 const CoinConversion = () => {
   const { user } = useAuth();
@@ -27,6 +32,25 @@ const CoinConversion = () => {
   const [convertedAmount, setConvertedAmount] = useState(0); // Amount of ToCoin
   const [deductedAmount, setDeductedAmount] = useState(0); // Amount of FromCoin
   const [exchangeRate, setExchangeRate] = useState(0);
+  const navigate = useNavigate();
+
+  const { data: transactions } = useQuery({
+    queryKey: ["user", user?.uid, "transactions"],
+    queryFn: async () => {
+      const documents = await getSubCollectionDocuments(
+        "users",
+        user.docRef,
+        "transactions"
+      );
+      return documents || [];
+    },
+    enabled: !!user,
+  });
+
+  const recentConversions = transactions
+    ?.filter((t) => t.type === "conversion")
+    ?.sort((a, b) => b.timestamp - a.timestamp)
+    ?.slice(0, 5);
 
   // Filter wallets where user has balance > 0
   const availableWallets = wallets
@@ -92,6 +116,9 @@ const CoinConversion = () => {
 
     setLoading(true);
     try {
+      const fromQty = getEstimatedQuantity(fromCoin, deductedAmount);
+      const toQty = getEstimatedQuantity(toCoin, convertedAmount);
+
       const result = await convertCoin(
         user.docRef,
         fromCoin,
@@ -102,7 +129,9 @@ const CoinConversion = () => {
         fromWallet.name,
         toWallet.name,
         fromWallet.value,
-        toWallet.value
+        toWallet.value,
+        fromQty,
+        toQty
       );
 
       if (result.success) {
@@ -256,6 +285,31 @@ const CoinConversion = () => {
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Convert
             </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Transactions Section */}
+      <div className="space-y-4 pt-6">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-semibold tracking-tight">
+            Recent Conversions
+          </h3>
+          <Button
+            variant="outline"
+            onClick={() => navigate("/dashboard/transactions?type=conversion")}
+          >
+            See more
+          </Button>
+        </div>
+        <Card>
+          <CardContent className="p-0">
+            <DataTable
+              columns={conversionColumns} // Just use conversion columns directly since we know the type
+              conversionColumns={conversionColumns}
+              data={recentConversions || []}
+              hideFilters={true}
+            />
           </CardContent>
         </Card>
       </div>
