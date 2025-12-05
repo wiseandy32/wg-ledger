@@ -300,7 +300,7 @@ const CoinConversion = () => {
           </h3>
           <Button
             variant="outline"
-            onClick={() => navigate("/dashboard/transactions?type=conversion")}
+            onClick={() => navigate("/user/transactions?type=conversion")}
           >
             See more
           </Button>
