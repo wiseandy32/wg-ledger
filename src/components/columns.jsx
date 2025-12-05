@@ -1,18 +1,7 @@
-// import { ColumnDef } from "@tanstack/react-table";
-// import { MoreHorizontal, ArrowUpDown } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-
 import { Badge } from "@/components/ui/badge";
 import { Minus } from "lucide-react";
 import { Plus } from "lucide-react";
+import { formatNumberWithCommas } from "@/lib/helpers";
 
 export const columns = [
   {
@@ -23,57 +12,64 @@ export const columns = [
   {
     accessorKey: "type",
     header: "Type",
+    cell: ({ row }) => <span className="capitalize">{row.original.type}</span>,
   },
   {
-    accessorKey: "coin",
-    header: "Coin",
+    accessorKey: "details", // Virtual column for Coin / Conversion Details
+    header: "Details",
+    cell: ({ row }) => {
+      const type = row.original.type;
+      if (type === "conversion") {
+        return (
+          <div className="flex flex-col">
+            <span className="font-medium">
+              {row.original.fromCoinSymbol} &rarr; {row.original.toCoinSymbol}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {parseFloat(row.original.fromQty).toFixed(6)} &rarr;{" "}
+              {parseFloat(row.original.toQty).toFixed(6)}
+            </span>
+          </div>
+        );
+      }
+      return <p>{row.original.coin || row.original.method || "N/A"}</p>;
+    },
   },
   {
     accessorKey: "amount",
-    header: "Amount",
+    header: "Amount ($)",
     cell: ({ row }) => {
+      const type = row.original.type;
+      const amount =
+        type === "conversion" ? row.original.fromAmount : row.original.amount;
+      
+      // For conversions, we just show the USD value involved
+      if (type === "conversion") {
+         return <span>${formatNumberWithCommas(amount)}</span>;
+      }
+
       return (
         <p className="flex gap-1 items-center">
-          {row.original.type === "deposit" ? (
+          {type === "deposit" ? (
             <Plus className="text-green-500 w-2" />
           ) : (
             <Minus className="text-red-500 w-2" />
           )}
           <span
             className={`${
-              row.original.type === "deposit" &&
-              row.original.status === "confirmed"
+              type === "deposit" && row.original.status === "confirmed"
                 ? "text-green-500"
-                : row.original.type === "withdrawal" &&
-                  row.original.status === "confirmed"
+                : type === "withdrawal" && row.original.status === "confirmed"
                 ? "text-red-500"
                 : ""
             }`}
           >
-            {`$${row.original.amount}`}
+            {`$${formatNumberWithCommas(amount)}`}
           </span>
         </p>
       );
     },
   },
-  //   {
-  //     accessorKey: "type",
-  //     header: ({ column }) => {
-  //       return (
-  //         <Button
-  //           variant="ghost"
-  //           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //         >
-  //           Type
-  //           <ArrowUpDown className="ml-2 h-4 w-4" />
-  //         </Button>
-  //       );
-  //     },
-  //   },
-  //   {
-  //     accessorKey: "type",
-  //     header: "Type",
-  //   },
   {
     accessorKey: "creationDate",
     header: "Date",
@@ -82,107 +78,34 @@ export const columns = [
       const rowDate = new Date(row.getValue(id));
       return rowDate >= start && rowDate <= end;
     },
+    cell: ({ row }) => {
+        // Fallback for conversion date which might be distinct or use same field
+        return <p>{row.original.creationDate || row.original.date}</p>
+    }
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
+      const status = row.original.status;
       return (
         <Badge
           variant={"outline"}
           className={`${
-            row.original.status === "confirmed" &&
-            "text-green-500 border-green-500"
-          } ${
-            row.original.status === "declined" && "text-red-500 border-red-500"
+            status === "confirmed" || status === "completed"
+              ? "text-green-500 border-green-500"
+              : status === "declined"
+              ? "text-red-500 border-red-500"
+              : ""
           }`}
         >
-          {row.original.status}
+          {status}
         </Badge>
       );
     },
   },
-  //   {
-  //     id: "actions",
-  //     cell: ({ row }) => {
-  //       const transaction = row.original;
-
-  //       return (
-  //         <DropdownMenu>
-  //           <DropdownMenuTrigger asChild>
-  //             <Button variant="ghost" className="h-8 w-8 p-0">
-  //               <span className="sr-only">Open menu</span>
-  //               <MoreHorizontal className="h-4 w-4" />
-  //             </Button>
-  //           </DropdownMenuTrigger>
-  //           <DropdownMenuContent align="end">
-  //             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //             <DropdownMenuItem
-  //               onClick={() => navigator.clipboard.writeText(transaction.id)}
-  //             >
-  //               Copy transaction ID
-  //             </DropdownMenuItem>
-  //             <DropdownMenuSeparator />
-  //             <DropdownMenuItem>View transaction details</DropdownMenuItem>
-  //           </DropdownMenuContent>
-  //         </DropdownMenu>
-  //       );
-  //     },
-  //   },
 ];
 
-export const conversionColumns = [
-  {
-    accessorKey: "id",
-    header: "Id",
-    cell: ({ row }) => <p>{row.original?.id?.slice(0, 7)}</p>,
-  },
-  {
-    accessorKey: "type",
-    header: "Type",
-  },
-  {
-    accessorKey: "fromCoinSymbol",
-    header: "Coin Converted",
-  },
-  {
-    accessorKey: "fromQty",
-    header: "Converted Qty",
-    cell: ({ row }) => (
-      <p>{parseFloat(row.original?.fromQty || 0).toFixed(8)}</p>
-    ),
-  },
-  {
-    accessorKey: "toCoinSymbol",
-    header: "Coin Received",
-  },
-  {
-    accessorKey: "toQty",
-    header: "Received Qty",
-    cell: ({ row }) => <p>{parseFloat(row.original?.toQty || 0).toFixed(8)}</p>,
-  },
-  {
-    accessorKey: "fromAmount", // Using fromAmount as the USD amount
-    header: "Amount ($)",
-    cell: ({ row }) => <p>${row.original?.fromAmount}</p>,
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <Badge
-        variant={"outline"}
-        className={`${
-          row.original.status === "completed" &&
-          "text-green-500 border-green-500"
-        }`}
-      >
-        {row.original.status}
-      </Badge>
-    ),
-  },
-];
+
+
+export const conversionColumns = columns;
