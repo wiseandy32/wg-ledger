@@ -558,20 +558,6 @@ export const convertCoin = async (
   fromQty,
   toQty
 ) => {
-  console.log({
-    userId,
-    fromCoinId,
-    toCoinId,
-    fromAmount,
-    toAmount,
-    exchangeRate,
-    fromCoinSymbol,
-    toCoinSymbol,
-    fromCoinBalanceField,
-    toCoinBalanceField,
-    fromQty,
-    toQty,
-  });
 
   if (
     !userId ||
