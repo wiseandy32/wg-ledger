@@ -29,12 +29,16 @@ const CoinConversion = () => {
   const [exchangeRate, setExchangeRate] = useState(0);
 
   // Filter wallets where user has balance > 0
-  const availableWallets = wallets.filter((wallet) => {
-    const balance = user?.[wallet.value] || 0;
-    return balance > 0 && wallet.id; // Ensure it has an ID (skip "Total Withdrawals" etc if any)
-  });
+  const availableWallets = wallets
+    .filter((wallet) => {
+      const balance = user?.[wallet.value] || 0;
+      return balance > 0 && wallet.id;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 
-  const allCoins = wallets.filter((w) => w.id);
+  const allCoins = wallets
+    .filter((w) => w.id)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   useEffect(() => {
     if (fromCoin && toCoin && coinsData) {
@@ -44,6 +48,8 @@ const CoinConversion = () => {
       if (fromCoinData && toCoinData) {
         const rate = fromCoinData.current_price / toCoinData.current_price;
         setExchangeRate(rate);
+      } else {
+        setExchangeRate(0);
       }
     }
   }, [fromCoin, toCoin, coinsData]);
@@ -55,13 +61,8 @@ const CoinConversion = () => {
 
       if (fromCoinData && toCoinData) {
         const usdAmount = parseFloat(amount);
-        // const fromAmount = usdAmount / fromCoinData.current_price;
-        const toAmount = parseFloat(
-          (usdAmount / toCoinData.current_price).toFixed(2)
-        );
-
         setDeductedAmount(usdAmount);
-        setConvertedAmount(toAmount);
+        setConvertedAmount(usdAmount); // Value is preserved 1:1 in USD
       }
     } else {
       setConvertedAmount(0);
@@ -95,8 +96,8 @@ const CoinConversion = () => {
         user.docRef,
         fromCoin,
         toCoin,
-        deductedAmount,
-        convertedAmount,
+        deductedAmount, // USD amount to deduct
+        convertedAmount, // USD amount to add
         exchangeRate,
         fromWallet.name,
         toWallet.name,
@@ -120,6 +121,13 @@ const CoinConversion = () => {
     }
   };
 
+  // Helper to calculate estimated coin quantity for display
+  const getEstimatedQuantity = (coinId, usdValue) => {
+    if (!coinsData || !coinId || !usdValue) return 0;
+    const coin = coinsData.find((c) => c.id === coinId);
+    return coin ? usdValue / coin.current_price : 0;
+  };
+
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
@@ -137,7 +145,7 @@ const CoinConversion = () => {
                 <SelectTrigger>
                   <SelectValue placeholder="Select coin to convert from" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="max-h-[300px]">
                   {availableWallets.map((wallet) => (
                     <SelectItem key={wallet.id} value={wallet.id}>
                       <div className="flex items-center gap-2">
@@ -146,7 +154,7 @@ const CoinConversion = () => {
                           alt={wallet.name}
                           className="w-4 h-4"
                         />
-                        {wallet.name} (Balance:{" "}
+                        {wallet.name} (Balance: $
                         {formatNumberWithCommas(user?.[wallet.value] || 0)})
                       </div>
                     </SelectItem>
@@ -161,7 +169,7 @@ const CoinConversion = () => {
                 <SelectTrigger>
                   <SelectValue placeholder="Select coin to convert to" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="max-h-[300px]">
                   {allCoins
                     .filter((w) => w.id !== fromCoin)
                     .map((wallet) => (
@@ -190,11 +198,20 @@ const CoinConversion = () => {
               />
             </div>
 
-            {exchangeRate > 0 && (
+            {fromCoin && toCoin && (
               <div className="text-sm text-muted-foreground">
-                Exchange Rate: 1 {wallets.find((w) => w.id === fromCoin)?.name}{" "}
-                = {exchangeRate.toFixed(6)}{" "}
-                {wallets.find((w) => w.id === toCoin)?.name}
+                {exchangeRate > 0 ? (
+                  <>
+                    Exchange Rate: 1{" "}
+                    {wallets.find((w) => w.id === fromCoin)?.name} ={" "}
+                    {exchangeRate.toFixed(6)}{" "}
+                    {wallets.find((w) => w.id === toCoin)?.name}
+                  </>
+                ) : (
+                  <span className="text-yellow-600">
+                    Fetching exchange rate or price unavailable...
+                  </span>
+                )}
               </div>
             )}
 
@@ -202,17 +219,31 @@ const CoinConversion = () => {
               <div className="p-4 bg-muted rounded-lg space-y-2">
                 <div className="flex justify-between">
                   <span className="font-medium">You Pay:</span>
-                  <span className="font-bold">
-                    {formatNumberWithCommas(deductedAmount.toFixed(2))}{" "}
-                    {wallets.find((w) => w.id === fromCoin)?.name}
-                  </span>
+                  <div className="text-right">
+                    <span className="font-bold block">
+                      ${formatNumberWithCommas(deductedAmount.toFixed(2))}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      ≈{" "}
+                      {getEstimatedQuantity(fromCoin, deductedAmount).toFixed(
+                        8
+                      )}{" "}
+                      {wallets.find((w) => w.id === fromCoin)?.name}
+                    </span>
+                  </div>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">You Receive:</span>
-                  <span className="font-bold">
-                    {formatNumberWithCommas(convertedAmount.toFixed(2))}{" "}
-                    {wallets.find((w) => w.id === toCoin)?.name}
-                  </span>
+                  <div className="text-right">
+                    <span className="font-bold block">
+                      ${formatNumberWithCommas(convertedAmount.toFixed(2))}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      ≈{" "}
+                      {getEstimatedQuantity(toCoin, convertedAmount).toFixed(8)}{" "}
+                      {wallets.find((w) => w.id === toCoin)?.name}
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
