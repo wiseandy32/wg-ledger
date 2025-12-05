@@ -130,3 +130,59 @@ export const columns = [
   //     },
   //   },
 ];
+
+export const conversionColumns = [
+  {
+    accessorKey: "id",
+    header: "Id",
+    cell: ({ row }) => <p>{row.original?.id?.slice(0, 7)}</p>,
+  },
+  {
+    accessorKey: "type",
+    header: "Type",
+  },
+  {
+    accessorKey: "fromCoinSymbol",
+    header: "Coin Converted",
+  },
+  {
+    accessorKey: "fromQty",
+    header: "Converted Qty",
+    cell: ({ row }) => (
+      <p>{parseFloat(row.original?.fromQty || 0).toFixed(8)}</p>
+    ),
+  },
+  {
+    accessorKey: "toCoinSymbol",
+    header: "Coin Received",
+  },
+  {
+    accessorKey: "toQty",
+    header: "Received Qty",
+    cell: ({ row }) => <p>{parseFloat(row.original?.toQty || 0).toFixed(8)}</p>,
+  },
+  {
+    accessorKey: "fromAmount", // Using fromAmount as the USD amount
+    header: "Amount ($)",
+    cell: ({ row }) => <p>${row.original?.fromAmount}</p>,
+  },
+  {
+    accessorKey: "date",
+    header: "Date",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <Badge
+        variant={"outline"}
+        className={`${
+          row.original.status === "completed" &&
+          "text-green-500 border-green-500"
+        }`}
+      >
+        {row.original.status}
+      </Badge>
+    ),
+  },
+];
