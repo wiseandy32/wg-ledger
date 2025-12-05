@@ -12,6 +12,7 @@ import { useRef } from "react";
 import Modal from "react-responsive-modal";
 import { Link } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 function GateWay() {
@@ -20,6 +21,7 @@ function GateWay() {
   const [isOpen, setIsOpen] = useState(false);
   const [amountDeposited, setAmountDeposited] = useState("");
   const { user } = useAuth();
+  const qc = useQueryClient();
 
   const handleCopy = () => {
     const textToCopy = inputRef.current.value;
@@ -69,6 +71,8 @@ function GateWay() {
       });
 
       setAmountDeposited("");
+      qc.invalidateQueries({ queryKey: ["uid", user?.uid] });
+      qc.invalidateQueries({ queryKey: ["user", user?.uid] });
     } catch (error) {
       console.error(error);
     }
