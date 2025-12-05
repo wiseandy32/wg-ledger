@@ -33,13 +33,13 @@ const data = {
       icon: GrUploadOption,
     },
     {
-      title: "Transactions",
-      url: "transactions",
+      title: "Convert",
+      url: "convert",
       icon: ArrowRightLeft,
     },
     {
-      title: "Convert",
-      url: "convert",
+      title: "Transactions",
+      url: "transactions",
       icon: ArrowRightLeft,
     },
   ],
