@@ -4,12 +4,12 @@ import { wallets } from "@/data";
 import { formatNumberWithCommas, getActiveWallets } from "@/lib/helpers";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
-import { useAsyncValue } from "react-router-dom";
+import { useAuth } from "@/context/auth/use-auth";
 import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import TotalAssets from "./components/total-assets";
 
 function UserDashboard() {
-  const user = useAsyncValue();
+  const { user } = useAuth();
   const { theme } = useTheme();
   const { coinsData } = useCoinData();
 
