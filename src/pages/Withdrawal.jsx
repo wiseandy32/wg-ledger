@@ -14,6 +14,7 @@ import { withdrawalOptions } from "@/data";
 import { addDataToSubCollection, getCurrentDate } from "@/lib/helpers";
 import { auth } from "@/services/firebase";
 import { addDataToDb } from "@/utils/auth";
+import { useQueryClient } from "@tanstack/react-query";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Loader2 } from "lucide-react";
 import { Check } from "lucide-react";
@@ -23,6 +24,7 @@ import { Link } from "react-router-dom";
 
 function Withdrawal() {
   const { user } = useAuth();
+  const qc = useQueryClient();
   const [errorMessage, setErrorMessage] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,6 +88,8 @@ function Withdrawal() {
 
       setIsOpen(true);
       setIsSubmitting(false);
+      qc.invalidateQueries({ queryKey: ["uid", auth.currentUser?.uid] });
+      qc.invalidateQueries({ queryKey: ["user", auth.currentUser?.uid] });
     } catch (error) {
       console.error(error);
       setIsSubmitting(false);
