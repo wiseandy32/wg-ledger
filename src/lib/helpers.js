@@ -554,7 +554,9 @@ export const convertCoin = async (
   fromCoinSymbol,
   toCoinSymbol,
   fromCoinBalanceField,
-  toCoinBalanceField
+  toCoinBalanceField,
+  fromQty,
+  toQty
 ) => {
   console.log({
     userId,
@@ -567,6 +569,8 @@ export const convertCoin = async (
     toCoinSymbol,
     fromCoinBalanceField,
     toCoinBalanceField,
+    fromQty,
+    toQty,
   });
 
   if (
@@ -617,9 +621,11 @@ export const convertCoin = async (
         fromAmount,
         toAmount,
         exchangeRate,
+        fromQty: fromQty || 0,
+        toQty: toQty || 0,
         date: getCurrentDate(),
         timestamp: getTimeInMilliseconds(),
-        status: "completed",
+        status: "completed", // Conversions are instant and treated as completed
         docRef: transactionRef.id,
       });
     });
