@@ -53,7 +53,7 @@ function Login() {
       navigate(!state ? "/user" : state.from);
     } catch (error) {
       const { code } = error;
-      console.log(error);
+      console.error(error);
       if (code === "auth/invalid-credential") {
         setError("Invalid email or password");
       }
