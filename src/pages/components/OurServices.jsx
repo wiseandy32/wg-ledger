@@ -1,195 +1,146 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Slide from "./Slide";
-import chart from "@/assets/chart.png";
+import Slide from "./Slide"; // Keep Slide for animations
 import { IoIosThunderstorm } from "react-icons/io";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { MdOutlineSupportAgent } from "react-icons/md";
-import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 
 function OurServices() {
   return (
-    <section
-      // className="relative pb-[17rem] mb:pb-[7rem] h-[750px] h-[350dvh] bottom-10 sm:h-[140dvh] lg:h-[260dvh]"
-      className="mt-[5rem]"
-    >
-      <div className="pb-10 w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px]">
-        {/* removed max-w-5xl  */}
-        <div className="relative mx-auto pt-20 mt-[40px] md:px-3 sm:px-0 sm:pt-0">
+    <section className="relative py-24 bg-brand-dark overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[100px] rounded-full -translate-y-1/2 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <Slide yAxis={50} className="text-center mb-16">
+          <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
+            Comprehensive Digital Finance
+          </span>
+          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-white">
+            A Full-Service <span className="text-gradient">Crypto Bank</span>
+          </h2>
+          <p className="mt-4 text-brand-text-muted max-w-2xl mx-auto text-lg">
+            From savings to settlements, we provide every financial tool you
+            need to maximize your digital capital.
+          </p>
+        </Slide>
+
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {/* Main Video Feature - Spans Full Width */}
           <Slide
-            xAxis={100}
-            className="w-full h-[411px] md:ml-[-10px] border-solid border-2 border-white"
+            xAxis={0}
+            yAxis={50}
+            className="md:col-span-3 h-full min-h-[500px]"
           >
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/2Sd1lGBTLrg?si=G6-qfhZvVjAbuuZ-"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              // referrerpolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </Slide>
-          <Slide
-            xAxis={-90}
-            className="px-5 sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
-          >
-            <p className="text-base mt-7 text-[#1c8d0c] font-bold">
-              Why World Global Ledger
-            </p>
-            <h2 className="md:mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-left text-white py-1 md:max-w-[400px] mb-[32px]">
-              {/* Our Services */}
-              Everything you need for crypto trading is available.
-            </h2>
-            {/* <p className="text-lg text-left max-w-3xl mx-auto text-slate-400">
-              Explore a full suite of secure, user-friendly solutions for
-              managing and protecting your digital assets. With QFS ledger,
-              enjoy seamless transactions, robust security, and unmatched
-              reliability tailored to safeguard your financial future.
-            </p> */}
-          </Slide>
-          <Slide
-            xAxis={-90}
-            className="px-5 flex justify-start flex-col md:flex-row gap-16 sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
-            // style={{ border: "2px solid orange" }}
-          >
-            <Tabs
-              defaultValue="free"
-              className="px-2 md:px-0 w-full md:w-auto md:max-w-[40%] text-white"
-              // style={{ border: "2px solid blue" }}
-            >
-              {/*  className="bg-green-700 max-w-[95%] overflow-scroll" */}
-              <TabsList className="text-white bg-[#0e1a40] max-w-full w-full overflow-scroll md:overflow-hidden pl-[8rem] xxs:pl-[6rem] xs:pl-0 sm:pl-[10.5rem] lg:pl-0">
-                <TabsTrigger value="free" className="capitalize">
-                  Free trial accounts
-                </TabsTrigger>
-                <TabsTrigger value="experts" className="capitalize">
-                  Guided by experts
-                </TabsTrigger>
-                <TabsTrigger value="plans" className="capitalize">
-                  Affordable plans
-                </TabsTrigger>
-              </TabsList>
-              <div
-              // style={{ border: "2px solid yellow" }}
-              >
-                <TabsContent
-                  value="free"
-                  className="w-full md:w-auto mt-9"
-                  // style={{ border: "2px solid red" }}
-                >
-                  <div className="py-3">
-                    <p className="mb-4">
-                      A product or service that is offered to customers for free
-                      for a short period of time so they can try using it
-                      easily.
-                    </p>
-                    <div className="skill-box">
-                      <div className="skillbar clearfix" data-percent="95.7%">
-                        <div className="skillbar-title">
-                          <span>Trading</span>
-                        </div>
-                        <div
-                          className="skillbar-bar fill-skillbar"
-                          style={{ width: "95.7%" }}
-                        ></div>
-                        <div className="skill-bar-percent">95.7%</div>
-                      </div>
-                      <div className="skillbar clearfix " data-percent="92%">
-                        <div className="skillbar-title">
-                          <span>Investment</span>
-                        </div>
-                        <div
-                          className="skillbar-bar fill-skillbar"
-                          style={{ width: "92%" }}
-                        ></div>
-                        <div className="skill-bar-percent">92%</div>
-                      </div>
-                      <div className="skillbar clearfix" data-percent="95%">
-                        <div className="skillbar-title">
-                          <span>Security</span>
-                        </div>
-                        <div
-                          className="skillbar-bar fill-skillbar"
-                          style={{ width: "95%" }}
-                        ></div>
-                        <div className="skill-bar-percent">95%</div>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-                {/* <div>
-                  <img src={chart} alt="" />
-                </div> */}
-              </div>
-              <TabsContent className="w-full md:w-auto mt-9" value="experts">
-                qfswrdledger SAS is a company founded by internationally
-                recognized industrial & academic researchers.
-              </TabsContent>
-              <TabsContent className="w-full md:w-auto mt-9" value="plans">
-                User have been seen in various occasion to have lost funds
-                without anyway of getting it retrived the system was not
-                designed to loss funds accross multi-chain ,so we dived deeper
-                into the blockchain and we found way lost funds could be
-                retrived my a short creation and roll-back functionality only
-                accessiblefas with our client accross the globe.
-              </TabsContent>
-            </Tabs>
-            <div className="w-full">
-              <CryptoCurrencyMarket
-                colorTheme="dark"
+            <div className="h-full w-full rounded-2xl overflow-hidden border border-brand-dark-lighter/50 shadow-2xl relative group">
+              <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all duration-300 pointer-events-none z-10"></div>
+              <iframe
                 width="100%"
-              ></CryptoCurrencyMarket>
-              {/* <img src={chart} alt="" /> */}
+                height="100%"
+                src="https://www.youtube.com/embed/2Sd1lGBTLrg?si=G6-qfhZvVjAbuuZ-"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="w-full h-full object-cover"
+              ></iframe>
             </div>
           </Slide>
-          <div
-            className="px-3 flex flex-wrap flex-col justify-between sm:flex-row gap-5 mt-20 sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
-            style={{ boxShadow: "20px 20px 20px #021035" }}
-          >
-            {[
-              {
-                title: "Online Wallets",
-                subtext:
-                  "Best for security because it comes with the strongest security features & track record of any crypto online wallet.",
-                icon: <IoIosThunderstorm color="#136b09" size={32} />,
-              },
-              {
-                title: "Multi Currency Support",
-                subtext:
-                  "Multi-currency support means that shoppers can pay for your products or services using the currency.",
-                icon: <FaHandHoldingDollar color="#136b09" size={32} />,
-              },
-              {
-                title: "24/7 Live Support",
-                subtext:
-                  "When you need help, our team of experts will work with you via our 24/7 live chat to reach a quick & efficient.",
-                icon: <MdOutlineSupportAgent color="#136b09" size={32} />,
-              },
-            ].map((item, index) => (
-              <Slide
-                key={item.title}
-                xAxis={100}
-                delay={0.4 * (index + 1)}
-                className={
-                  "bg-[#0e1a40] text-[#e3f9e5] highlight-white/5 rounded-lg p-6 sm:w-[30%] hover:bg-[#162a6d] hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col"
-                }
-              >
-                {/* <div
-                key={item.title}
-                className="bg-slate-800 highlight-white/5 rounded-lg p-6 text-white sm:w-[30%] hover:bg-[#0a1120] hover:shadow-[0_35px_60px_-15px_rgba(0,0,32,0.8)] flex flex-col"
-                > */}
-                <div className="">
-                  {item.icon}
-                  <h5 className="text-slate-300 font-semibold text-base capitalize mt-2">
-                    {item.title}
-                  </h5>
-                  <p className="mt-6 text-slate-300">{item.subtext}</p>
-                </div>
-                {/* <div className="p-[15px_13px_15px_17px] bg-[linear-gradient(60deg,#ceff0c_0%,#e1ff63_100%)] rounded-[50px] w-5 h-5"></div> */}
-                {/* </div> */}
-              </Slide>
-            ))}
-          </div>
+
+          {/* Service Card 1: Interest/Yield */}
+          <Slide xAxis={50} className="md:col-span-1 h-full">
+            <div className="glass-card p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6">
+                <FaHandHoldingDollar size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                High-Yield Vaults
+              </h3>
+              <p className="text-brand-text-muted text-sm leading-relaxed mb-4">
+                Earn interest on your crypto assets just like a savings account,
+                but with significantly higher APY rates.
+              </p>
+              {/* Skill Bars */}
+              <div className="space-y-3 mt-6">
+                {["APY Returns", "Asset Liquidity", "Security"].map(
+                  (skill, i) => (
+                    <div key={i}>
+                      <div className="flex justify-between text-xs text-brand-text mb-1">
+                        <span>{skill}</span>
+                        <span className="text-brand-primary">
+                          Best in Class
+                        </span>
+                      </div>
+                      <div className="h-1.5 w-full bg-brand-dark-lighter rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-brand-primary to-brand-accent w-[98%]"></div>
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </Slide>
+
+          {/* Service Card 2: Private Banking */}
+          <Slide yAxis={50} delay={0.2} className="md:col-span-1">
+            <div className="glass-card p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+                <MdOutlineSupportAgent size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                Private Banking
+              </h3>
+              <p className="text-brand-text-muted text-sm leading-relaxed mb-6">
+                Dedicated account managers and priority support for
+                high-net-worth individuals and institutional clients.
+              </p>
+              <ul className="space-y-2">
+                {[
+                  "Personalized Wealth Strategy",
+                  "OTC Trading Desk",
+                  "Estate Planning Services",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 text-xs text-brand-text-muted"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Slide>
+
+          {/* Service Card 3: Fund Recovery */}
+          <Slide yAxis={50} delay={0.3} className="md:col-span-1">
+            <div className="glass-card p-8 rounded-2xl h-full flex flex-col hover:border-brand-primary/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6">
+                <IoIosThunderstorm size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                Fund Recovery
+              </h3>
+              <p className="text-brand-text-muted text-sm leading-relaxed mb-6">
+                Lost funds? Our unique blockchain rollback functionality
+                (client-exclusive) offers a safety net others cannot provide.
+              </p>
+              <ul className="space-y-2 mt-auto">
+                {[
+                  "24h Settlement Reversal Window",
+                  "Unauthorized Tx Protection",
+                  "Verified Rollback Protocol",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 text-xs text-brand-text-muted"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Slide>
         </div>
       </div>
     </section>

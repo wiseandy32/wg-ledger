@@ -3,107 +3,92 @@ import Slide from "./Slide";
 import aboutUsImage from "@/assets/about-image-2.avif";
 
 function AboutUs() {
-  // bg-[#0f0f0f]
   return (
     <section
-      className="mt-20 md:mt-20 mb-20 sm:pt-32 sm:mb-32 md:pt-20 md:mb-40 md:px-5"
+      className="relative py-20 overflow-hidden bg-brand-dark"
       id="about"
     >
-      <div className="flex flex-col-reverse justify-center lg:flex-row-reverse gap-10 md:gap-10">
-        <Slide
-          xAxis={-90}
-          className={
-            "sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto"
-          }
-        >
-          <div className="flex flex-col sm:max-w-full px-5 sm:px-2 md:px-0 text-slate-50">
-            <p className="text-sm mb-2 text-[#1c8d0c] font-bold capitalize">
-              Manage your digital assets
-            </p>
-            <h2 className="md:mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-50 capitalize md:max-w-[60%] lg:max-w-full">
-              {/* About QFS Ledger */}
-              secure solutions for your digital assets and money
-            </h2>
-            <p className="mt-4 max-w-3xl space-y-6">
-              {/* Holdings BRC Investment Group is one of the most transformative
-              technologies since the invention of the Internet. Holdings BRC
-              Investment Group stands firmly in support of financial freedom and
-              the liberty that Bitcoin provides globally for anyone to
-              voluntarily participate in a permissionless and decentralized
-              network which empowers people to not be marginalized by
-              governments and financial institutions. */}
-              This is a platform where you can buy & sell all your chosen
-              cryptocurrencies and digital assets at affordable prices. It is a
-              platform to leverage blockchain technology.
-            </p>
-            <ul className="about-description-box">
-              <li>
-                <p>Seamless User Experience</p>
-              </li>
-              <li>
-                <p>Secure and fast payments</p>
-              </li>
-              <li>
-                <p>A wallet you can trust</p>
-              </li>
-            </ul>
-            <Link
-              to={"login"}
-              // removed bg-slate-900
-              className=" focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-[fit-content] highlight-white/20 bg-[#136b09] hover:bg-[#1c8d0c]"
-            >
-              Connect wallet
-            </Link>
-          </div>
-        </Slide>
-        <Slide
-          xAxis={90}
-          // delay={0.4}
-          className={"lg:pr-10 rounded-md relative lg:w-[40%] md:rounded-md"}
-        >
-          <img src={aboutUsImage} alt="" className="w-full h-full md:rounded" />
-          {/* <div
-            className="overlay w-full h-full z-10"
-            style={{
-              position: "absolute",
-              inset: "0 0 0 0",
-              backgroundColor: "rgba(11, 17, 32, 0.5)",
-            }}
-          ></div> */}
-        </Slide>
-      </div>
-      {/* <div className="flex flex-wrap flex-col justify-between sm:flex-row gap-5 mt-20">
-        {[
-          {
-            title: "ONLINE Wallets",
-            subtext:
-              "Best for security because it comes with the strongest security features and track record of any crypto online wallet.",
-          },
-          {
-            title: "Multi Currency Support",
-            subtext:
-              "Multi-currency support means that shoppers can pay for your products or services using the currency.",
-          },
-          {
-            title: "24/7 Live Support",
-            subtext:
-              "When you need help, our team of experts will work with you via our 24/7 live chat to reach a quick and efficient.",
-          },
-        ].map((item) => (
-          <div
-            key={item.title}
-            className="col-md-4 boxes  bg-slate-800 highlight-white/5 rounded-lg p-6 text-white sm:w-[30%]"
-          >
-            <div className="">
-              <i className="lni lni-thunder"></i>
-              <h5 className="text-slate-300 font-semibold text-base">
-                {item.title}
-              </h5>
-              <p className="mt-6 text-slate-300">{item.subtext}</p>
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-primary/5 blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
+          {/* Content Side */}
+          <Slide xAxis={-50} className="w-full lg:w-1/2">
+            <div className="glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group hover:border-brand-primary/20 transition-all duration-500">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-brand-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+
+              <span className="inline-block text-brand-primary font-bold tracking-wider text-sm uppercase mb-3">
+                Next-Gen Banking
+              </span>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                Traditional Banking Security, <br />
+                <span className="text-gradient">Blockchain Freedom</span>
+              </h2>
+
+              <p className="text-brand-text-muted mb-8 leading-relaxed text-lg">
+                We are not just an exchange; we are a full-service digital
+                custodian. Manage your crypto portfolio with the same ease and
+                security as a traditional bank account, but with instant global
+                settlements, higher yields, and complete asset ownership.
+              </p>
+
+              <ul className="space-y-4 mb-10">
+                {[
+                  "FDIC-Style Asset Protection logic",
+                  "Instant Global Wire Transfers",
+                  "Institutional Cold Storage Custody",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-3 text-brand-text"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center text-brand-primary text-xs">
+                      ✓
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                to="login"
+                className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-brand-primary text-white font-semibold hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/25 transition-all duration-300"
+              >
+                Connect Wallet
+              </Link>
             </div>
-          </div>
-        ))}
-      </div> */}
+          </Slide>
+
+          {/* Image Side */}
+          <Slide xAxis={50} className="w-full lg:w-1/2 relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-brand-dark-lighter/50 group">
+              <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all duration-500 z-10"></div>
+              <img
+                src={aboutUsImage}
+                alt="About WGL"
+                className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
+              />
+
+              {/* Floating Stat Card */}
+              <div className="absolute bottom-6 left-6 right-6 z-20">
+                <div className="glass-card p-4 rounded-xl flex items-center justify-between">
+                  <div>
+                    <p className="text-brand-text-muted text-xs uppercase">
+                      Total Volume
+                    </p>
+                    <p className="text-white font-bold text-xl">$2.4B+</p>
+                  </div>
+                  <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center text-brand-primary">
+                    ⚡
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Slide>
+        </div>
+      </div>
     </section>
   );
 }

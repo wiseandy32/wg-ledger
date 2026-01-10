@@ -4,68 +4,83 @@ import bgVideo from "../../assets/ad.mp4";
 
 function Hero() {
   return (
-    <section
-      className="relative pb-[17rem] mb:pb-[7rem]"
-      // className="h-[750px] bg-bottom bg-no-repeat bg-[#0B1120] bottom-10 inset-0  sm:h-[100dvh] relative"
-    >
-      {/* <div className="absolute inset-0 h-[100dvh] w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px] "> */}
-      <div
-        id="overlay"
-        // className="absolute top-[0] left-[0] right-[0] bottom-[0] z-10 cursor-pointer bg-[rgba(0,0,0,0.3)]"
-        // style={{ top: 0, bottom: 0, left: 0, right: 0 }}
-      ></div>
-      <div
-        className="fullscreen-bg"
-        // style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
-      >
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark">
+      {/* Background Video with heavy overlay */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-brand-dark/80 z-10"></div>
         <video
-          autoPlay={true}
-          muted={true}
-          loop={true}
-          playsInline={true}
-          className="fullscreen-bg__video max-w-[inherit]"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-40"
         >
           <source src={bgVideo} type="video/mp4" />
         </video>
       </div>
-      <div className="sm:max-w-[540px] md:max-w-[720px] xl:max-w-[1140px] m-auto relative max-w-5xl mx-auto pt-5 md:pt-20 sm:pt-24 lg:pt-32 mt-[40px] px-3 sm:px-0">
-        <Slide yAxis={90}>
-          <h1 className="h mt-[40px] md:mt-0 py-5 pt-10 md:pt-0 capitalize font-extrabold text-3xl md:text-4xl sm:text-5xl lg:text-6xl tracking-tight text-left md:text-center text-white md:py-10">
-            secure your financial future with quantum financial system.
+
+      {/* Glow Effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-primary/20 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+      {/* Content */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        <Slide yAxis={50}>
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-brand-primary/30 bg-brand-primary/10 backdrop-blur-sm">
+            <span className="text-brand-primary font-semibold text-sm tracking-wide uppercase">
+              Banking Reimagined
+            </span>
+          </div>
+
+          <h1 className="mt-4 text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            The Digital Bank for Your <br className="hidden md:block" />
+            <span className="text-gradient">Crypto Assets</span>
           </h1>
-          {/* removed p */}
-          <p className="mt-[40px] md:mt-6 md:text-lg text-left md:text-center max-w-3xl text-sm mx-auto text-white">
-            World Global Ledger is the world&apos;s most secure ledger and a
-            decentralized digital banking system. It&apos;s specially crafted by
-            the Quantum Financial System in collaboration with Nesara/Gesara,
-            introducing a revolutionary banking system with robustly backed
-            digital assets to ensure the safety of your finances. It&apos;s
-            simple, seamless, and secure, equipped to manage your ISO20022 coins
-            (XRP/XLM) and various other crypto assets like Bitcoin, USDT,
-            Ethereum, Dogecoin, Litecoin, TRX, etc., guarding against crashes
-            and cyberattacks.
+
+          <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-brand-text-muted leading-relaxed">
+            Experience the security of a Swiss vault with the freedom of
+            blockchain. We offer institutional-grade banking infrastructure for
+            your digital wealth, bridging the gap between traditional finance
+            and DeFi.
           </p>
-        </Slide>
-        <Slide
-          delay={0.4}
-          yAxis={90}
-          className="w-[92%] absolute z-[100] bottom-[-10rem] md:bottom-[-7rem] mt-10 md:mt-6 sm:mt-10 flex flex-col md:flex-row gap-2 sm:justify-center sm:space-x-6 text-sm sm:w-[100%] m-auto"
-        >
-          <Link
-            className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto highlight-white/20 bg-[#136b09] hover:bg-[#1c8d0c] md:w-[30%]"
-            to="register"
-          >
-            Get started
-          </Link>
-          <Link
-            className="  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto border-solid border-2 highlight-white/20 border-[#136b09] hover:border-[#1c8d0c] md:w-[30%]"
-            to="Login"
-          >
-            Login
-          </Link>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link
+              to="register"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-primary text-white font-bold text-lg hover:bg-brand-primary/90 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+            >
+              Get Started Now
+            </Link>
+            <Link
+              to="login"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-button text-white font-semibold text-lg hover:text-brand-primary hover:border-brand-primary/50"
+            >
+              Login to Dashboard
+            </Link>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-16 pt-8 border-t border-white/5 flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+              <span className="text-sm font-medium text-slate-300">
+                ISO20022 Compliant
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+              <span className="text-sm font-medium text-slate-300">
+                Quantum Secure
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+              <span className="text-sm font-medium text-slate-300">
+                Instant Settlement
+              </span>
+            </div>
+          </div>
         </Slide>
       </div>
-      {/* </div> */}
     </section>
   );
 }

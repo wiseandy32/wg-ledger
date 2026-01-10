@@ -4,35 +4,46 @@ import handHoldingCreditCardMockup from "../../assets/hand-holding-credit-card.w
 
 function LastSection() {
   return (
-    <section className="pt-20 mb-20 sm:pt-32 sm:mb-32 md:pt-40 md:mb-40 sm:px-10">
-      <div className="sm:mt-0 flex flex-col-reverse sm:flex-row justify-between gap-16 sm:gap-0">
-        <div className="flex flex-col gap-y-4 sm:gap-y-10 sm:max-w-[50%] px-5">
-          <Slide xAxis={-90}>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-50 capitalize">
-              your financial freedom begins here
-            </h2>
-            <p className="mt-4 max-w-3xl space-y-6 ">
-              The history of money is entering a new era, You might just wake up
-              with no money. We might just wake up one day with no money.
-              Convert all paper money into a digitally gold backed currency.
-            </p>
-          </Slide>
-          <Slide yAxis={90} delay={0.4}>
-            <Link
-              className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center bg-sky-500 highlight-white/20 hover:bg-sky-400 sm:w-[fit-content]"
-              to="register"
-            >
-              Get started
-            </Link>
-          </Slide>
+    <section className="py-24 relative overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="bg-brand-dark-lighter/30 backdrop-blur-md border border-brand-dark-lighter/50 rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 overflow-hidden relative">
+          {/* Inner Gradient */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-accent/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+          <div className="flex-1 text-center md:text-left">
+            <Slide xAxis={-50}>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Ready to Experience the <br />
+                <span className="text-gradient">Future of Banking?</span>
+              </h2>
+              <p className="text-brand-text-muted text-lg mb-8 max-w-xl mx-auto md:mx-0">
+                Join over 24 million users who trust World Global Ledger with
+                their financial future. Secure, instant, and borderless.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <Link
+                  to="/register"
+                  className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-brand-dark bg-brand-primary rounded-xl hover:bg-brand-primary/90 transition-all duration-300 shadow-lg shadow-brand-primary/20 hover:scale-105"
+                >
+                  Create an Account
+                </Link>
+              </div>
+            </Slide>
+          </div>
+
+          <div className="flex-1 flex justify-center md:justify-end relative">
+            <Slide xAxis={50} delay={0.2} className="relative z-10">
+              <img
+                src={handHoldingCreditCardMockup}
+                alt="Global Banking Card"
+                className="w-full max-w-sm md:max-w-md object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              />
+            </Slide>
+          </div>
         </div>
-        <Slide xAxis={90} delay={0.3} className="sm:w-[40%] h-[402px]">
-          <img
-            src={handHoldingCreditCardMockup}
-            className="w-full h-full object-contain"
-            alt=""
-          />
-        </Slide>
       </div>
     </section>
   );

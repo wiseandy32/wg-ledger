@@ -23,6 +23,15 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        brand: {
+          dark: "hsl(var(--brand-dark) / <alpha-value>)",
+          "dark-lighter": "hsl(var(--brand-dark-lighter) / <alpha-value>)",
+          card: "hsl(var(--brand-dark-lighter) / <alpha-value>)",
+          primary: "hsl(var(--brand-primary) / <alpha-value>)",
+          text: "hsl(var(--brand-text) / <alpha-value>)",
+          muted: "hsl(var(--brand-text-muted) / <alpha-value>)",
+          accent: "hsl(var(--brand-accent) / <alpha-value>)",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

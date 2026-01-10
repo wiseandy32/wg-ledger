@@ -9,7 +9,14 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
+
+  /* Brand Variables - HSL Channels for Tailwind Opacity Support */
+  --brand-dark: 240 10% 4%; /* #09090B Zinc-950 (Rich Black) */
+  --brand-dark-lighter: 240 6% 10%; /* #18181B Zinc-900 (Dark Charcoal) */
+  --brand-primary: 160 84% 39%; /* #10B981 Emerald Green */
+  --brand-text: 0 0% 98%; /* #FAFAFA Zinc-50 */
+  --brand-text-muted: 240 5% 65%; /* #A1A1AA Zinc-400 */
+  --brand-accent: 199 89% 60%; /* #38BDF8 Sky Blue */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,7 +34,7 @@ body {
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
-  background-color: #021035;
+  background-color: hsl(var(--brand-dark));
   /* background-color: #0b1120; */
   /* background-color: hsl(223, 49%, 8%); */
   /* background-color: rgb(11, 17, 32);
@@ -211,6 +218,31 @@ footer {
 
 .p::after {
   content: "qfswrdledger Ledger stands as the world's most secure ledger and a decentralized digital banking system. It's specially crafted by the Quantum Financial System in collaboration with Nesara/Gesara, introducing a revolutionary banking system with robustly backed digital assets to ensure the safety of your finances. It's simple, seamless, and secure, equipped to manage your ISO20022 coins (XRP/XLM) and various other crypto assets like Bitcoin, USDT, Ethereum, Dogecoin, Litecoin, TRX, etc., guarding against crashes and cyberattacks.";
+}
+
+/* Modern Redesign Utilities */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-accent to-brand-primary bg-[length:200%_auto] animate-shine;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.glow-bg {
+  background: radial-gradient(
+    circle at center,
+    rgba(16, 185, 129, 0.15) 0%,
+    transparent 70%
+  );
+}
+
+.glass-card {
+  @apply bg-brand-dark-lighter/40 backdrop-blur-md border border-white/10 shadow-xl;
+}
+
+.glass-button {
+  @apply bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300;
 }
 
 @layer base {
@@ -397,4 +429,22 @@ footer {
   width: 100% !important;
   max-width: 500px !important;
   border-radius: 10px;
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

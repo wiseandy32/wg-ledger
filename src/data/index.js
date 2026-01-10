@@ -1,9 +1,16 @@
-import chooseUsImage1 from "@/assets/choose-us-image-1.png";
-import chooseUsImage2 from "@/assets/choose-us-image-2.png";
-import chooseUsImage3 from "@/assets/choose-us-image-3.png";
-import chooseUsImage4 from "@/assets/choose-us-image-4.jpg";
-import chooseUsImage5 from "@/assets/choose-us-image-5.webp";
-import chooseUsImage6 from "@/assets/choose-us-image-6.jfif";
+// import chooseUsImage1 from "@/assets/choose-us-image-1.png";
+// import chooseUsImage2 from "@/assets/choose-us-image-2.png";
+// import chooseUsImage3 from "@/assets/choose-us-image-3.png";
+// import chooseUsImage4 from "@/assets/choose-us-image-4.jpg";
+// import chooseUsImage5 from "@/assets/choose-us-image-5.webp";
+// import chooseUsImage6 from "@/assets/choose-us-image-6.jfif";
+
+import regulatoryImg from "@/assets/regulatory_compliance.png";
+import securityImg from "@/assets/institutional_security.png";
+import globalImg from "@/assets/global_banking.png";
+import liquidityImg from "@/assets/instant_liquidity.png";
+import wealthImg from "@/assets/private_wealth.png";
+import auditImg from "@/assets/transparent_audits.png";
 import btcIcon from "@/assets/btc-logo.png";
 import ethIcon from "@/assets/eth-logo.png";
 import usdtIcon from "@/assets/usdt-logo.png";
@@ -108,41 +115,41 @@ export const loginFormFields = [
 
 export const chooseUsCardInfo = [
   {
-    title: "Digital Adaptation",
+    title: "Regulatory Compliance",
     subtext:
-      "The Quantum Financial System (QFS) is indeed a real concept and a subject of ongoing research and development but has yet to be fully implemented globally. It aims to revolutionize the financial world.",
+      "Fully licensed and regulated financial infrastructure. We adhere to the strictest international banking standards, ensuring your operations are always compliant and secure.",
     start: 1,
-    image: chooseUsImage1,
+    image: regulatoryImg,
   },
   {
-    title: "Quantum Financial System",
+    title: "Institutional Security",
     subtext:
-      "The Quantum Financial System (QFS) originally began as a concept that was then developed by various researchers, scientists, and experts in the fields of finance, physics, and computer science over a period of time.",
-    image: chooseUsImage2,
+      "Your assets are safeguarded in military-grade cold storage vaults with multi-signature technology and comprehensive insurance coverage against theft or loss.",
+    image: securityImg,
   },
   {
-    title: "How it Works",
+    title: "Global Banking Access",
     subtext:
-      "One of the key features of the new quantum financial system is its use of quantum computing technology. This technology can process complex transactions at unprecedented speeds.",
-    image: chooseUsImage3,
+      "Experience borderless finance with support for over 50 fiat currencies. Send and receive funds globally with instant wire transfers and zero foreign exchange fees.",
+    image: globalImg,
   },
   {
-    title: "Near Instantaneous Transaction",
+    title: "Instant Liquidity",
     subtext:
-      "With the use of quantum computing and blockchain technology, it will become possible to conduct financial transactions in real-time and without the need for intermediaries (like banks). This will significantly reduce transaction times and costs.",
-    image: chooseUsImage4,
+      "Access your funds 24/7 with our real-time settlement network. Convert between crypto and fiat instantly, providing you with the liquidity you need, when you need it.",
+    image: liquidityImg,
   },
   {
-    title: "Increased Security",
+    title: "Private Wealth Management",
     subtext:
-      "With the use of quantum computing and blockchain technology, it will be much more difficult for hackers to steal financial information or conduct fraudulent transactions. This will make it safer for businesses and individuals to conduct financial transactions.",
-    image: chooseUsImage5,
+      "Bespoke financial services for high-net-worth individuals. Enjoy dedicated account managers, personalized investment strategies, and priority 24/7 concierge support.",
+    image: wealthImg,
   },
   {
-    title: "Blockchain Utilization",
+    title: "Transparent Audits",
     subtext:
-      "A key component of the quantum financial system is its utilization of blockchain technology. In this new quantum financial system, blockchain technology will be used to assist in the creation of a secure and transparent financial system.",
-    image: chooseUsImage6,
+      "Trust is earned through transparency. We provide real-time proof of reserves and undergo rigorous quarterly audits by top-tier accounting firms to verify solvency.",
+    image: auditImg,
   },
 ];
 
