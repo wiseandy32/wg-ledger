@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../services/firebase";
@@ -13,6 +13,15 @@ function MobileNav() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const path = pathname.split("/");
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMenuVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMenuVisible]);
 
   const logout = async () => {
     try {
@@ -25,83 +34,83 @@ function MobileNav() {
     }
   };
 
+  const navLinks = [
+    { title: "Home", path: "/" },
+    { title: "Services", path: "/#services" },
+    { title: "About", path: "/#about" },
+    { title: "Contact", path: "/contact" },
+  ];
+
   return (
     <>
       <div
-        className="absolute top-[28px] right-[-14px] grid items-center w-12 h-12 text-white z-[9999999] md:hidden"
+        className="md:hidden z-[10001] relative cursor-pointer text-white hover:text-brand-primary transition-colors p-2"
         onClick={() => setIsMenuVisible((prev) => !prev)}
       >
         {!isMenuVisible ? (
           <GiHamburgerMenu className="h-6 w-6" />
         ) : (
-          <ImCross className="h-6 w-6" />
+          <ImCross className="h-6 w-6 fixed top-8 right-6" />
         )}
       </div>
-      <motion.nav
-        variants={{
-          close: {
-            translateX: "100vw",
-          },
-          open: {
-            translateX: 0,
-          },
-        }}
-        transition={{
-          duration: 0.5,
-          damping: 8,
-          stiffness: 100,
-        }}
-        initial="hidden"
-        animate={!isMenuVisible ? "close" : "open"}
-        className="flex md:hidden flex-col md:flex-row gap-16 md:gap-0 pt-24 md:pt-0 md:justify-end items-center capitalize fixed md:static h-[100vh] md:h-auto w-[100vw] top-[0] left-[0] z-[999999] bg-[#021035]"
-      >
-        <ul className="flex flex-col md:flex-row justify-center md:w-auto w-full items-center gap-4">
-          {[
-            { title: "home", path: "/" },
-            { title: "about", path: "/" },
-            { title: "services", path: "/" },
-          ].map((link) => (
-            <Link
-              to={link.path}
-              key={link.title}
-              className="text-2xl md:text-sm font-semibold"
-            >
-              <li onClick={() => setIsMenuVisible(false)}>{link.title}</li>
-            </Link>
-          ))}
-        </ul>
-        <div className="flex items-center flex-col md:flex-row px-5 md:px-0 gap-4 w-full md:w-auto md:border-l-2 md:border-slate-200 md:border-solid md:ml-6 md:pl-6 ">
-          {!path.includes("admin") || !path.includes("user") ? (
-            <>
-              {[
-                { title: "sign up", path: "register" },
-                { title: "login", path: "login" },
-              ].map((link) => (
-                <Link
-                  key={link.title}
-                  className={`focus:outline-none ${
-                    link.path === "register"
-                      ? "bg-[#136b09] md:bg-transparent md:hover:bg-transparent"
-                      : "border-solid border-2 border-[#136b09] hover:border-[#1c8d0c] md:border-none md:hover:bg-transparent md:hover:text-sky-400"
-                  } focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 md:px-0 rounded-lg w-full flex items-center justify-center sm:w-auto`}
-                  to={link.path}
-                >
-                  <span onClick={() => setIsMenuVisible(false)}>
+
+      <AnimatePresence>
+        {isMenuVisible && (
+          <motion.nav
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed inset-0 w-full h-screen bg-brand-dark/95 backdrop-blur-xl z-[10000] flex flex-col justify-center items-center md:hidden"
+          >
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <ul className="flex flex-col items-center gap-8 mb-12 relative z-10">
+              {navLinks.map((link) => (
+                <li key={link.title}>
+                  <Link
+                    to={link.path}
+                    className="text-3xl font-bold text-white hover:text-brand-primary transition-colors uppercase tracking-widest"
+                    onClick={() => setIsMenuVisible(false)}
+                  >
                     {link.title}
-                  </span>
-                </Link>
+                  </Link>
+                </li>
               ))}
-            </>
-          ) : (
-            <button
-              onClick={logout}
-              className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400"
-            >
-              Sign out
-            </button>
-          )}
-        </div>
-      </motion.nav>
+            </ul>
+
+            <div className="flex flex-col gap-6 w-full max-w-xs px-6 relative z-10">
+              {!path.includes("admin") && !path.includes("user") ? (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsMenuVisible(false)}
+                    className="w-full h-14 flex items-center justify-center rounded-xl border border-brand-dark-lighter text-white font-semibold hover:border-brand-primary hover:text-brand-primary transition-all uppercase tracking-wider text-sm"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setIsMenuVisible(false)}
+                    className="w-full h-14 flex items-center justify-center rounded-xl bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all uppercase tracking-wider text-sm"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={logout}
+                  className="w-full h-14 flex items-center justify-center rounded-xl bg-red-500/10 border border-red-500/50 text-red-500 font-bold hover:bg-red-500/20 transition-all uppercase tracking-wider text-sm"
+                >
+                  Sign Out
+                </button>
+              )}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </>
   );
 }

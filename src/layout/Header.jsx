@@ -1,54 +1,80 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MobileNav from "../pages/components/MobileNav";
 import logo from "../assets/logo.png";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Header() {
   const { pathname } = useLocation();
   const path = pathname.split("/");
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <header className="flex items-center px-2 md:px-5 justify-between h-20 text-slate-200 font-semibold text-sm fixed pt-6 leading-6 w-full bg-[#021035] z-[1000]">
-        <MobileNav />
-        <Link to={"/"}>
-          <img src={logo} width={160} height={20} alt="" />
-        </Link>
-        <nav className="hidden md:flex flex-col md:flex-row gap-16 md:gap-0 pt-24 md:pt-0 md:justify-end items-center capitalize fixed md:static h-[100vh] md:h-auto w-[100vw] top-[0] left-[0] z-[999999] bg-[#021035]">
-          <ul className="flex flex-col md:flex-row justify-center md:w-auto w-full items-center gap-4">
-            {[
-              { title: "home", path: "/" },
-              { title: "about", path: "/" },
-              { title: "services", path: "/" },
-            ].map((link) => (
-              <li
-                key={link.title}
-                className="hover:text-[#1c8d0c] text-2xl md:text-sm font-semibold"
-              >
-                <Link to={link.path}>{link.title}</Link>
-              </li>
-            ))}
-          </ul>
-          {!path.includes("admin") || !path.includes("user") ? (
-            <div className="flex items-center flex-col md:flex-row px-5 md:px-0 gap-4 w-full md:w-auto md:border-l-2 md:border-slate-200 md:hover:border-[#1c8d0c] md:border-solid md:ml-6 md:pl-6 ">
+      <header
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
+          scrolled
+            ? "bg-brand-dark/80 backdrop-blur-md shadow-lg shadow-brand-primary/5 py-4"
+            : "bg-transparent py-6"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <Link to={"/"} className="flex items-center gap-2 group">
+            <img
+              src={logo}
+              width={160}
+              height={40}
+              alt="World Global Ledger"
+              className="brightness-0 invert group-hover:opacity-80 transition-opacity"
+            />
+          </Link>
+
+          <MobileNav />
+
+          <nav className="hidden md:flex items-center gap-8">
+            <ul className="flex items-center gap-8">
               {[
-                { title: "sign up", path: "register" },
-                { title: "login", path: "login" },
+                { title: "Home", path: "/" },
+                { title: "Services", path: "/#services" },
+                { title: "About", path: "/#about" },
+                { title: "Contact", path: "/contact" },
               ].map((link) => (
-                <Link
-                  key={link.title}
-                  className={`focus:outline-none ${
-                    link.path === "register"
-                      ? "bg-[#136b09] hover:bg-[#1c8d0c] md:bg-transparent md:hover:bg-transparent md:hover:text-[#1c8d0c]"
-                      : "border-solid border-2 border-[#1c8d0c] hover:bg-[#1c8d0c] md:border-none md:hover:bg-transparent md:hover:text-[#1c8d0c]"
-                  }  text-white font-semibold h-12 px-6 md:px-0 rounded-lg w-full flex items-center justify-center sm:w-auto`}
-                  to={link.path}
-                >
-                  {link.title}
-                </Link>
+                <li key={link.title}>
+                  <Link
+                    to={link.path}
+                    className="text-brand-text-muted hover:text-brand-primary font-medium text-sm transition-colors uppercase tracking-wider"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
               ))}
-            </div>
-          ) : null}
-        </nav>
+            </ul>
+
+            {!path.includes("admin") && !path.includes("user") && (
+              <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
+                <Link
+                  to="/login"
+                  className="text-white hover:text-brand-primary font-semibold text-sm transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-5 py-2.5 rounded-lg bg-brand-primary text-brand-dark font-bold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transform hover:-translate-y-0.5"
+                >
+                  Get Started
+                </Link>
+              </div>
+            )}
+          </nav>
+        </div>
       </header>
     </>
   );
