@@ -13,14 +13,22 @@ import { Link } from "react-router-dom";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUp,
+  ArrowDown,
+  Wallet,
+  Banknote,
+  Landmark,
+  CreditCard,
+} from "lucide-react";
 
 function UserDashboard() {
   const { user } = useAuth();
   const { theme } = useTheme();
   const { coinsData } = useCoinData();
 
-  const { data: recentTransactions } = useQuery({
+  const { data: recentTransactionsRaw } = useQuery({
     queryKey: ["recentTransactions", user?.uid],
     queryFn: async () => {
       if (!user?.docRef) return [];
@@ -29,13 +37,38 @@ function UserDashboard() {
         user.docRef,
         "transactions"
       );
-      // Sort desc by timestamp and take top 6
-      return (documents || [])
-        .sort((a, b) => b.timestamp - a.timestamp)
-        .slice(0, 6);
+      // Sort desc by timestamp
+      return (documents || []).sort((a, b) => b.timestamp - a.timestamp);
     },
     enabled: !!user?.docRef,
   });
+
+  const recentTransactions = recentTransactionsRaw?.slice(0, 6);
+
+  const stats = (recentTransactionsRaw || []).reduce(
+    (acc, curr) => {
+      if (curr.type === "deposit") {
+        if (curr.status === "confirmed" || curr.status === "completed") {
+          acc.totalDeposits += Number(curr.amount);
+        } else if (curr.status === "pending") {
+          acc.pendingDeposits += Number(curr.amount);
+        }
+      } else if (curr.type === "withdrawal") {
+        if (curr.status === "confirmed" || curr.status === "completed") {
+          acc.totalWithdrawals += Number(curr.amount);
+        } else if (curr.status === "pending") {
+          acc.pendingWithdrawals += Number(curr.amount);
+        }
+      }
+      return acc;
+    },
+    {
+      totalDeposits: 0,
+      totalWithdrawals: 0,
+      pendingDeposits: 0,
+      pendingWithdrawals: 0,
+    }
+  );
 
   const mappedWallets = wallets.map((wallet) => {
     if (!user) {
@@ -87,6 +120,9 @@ function UserDashboard() {
   );
 
   const dashboardWallets = [...coins, ...otherWallets].filter((w) => {
+    // Filter out Withdrawal wallet and empty balances
+    if (w.name.includes("Withdrawal")) return false;
+
     const effectiveBalance =
       w.name === "Ledger" ? ledgerBalance : parseFloat(w.balance);
     return effectiveBalance > 0;
@@ -108,6 +144,54 @@ function UserDashboard() {
           prices.
         </p>
         <TotalAssets balance={ledgerBalance.toFixed(2)} />
+
+        {/* Summary Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          <div className="glass-card p-4 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Wallet className="w-8 h-8" />
+            </div>
+            <p className="text-sm text-muted-foreground font-medium z-10">
+              Pending Deposits
+            </p>
+            <p className="text-2xl font-bold text-foreground z-10">
+              ${formatNumberWithCommas(stats.pendingDeposits.toFixed(2))}
+            </p>
+          </div>
+          <div className="glass-card p-4 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Banknote className="w-8 h-8" />
+            </div>
+            <p className="text-sm text-muted-foreground font-medium z-10">
+              Pending Withdrawals
+            </p>
+            <p className="text-2xl font-bold text-foreground z-10">
+              ${formatNumberWithCommas(stats.pendingWithdrawals.toFixed(2))}
+            </p>
+          </div>
+          <div className="glass-card p-4 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Landmark className="w-8 h-8 text-brand-primary" />
+            </div>
+            <p className="text-sm text-muted-foreground font-medium z-10">
+              Total Deposits
+            </p>
+            <p className="text-2xl font-bold text-foreground z-10">
+              ${formatNumberWithCommas(stats.totalDeposits.toFixed(2))}
+            </p>
+          </div>
+          <div className="glass-card p-4 rounded-xl flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+              <CreditCard className="w-8 h-8 text-orange-500" />
+            </div>
+            <p className="text-sm text-muted-foreground font-medium z-10">
+              Total Withdrawals
+            </p>
+            <p className="text-2xl font-bold text-foreground z-10">
+              ${formatNumberWithCommas(stats.totalWithdrawals.toFixed(2))}
+            </p>
+          </div>
+        </div>
       </div>
 
       <motion.div
