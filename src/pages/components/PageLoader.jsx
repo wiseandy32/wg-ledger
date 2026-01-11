@@ -3,78 +3,104 @@ import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
 
 function PageLoader() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 18); // Adjust speed to match the 2.2s total loading time
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <div className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#021035] overflow-hidden">
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#021035] overflow-hidden"
+    >
       {/* Cinematic Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary/10 via-[#021035] to-[#021035] opacity-50"></div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary/10 via-[#021035] to-[#021035] opacity-50"
+      ></motion.div>
 
-      {/* Rotating Security Rings */}
-      <div className="relative flex items-center justify-center">
-        {/* Outer Ring */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-brand-primary/20 border-t-brand-primary/60 border-dashed"
-        ></motion.div>
+      <motion.div
+        className="relative flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: [0, 1, 1, 0],
+          transition: {
+            duration: 2.5,
+            times: [0, 0.05, 0.85, 1], // Stays visible until ~2.1s
+            ease: "easeInOut",
+          },
+        }}
+      >
+        {/* Animated SVG Rings */}
+        <div className="relative flex items-center justify-center">
+          <svg
+            className="w-64 h-64 md:w-80 md:h-80 -rotate-90"
+            viewBox="0 0 100 100"
+          >
+            {/* Outer Drawing Circle */}
+            <motion.circle
+              cx="50"
+              cy="50"
+              r="48"
+              fill="transparent"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeDasharray="301.6"
+              initial={{ strokeDashoffset: 301.6 }}
+              animate={{
+                strokeDashoffset: 0,
+                color: ["#10b981", "#10b981", "#ffffff"],
+              }}
+              transition={{
+                strokeDashoffset: { duration: 1.2, ease: "easeInOut" },
+                color: { duration: 2, times: [0, 0.6, 0.7] }, // Changes to white at ~1.2s
+              }}
+            />
+            {/* Inner Drawing Circle */}
+            <motion.circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="transparent"
+              stroke="currentColor"
+              strokeWidth="0.5"
+              strokeDasharray="251.3"
+              initial={{ strokeDashoffset: 251.3 }}
+              animate={{
+                strokeDashoffset: 0,
+                color: ["#f59e0b", "#f59e0b", "#ffffff"],
+              }}
+              transition={{
+                strokeDashoffset: {
+                  duration: 1,
+                  delay: 0.2,
+                  ease: "easeInOut",
+                },
+                color: { duration: 2, times: [0, 0.6, 0.7] },
+              }}
+            />
+          </svg>
 
-        {/* Middle Ring (counter-rotate) */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute w-48 h-48 md:w-60 md:h-60 rounded-full border border-brand-accent/20 border-b-brand-accent/60"
-        ></motion.div>
-
-        {/* Inner Ring */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 p-8 rounded-full bg-[#021035]/50 backdrop-blur-sm shadow-[0_0_50px_rgba(16,185,129,0.1)]"
-        >
-          <motion.img
-            src={logo}
-            alt="Loading..."
-            initial={{ filter: "brightness(0) invert(1) blur(10px)" }}
-            animate={{ filter: "brightness(0) invert(1) blur(0px)" }}
-            transition={{ duration: 0.8 }}
-            className="w-32 md:w-40 h-auto object-contain"
-          />
-        </motion.div>
-      </div>
-
-      {/* Modern Progress Indicator */}
-      <div className="mt-12 relative z-10 flex flex-col items-center gap-2">
-        <div className="flex items-end gap-1">
-          <span className="text-4xl font-bold text-white tabular-nums tracking-tighter">
-            {progress}
-          </span>
-          <span className="text-brand-primary text-xl font-medium mb-1">%</span>
-        </div>
-        <div className="w-48 h-[2px] bg-brand-dark-lighter/30 rounded-full overflow-hidden">
+          {/* Logo Centerpiece */}
           <motion.div
-            className="h-full bg-brand-primary shadow-[0_0_10px_rgba(16,185,129,0.8)]"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-          />
+            className="absolute z-10 p-8 rounded-full bg-[#021035]/50 backdrop-blur-sm shadow-[0_0_50px_rgba(16,185,129,0.1)]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{
+              opacity: [0, 0, 1, 1],
+              scale: [0.9, 0.9, 1, 1],
+            }}
+            transition={{
+              duration: 2,
+              times: [0, 0.6, 0.75, 1], // Appears at ~1.2s as circles finish
+              ease: "easeOut",
+            }}
+          >
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-24 md:w-32 h-auto object-contain brightness-0 invert"
+            />
+          </motion.div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

@@ -15,7 +15,7 @@ function Layout() {
     // Simulate initial loading sequence
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2200);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -23,7 +23,12 @@ function Layout() {
   return (
     <>
       <AnimatePresence mode="wait">
-        {loading && <PageLoader key="loader" />}
+        {loading && (
+          <PageLoader
+            key="loader"
+            subtext="Establishing secure terminal connection..."
+          />
+        )}
       </AnimatePresence>
 
       {!loading && (
