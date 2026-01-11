@@ -4,6 +4,7 @@ import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
 import { redirect } from "react-router-dom";
 import ForgotPassword from "../pages/ForgotPassword";
 import NotFoundError from "@/pages/NotFound";
@@ -48,6 +49,10 @@ const router = createBrowserRouter(
         {
           path: "about",
           element: <About />,
+        },
+        {
+          path: "contact",
+          element: <Contact />,
         },
         {
           path: "login",
