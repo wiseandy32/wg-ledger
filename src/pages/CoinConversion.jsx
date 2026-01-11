@@ -161,33 +161,42 @@ const CoinConversion = () => {
   };
 
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Convert Coins</h2>
+    <div className="flex-1 space-y-8 p-4 md:p-8 pt-6">
+      <div className="flex flex-col gap-2">
+        <h2 className="text-3xl font-bold premium-gradient-text">
+          Convert Coins
+        </h2>
+        <p className="text-muted-foreground">
+          Instantly swap your assets between different cryptocurrencies with
+          zero fees.
+        </p>
       </div>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="col-span-4 md:col-span-2">
-          <CardHeader>
-            <CardTitle>Conversion</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label>From</Label>
+        <div className="col-span-4 md:col-span-2 glass-card p-8 space-y-8 rounded-2xl">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+                From
+              </Label>
               <Select value={fromCoin} onValueChange={setFromCoin}>
-                <SelectTrigger>
+                <SelectTrigger className="py-6 glass-input">
                   <SelectValue placeholder="Select coin to convert from" />
                 </SelectTrigger>
-                <SelectContent className="max-h-[300px]">
+                <SelectContent className="max-h-[300px] glass-card border-border/50">
                   {availableWallets.map((wallet) => (
                     <SelectItem key={wallet.id} value={wallet.id}>
                       <div className="flex items-center gap-2">
                         <img
                           src={wallet.icon}
                           alt={wallet.name}
-                          className="w-4 h-4"
+                          className="w-5 h-5 object-contain"
                         />
-                        {wallet.name} (Balance: $
-                        {formatNumberWithCommas(user?.[wallet.value] || 0)})
+                        <span className="font-medium">{wallet.name}</span>
+                        <span className="text-xs text-muted-foreground opacity-70">
+                          (Balance: $
+                          {formatNumberWithCommas(user?.[wallet.value] || 0)})
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
@@ -195,13 +204,15 @@ const CoinConversion = () => {
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label>To</Label>
+            <div className="space-y-3">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+                To
+              </Label>
               <Select value={toCoin} onValueChange={setToCoin}>
-                <SelectTrigger>
+                <SelectTrigger className="py-6 glass-input">
                   <SelectValue placeholder="Select coin to convert to" />
                 </SelectTrigger>
-                <SelectContent className="max-h-[300px]">
+                <SelectContent className="max-h-[300px] glass-card border-border/50">
                   {allCoins
                     .filter((w) => w.id !== fromCoin)
                     .map((wallet) => (
@@ -210,9 +221,9 @@ const CoinConversion = () => {
                           <img
                             src={wallet.icon}
                             alt={wallet.name}
-                            className="w-4 h-4"
+                            className="w-5 h-5 object-contain"
                           />
-                          {wallet.name}
+                          <span className="font-medium">{wallet.name}</span>
                         </div>
                       </SelectItem>
                     ))}
@@ -220,18 +231,22 @@ const CoinConversion = () => {
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label>Amount (USD)</Label>
+            <div className="space-y-3">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+                Amount (USD)
+              </Label>
               <Input
                 type="number"
                 placeholder="0.00"
                 value={amount}
+                className="py-6 glass-input text-lg font-semibold"
                 onChange={(e) => setAmount(e.target.value)}
               />
             </div>
 
             {fromCoin && toCoin && (
-              <div className="text-sm text-muted-foreground">
+              <div className="p-3 rounded-xl bg-muted/30 border border-border/30 text-xs font-medium text-muted-foreground flex items-center gap-2">
+                <Loader2 className="w-3 h-3 text-brand-primary animate-pulse" />
                 {exchangeRate > 0 ? (
                   <>
                     Exchange Rate: 1{" "}
@@ -240,22 +255,24 @@ const CoinConversion = () => {
                     {wallets.find((w) => w.id === toCoin)?.name}
                   </>
                 ) : (
-                  <span className="text-yellow-600">
-                    Fetching exchange rate or price unavailable...
+                  <span className="text-brand-primary">
+                    Updating exchange rates...
                   </span>
                 )}
               </div>
             )}
 
             {deductedAmount > 0 && (
-              <div className="p-4 bg-muted rounded-lg space-y-2">
-                <div className="flex justify-between">
-                  <span className="font-medium">You Pay:</span>
+              <div className="glass-card bg-muted/20 p-5 rounded-2xl space-y-4 border-border/30">
+                <div className="flex justify-between items-start">
+                  <span className="text-sm font-semibold text-muted-foreground uppercase tracking-tight">
+                    You Pay
+                  </span>
                   <div className="text-right">
-                    <span className="font-bold block">
+                    <span className="text-xl font-bold block text-foreground tracking-tight">
                       ${formatNumberWithCommas(deductedAmount.toFixed(2))}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs font-mono text-muted-foreground">
                       ≈{" "}
                       {getEstimatedQuantity(fromCoin, deductedAmount).toFixed(
                         8
@@ -264,13 +281,18 @@ const CoinConversion = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">You Receive:</span>
+
+                <div className="h-px bg-border/50" />
+
+                <div className="flex justify-between items-start">
+                  <span className="text-sm font-semibold text-muted-foreground uppercase tracking-tight">
+                    You Receive
+                  </span>
                   <div className="text-right">
-                    <span className="font-bold block">
+                    <span className="text-xl font-bold block text-brand-primary tracking-tight">
                       ${formatNumberWithCommas(convertedAmount.toFixed(2))}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs font-mono text-muted-foreground">
                       ≈{" "}
                       {getEstimatedQuantity(toCoin, convertedAmount).toFixed(8)}{" "}
                       {wallets.find((w) => w.id === toCoin)?.name}
@@ -281,38 +303,41 @@ const CoinConversion = () => {
             )}
 
             <Button
-              className="w-full"
+              className="w-full h-12 text-base font-bold shadow-lg shadow-brand-primary/10"
               onClick={handleConvert}
+              variant="gooeyLeft"
               disabled={loading || !fromCoin || !toCoin || !amount}
             >
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Convert
+              {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {loading ? "Processing..." : "Convert Assets"}
             </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Recent Transactions Section */}
-      <div className="space-y-4 pt-6">
+      <div className="space-y-6 pt-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold tracking-tight">
+          <h3 className="text-xl font-bold tracking-tight premium-gradient-text">
             Recent Conversions
           </h3>
           <Button
             variant="outline"
+            size="sm"
+            className="h-9 px-4 text-xs font-semibold rounded-full border-border/50 hover:bg-muted/50 transition-all"
             onClick={() => navigate("/user/transactions?type=conversion")}
           >
             See more
           </Button>
         </div>
-        <div className="max-w-[calc(100vw-4rem)] md:max-w-full">
-            <DataTable
-                columns={conversionColumns}
-                conversionColumns={conversionColumns}
-                data={recentConversions || []}
-                hideFilters={true}
-                hidePagination={true}
-            />
+        <div className="glass-card rounded-2xl overflow-hidden overflow-x-auto">
+          <DataTable
+            columns={conversionColumns}
+            conversionColumns={conversionColumns}
+            data={recentConversions || []}
+            hideFilters={true}
+            hidePagination={true}
+          />
         </div>
       </div>
     </div>
