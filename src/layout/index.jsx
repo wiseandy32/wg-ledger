@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import emailjs from "@emailjs/browser";
@@ -8,17 +8,25 @@ import PageLoader from "../pages/components/PageLoader";
 import { AnimatePresence } from "framer-motion";
 
 function Layout() {
+  const location = useLocation();
   emailjs.init({ publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(
+    !location.pathname.startsWith("/admin")
+  );
 
   useEffect(() => {
+    if (location.pathname.startsWith("/admin")) {
+      setLoading(false);
+      return;
+    }
+
     // Simulate initial loading sequence
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>

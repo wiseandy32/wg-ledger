@@ -19,6 +19,12 @@ function DashboardLayout() {
   emailjs.init({ publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY });
 
   useEffect(() => {
+    // Skip loader for admin routes
+    if (location.pathname.startsWith("/admin")) {
+      setIsPageLoading(false);
+      return;
+    }
+
     // Show loader on path change
     setIsPageLoading(true);
 
