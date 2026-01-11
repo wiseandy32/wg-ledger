@@ -97,9 +97,9 @@ export function DataTable({
   }, [typeFilter]);
 
   return (
-    <div>
+    <div className="space-y-4">
       {!hideFilters && (
-        <div className="flex flex-wrap items-center gap-4 py-4">
+        <div className="flex flex-wrap items-center gap-4 px-4 py-4">
           <Select
             value={table.getColumn("type")?.getFilterValue() ?? "all"}
             onValueChange={(value) =>
@@ -108,11 +108,10 @@ export function DataTable({
                 ?.setFilterValue(value === "all" ? "" : value)
             }
           >
-            <SelectTrigger className="md:max-w-[180px]">
-              {/* <SelectTrigger> */}
+            <SelectTrigger className="md:max-w-[180px] glass-input">
               <SelectValue placeholder="Select type" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="glass-card">
               <SelectItem value="all">All Types</SelectItem>
               <SelectItem value="deposit">Deposit</SelectItem>
               <SelectItem value="withdrawal">Withdrawal</SelectItem>
@@ -130,36 +129,40 @@ export function DataTable({
               table.getColumn("type")?.getFilterValue() === "conversion"
             }
           >
-            <SelectTrigger className="md:max-w-[180px]">
-              {/* <SelectTrigger> */}
+            <SelectTrigger className="md:max-w-[180px] glass-input">
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="glass-card">
               <SelectItem value="all">All Statuses</SelectItem>
               <SelectItem value="confirmed">Confirmed</SelectItem>
               <SelectItem value="pending">Pending</SelectItem>
               <SelectItem value="declined">Declined</SelectItem>
-              {/* "completed" is not a selectable option for normal transactions per user request implicitly */}
             </SelectContent>
           </Select>
           <DateRangePicker onDateRangeChange={handleDateRangeChange} />
           <Button
             variant="outline"
             onClick={handleClearFilters}
-            className="ml-auto"
+            className="ml-auto rounded-full px-6 hover:bg-muted/50"
           >
             Clear Filters
           </Button>
         </div>
       )}
-      <div className="rounded-md border">
+      <div className="border-t border-border/40">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-muted/30">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow
+                key={headerGroup.id}
+                className="hover:bg-transparent border-border/40"
+              >
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="whitespace-nowrap">
+                    <TableHead
+                      key={header.id}
+                      className="whitespace-nowrap font-bold text-muted-foreground py-4 px-6"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -176,12 +179,12 @@ export function DataTable({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap border-border/40 hover:bg-muted/20 transition-colors"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="py-4 px-6">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -193,8 +196,8 @@ export function DataTable({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
+                  colSpan={activeColumns.length}
+                  className="h-24 text-center text-muted-foreground"
                 >
                   No available transactions.
                 </TableCell>
@@ -204,10 +207,11 @@ export function DataTable({
         </Table>
       </div>
       {!hidePagination && (
-        <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex items-center justify-end space-x-2 p-4 border-t border-border/40">
           <Button
             variant="outline"
             size="sm"
+            className="rounded-full px-4"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -216,6 +220,7 @@ export function DataTable({
           <Button
             variant="outline"
             size="sm"
+            className="rounded-full px-4"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

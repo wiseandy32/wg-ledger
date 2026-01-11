@@ -41,26 +41,28 @@ function TransactionHistoryPage() {
   }, [user, user?.docRef, qc]);
 
   return (
-    <>
-      <div className="">
-        <h1 className="text-2xl md:text-4xl font-bold capitalize">
+    <div className="flex-1 space-y-8 p-4 md:p-8 pt-6">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold premium-gradient-text">
           Transaction History
         </h1>
-        <p className="md:mt-2 text-sm">
-          Here&apos;s an overview of all transactions on your account.
+        <p className="text-muted-foreground">
+          A comprehensive overview of all your deposits, withdrawals, and
+          conversions.
         </p>
       </div>
-      <div className="container mx-auto py-5">
+
+      <div className="glass-card rounded-2xl overflow-hidden">
         <div className="max-w-[calc(100vw-2rem)] md:max-w-full">
-            <DataTable
+          <DataTable
             columns={columns}
             conversionColumns={conversionColumns}
             data={transactions || []}
             defaultType={defaultType}
-            />
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
