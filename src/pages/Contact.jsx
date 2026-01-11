@@ -65,18 +65,17 @@ function Contact() {
               </p>
               <div className="flex items-center gap-3 text-white font-medium">
                 <Mail className="text-brand-primary w-5 h-5" />
-                support@worldgloballedger.com
+                admin@worldglobal-ledger.com
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-brand-dark-lighter/20 border border-brand-dark-lighter/50 rounded-3xl p-8 backdrop-blur-sm">
-                <MapPin className="text-brand-primary w-8 h-8 mb-4" />
-                <h4 className="text-lg font-bold text-white mb-2">Global HQ</h4>
+                <MessageSquare className="text-brand-primary w-8 h-8 mb-4" />
+                <h4 className="text-lg font-bold text-white mb-2">Live Chat</h4>
                 <p className="text-brand-text-muted text-sm">
-                  Bahnhofstrasse 21
-                  <br />
-                  6300 Zug, Switzerland
+                  Chat with us directly by clicking on the chat icon at the
+                  bottom-right corner of our website.
                 </p>
               </div>
               <div className="bg-brand-dark-lighter/20 border border-brand-dark-lighter/50 rounded-3xl p-8 backdrop-blur-sm">
