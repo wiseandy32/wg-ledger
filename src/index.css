@@ -238,11 +238,19 @@ footer {
 }
 
 .glass-card {
-  @apply bg-brand-dark-lighter/40 backdrop-blur-md border border-white/10 shadow-xl;
+  @apply bg-brand-dark-lighter/60 backdrop-blur-md border border-white/5 shadow-xl transition-all duration-300;
+}
+
+.glass-card-hover {
+  @apply hover:bg-brand-dark-lighter/80 hover:border-white/10 hover:shadow-2xl;
 }
 
 .glass-button {
-  @apply bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300;
+  @apply bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300 active:scale-95;
+}
+
+.premium-gradient-text {
+  @apply text-white font-semibold tracking-tight;
 }
 
 @layer base {

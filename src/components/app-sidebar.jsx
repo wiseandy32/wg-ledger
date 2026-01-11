@@ -68,7 +68,11 @@ export function AppSidebar({ ...props }) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <img src={logo} alt="" />
+        <img
+          src={logo}
+          alt="World Global Ledger"
+          className="brightness-0 invert w-40 ml-2 pt-2"
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavMain
