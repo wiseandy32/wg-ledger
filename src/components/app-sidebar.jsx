@@ -71,7 +71,7 @@ export function AppSidebar({ ...props }) {
         <img
           src={logo}
           alt="World Global Ledger"
-          className="brightness-0 invert w-40 ml-2 pt-2"
+          className="dark:brightness-0 dark:invert w-40 ml-2 pt-2"
         />
       </SidebarHeader>
       <SidebarContent>

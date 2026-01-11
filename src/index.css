@@ -8,7 +8,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
 
   /* Brand Variables - HSL Channels for Tailwind Opacity Support */
   --brand-dark: 240 10% 4%; /* #09090B Zinc-950 (Rich Black) */
@@ -34,7 +34,7 @@ body {
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
-  background-color: hsl(var(--brand-dark));
+  /* background-color: hsl(var(--brand-dark)); */
   /* background-color: #0b1120; */
   /* background-color: hsl(223, 49%, 8%); */
   /* background-color: rgb(11, 17, 32);
@@ -238,19 +238,19 @@ footer {
 }
 
 .glass-card {
-  @apply bg-brand-dark-lighter/60 backdrop-blur-md border border-white/5 shadow-xl transition-all duration-300;
+  @apply bg-white/60 dark:bg-brand-dark-lighter/60 backdrop-blur-md border border-black/5 dark:border-white/5 shadow-xl transition-all duration-300;
 }
 
 .glass-card-hover {
-  @apply hover:bg-brand-dark-lighter/80 hover:border-white/10 hover:shadow-2xl;
+  @apply hover:bg-white/80 dark:hover:bg-brand-dark-lighter/80 hover:border-black/10 dark:hover:border-white/10 hover:shadow-2xl;
 }
 
 .glass-button {
-  @apply bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-all duration-300 active:scale-95;
+  @apply bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 backdrop-blur-sm transition-all duration-300 active:scale-95 text-foreground;
 }
 
 .premium-gradient-text {
-  @apply text-white font-semibold tracking-tight;
+  @apply text-foreground font-semibold tracking-tight;
 }
 
 @layer base {
@@ -318,13 +318,13 @@ footer {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   } */
   .dark {

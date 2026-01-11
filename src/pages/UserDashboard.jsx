@@ -139,17 +139,19 @@ function UserDashboard() {
           >
             <div className="relative z-10 flex items-start justify-between mb-8">
               <div
-                className={`h-14 w-14 rounded-2xl grid place-content-center border border-white/5 ${
+                className={`h-14 w-14 rounded-2xl grid place-content-center border border-black/5 dark:border-white/5 ${
                   wallet?.name?.includes("Ledger")
                     ? "bg-brand-primary/20 text-brand-primary"
-                    : "bg-white/5 text-gray-300"
+                    : "bg-black/5 dark:bg-white/5 text-gray-500 dark:text-gray-300"
                 }`}
               >
                 {!wallet?.name?.includes("Ledger") ? (
                   <img
                     src={wallet?.icon}
                     className={`w-8 h-8 object-contain opacity-90 ${
-                      wallet.name === "ALGO" ? "brightness-0 invert" : ""
+                      wallet.name === "ALGO"
+                        ? "dark:brightness-0 dark:invert"
+                        : ""
                     }`}
                     alt=""
                   />
@@ -178,7 +180,7 @@ function UserDashboard() {
                 {!wallet?.name?.includes("Withdrawal") ? "Balance" : ""}
               </p>
 
-              <p className="text-2xl font-bold tracking-tight text-white mb-2">
+              <p className="text-2xl font-bold tracking-tight text-foreground mb-2">
                 <AnimatePresence mode="wait">
                   <motion.span
                     initial={{ y: "100%" }}
@@ -216,7 +218,9 @@ function UserDashboard() {
       </motion.div>
       <div className="w-full glass-card rounded-2xl p-6 overflow-hidden space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white">Recent Transactions</h2>
+          <h2 className="text-xl font-bold text-foreground">
+            Recent Transactions
+          </h2>
           <Link to="/user/transactions">
             <Button
               variant="ghost"
