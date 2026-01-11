@@ -42,7 +42,7 @@ function Header() {
             <ul className="flex items-center gap-8">
               {[
                 { title: "Home", path: "/" },
-                { title: "Services", path: "/#services" },
+                { title: "Services", path: "/services" },
                 { title: "About", path: "/about" },
                 { title: "Contact", path: "/contact" },
               ].map((link) => (
