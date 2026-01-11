@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import logo from "../../assets/logo.png";
-import { useEffect, useState } from "react";
 
 function PageLoader() {
   return (
