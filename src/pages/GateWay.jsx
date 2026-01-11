@@ -20,7 +20,9 @@ import { toast } from "sonner";
 function GateWay() {
   const data = useLoaderData();
   const inputRef = useRef();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isHashModalOpen, setIsHashModalOpen] = useState(false);
+  const [transactionHash, setTransactionHash] = useState("");
   const [amountDeposited, setAmountDeposited] = useState("");
   const { user } = useAuth();
   const { coinsData } = useCoinData();
@@ -62,10 +64,57 @@ function GateWay() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleOpenHashModal = (e) => {
     e.preventDefault();
-    setIsOpen(true);
-    const formData = new FormData(e.target);
+    setIsHashModalOpen(true);
+  };
+
+  const validateHash = (hash) => {
+    /**
+     * Validates a crypto transaction hash in a chain-agnostic way.
+     *
+     * Rules:
+     * - Must be a string
+     * - Must represent at least 32 bytes (256 bits)
+     * - Supports hex (with or without 0x), Base58, and Base64
+     */
+    if (typeof hash !== "string") return false;
+
+    const value = hash.trim();
+    if (!value) return false;
+
+    // HEX (with optional 0x prefix)
+    const hex = value.startsWith("0x") ? value.slice(2) : value;
+    if (/^[0-9a-fA-F]+$/.test(hex)) {
+      return hex.length >= 64 && hex.length % 2 === 0;
+    }
+
+    // Base64 (standard or URL-safe, with optional padding)
+    if (/^[A-Za-z0-9+/=_-]+$/.test(value)) {
+      try {
+        const bytes = Buffer.from(value, "base64");
+        return bytes.length >= 32;
+      } catch {
+        return false;
+      }
+    }
+
+    // Base58 (Bitcoin-style alphabet)
+    const BASE58_REGEX = /^[1-9A-HJ-NP-Za-km-z]+$/;
+    if (BASE58_REGEX.test(value)) {
+      // 32 bytes ≈ 43–44 Base58 chars minimum
+      return value.length >= 43;
+    }
+
+    return false;
+  };
+
+  const handleFinalSubmit = async () => {
+    if (!transactionHash.trim() || !validateHash(transactionHash)) {
+      toast.error("Invalid transaction hash.");
+      return;
+    }
+
     const depositRequestInfo = {
       uid: user.uid,
       userDocRef: user.docRef,
@@ -73,9 +122,10 @@ function GateWay() {
       timestamp: Date.now(),
       coin: data.type,
       name: user.displayName,
-      amount: +formData.get("depositAmount"),
+      amount: parseFloat(amountDeposited),
       email: user.email,
       isConfirmed: false,
+      transactionHash: transactionHash.trim(),
     };
 
     try {
@@ -88,18 +138,22 @@ function GateWay() {
         id: depositID,
         coin: data.type,
         type: "deposit",
-        amount: +formData.get("depositAmount"),
+        amount: parseFloat(amountDeposited),
         status: "pending",
         userDocRef: user.docRef,
         timestamp: Date.now(),
         creationDate: getCurrentDate(),
+        transactionHash: transactionHash.trim(),
       });
 
       setAmountDeposited("");
+      setIsHashModalOpen(false);
+      setIsSuccessModalOpen(true);
       qc.invalidateQueries({ queryKey: ["uid", user?.uid] });
       qc.invalidateQueries({ queryKey: ["user", user?.uid] });
     } catch (error) {
       console.error(error);
+      toast.error("Failed to submit deposit request");
     }
   };
 
@@ -115,7 +169,7 @@ function GateWay() {
       </div>
       <form
         className="w-full max-w-[680px] glass-card p-8 space-y-8 rounded-2xl"
-        onSubmit={(e) => handleSubmit(e)}
+        onSubmit={handleOpenHashModal}
       >
         <div className="flex items-center gap-2 pb-4 border-b border-border/50">
           <img src={data.icon} alt="" width={32} className="object-contain" />
@@ -212,7 +266,6 @@ function GateWay() {
               <span className="font-bold text-foreground text-base">
                 {(() => {
                   const val = transactionDetails.estimatedReceive;
-                  console.log(val);
                   const parts = val.split(".");
                   const formattedInt = formatNumberWithCommas(parts[0]);
                   return parts.length > 1
@@ -230,29 +283,112 @@ function GateWay() {
           type="submit"
           variant="gooeyLeft"
         >
-          Confirm Deposit
+          I've Made the Deposit
         </Button>
       </form>
+
+      {/* Transaction Hash Modal */}
       <Modal
         classNames={{
-          //   overlay: "customModal",
-          modal: "customModal",
-          root: "bg-[rgba(0,_0,_0,_0.8)] grid place-content-center",
+          modal:
+            "customModal glass-card p-0 overflow-hidden rounded-2xl border-none shadow-2xl !m-0 !relative !z-[60]",
+          root: "!bg-transparent !flex !items-center !justify-center !fixed !inset-0 !overflow-hidden !z-50 !p-4",
+          overlay: "!bg-black/60 !backdrop-blur-sm !fixed !inset-0 !z-40",
         }}
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
+        open={isHashModalOpen}
+        onClose={() => setIsHashModalOpen(false)}
       >
-        <div className="grid place-items-center gap-4 text-center">
-          <div className="border-solid border-2 border-green-600 w-20 h-20 grid place-content-center rounded-full">
-            <Check color="#16a34a" width={"3rem"} height={"3rem"} />
+        <div className="p-6 sm:p-8 space-y-6 w-full sm:w-[480px] h-auto sm:h-[380px] flex flex-col justify-between max-w-[95vw]">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold premium-gradient-text">
+              Confirm Transaction
+            </h3>
+            <p className="text-muted-foreground text-sm">
+              Please provide the transaction hash or ID of your deposit for
+              verification.
+            </p>
           </div>
-          <p className="font-semibold text-2xl">DEPOSIT RECEIVED</p>
-          <p className="">
-            Your deposit has been successfully received and is being processed.
-            You will be notified once the transaction is confirmed.
-          </p>
-          <Button variant="gooeyRight">
-            <Link to="/user">Go to dashboard</Link>
+
+          <div className="space-y-3">
+            <Label
+              htmlFor="txHash"
+              className="text-xs font-bold uppercase tracking-widest opacity-60"
+            >
+              Transaction Hash
+            </Label>
+            <Input
+              id="txHash"
+              placeholder="Enter Transaction Hash"
+              className="py-6 glass-input font-mono text-sm w-full break-all"
+              value={transactionHash}
+              onChange={(e) => setTransactionHash(e.target.value)}
+            />
+            <p className="text-[10px] text-muted-foreground italic flex items-center gap-1">
+              <Info className="w-3 h-3" />
+              Ensure the hash is correct to avoid processing delays.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 pt-2">
+            <Button
+              onClick={handleFinalSubmit}
+              className="w-full h-12 font-bold shadow-lg shadow-brand-primary/20"
+              variant="gooeyLeft"
+            >
+              Submit for Verification
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setIsHashModalOpen(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Success Modal */}
+      <Modal
+        classNames={{
+          modal:
+            "customModal glass-card rounded-2xl p-8 max-w-sm !m-0 !relative !z-[60]",
+          root: "!bg-transparent !flex !items-center !justify-center !fixed !inset-0 !overflow-hidden !z-50 !p-4",
+          overlay: "!bg-black/60 !backdrop-blur-sm !fixed !inset-0 !z-40",
+        }}
+        open={isSuccessModalOpen}
+        onClose={() => {
+          setIsSuccessModalOpen(false);
+          setTransactionHash("");
+        }}
+      >
+        <div className="grid place-items-center gap-6 text-center">
+          <div className="relative">
+            <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full animate-pulse"></div>
+            <div className="relative border-2 border-green-500 w-20 h-20 grid place-content-center rounded-full bg-background/50 backdrop-blur-md">
+              <Check className="text-green-500 w-10 h-10" strokeWidth={3} />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <p className="font-bold text-2xl tracking-tight">
+              DEPOSIT SUBMITTED
+            </p>
+            <p className="text-muted-foreground text-sm leading-relaxed px-2">
+              Your deposit request with hash
+              <span className="font-mono text-xs block mt-1 text-foreground bg-muted/50 p-1 rounded">
+                {transactionHash?.slice(0, 10)}...{transactionHash?.slice(-10)}
+              </span>
+              is being processed. You'll be notified once confirmed.
+            </p>
+          </div>
+
+          <Button
+            variant="gooeyRight"
+            className="w-full h-11"
+            onClick={() => (window.location.href = "/user")}
+          >
+            Return to Dashboard
           </Button>
         </div>
       </Modal>
