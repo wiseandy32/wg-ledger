@@ -137,12 +137,12 @@ function Withdrawal() {
             id="amount"
             name="amount"
             placeholder="Enter withdrawal amount"
-            min={1000}
+            min={10}
             className="py-6 glass-input"
             required
           />
           <p className="text-xs text-muted-foreground">
-            Minimum withdrawal amount: $1,000
+            Minimum withdrawal amount: $10
           </p>
         </div>
 
