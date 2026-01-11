@@ -1,85 +1,154 @@
 import { Link } from "react-router-dom";
 import Slide from "../pages/components/Slide";
 import logo from "../assets/logo.png";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaFacebook,
+  FaInstagram,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="pt-20 mb-20 sm:pt-32 sm:mb-32 md:pt-20 md:mb-5 sm:px-10 text-white">
-      <div className="sm:mt-0 flex flex-col-reverse sm:flex-row justify-between gap-16 sm:gap-0">
-        <div
-          className="flex flex-col sm:flex-row justify-between gap-y-4 sm:gap-y-10 w-full px-5 sm:px-0"
-          // style={{ border: "2px solid red" }}
-        >
-          <Slide yAxis={90} className="sm:w-[33%]">
-            <div className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-50 capitalize">
-              <img src={logo} width={160} height={20} alt="" />
-            </div>
-
-            <p className="mt-4 max-w-3xl space-y-6 ">
-              JOIN THE BIGGEST FINANCIAL REVOLUTIONARY SYSTEM DESIGNED TO
-              OVERTAKE THE WORLD&apos;S BANKING SYSTEM BY ELIMINATING CONTROL OF
-              MONEY BY CABALS.
-            </p>
-          </Slide>
-          <div className="flex justify-between mt-10 md:w-[50%] sm:justify-evenly">
-            <ul className="capitalize">
-              <Slide yAxis={90} delay={0.1}>
-                <p className="font-semibold text-md">company</p>
-              </Slide>
-              {[
-                { title: "home", path: "home" },
-                { title: "about", path: "about" },
-                { title: "services", path: "contact" },
-                // { title: "privacy policy", path: "/" },
-              ].map((link, index) => (
-                <Slide
-                  key={link.title}
-                  yAxis={90}
-                  delay={index === 0 ? 0.2 : 0.2 * index}
-                >
-                  <li key={link.title} className="hover:text-[#1c8d0c] mt-4">
-                    <Link href={link.path}>{link.title}</Link>
-                  </li>
-                </Slide>
-              ))}
-            </ul>
-            <ul className="capitalize">
-              <Slide yAxis={90}>
-                <p className="font-semibold text-md">support</p>
-              </Slide>
-              {[
-                { title: "help center", path: "home" },
-                { title: "contact us", path: "about" },
-                { title: "legal", path: "/" },
-              ].map((link, index) => (
-                <Slide
-                  key={link.path}
-                  yAxis={90}
-                  delay={index === 0 ? 0.2 : 0.2 * index}
-                >
-                  <li key={link.title} className="hover:text-[#1c8d0c] mt-4">
-                    <Link href={link.path}>{link.title}</Link>
-                  </li>
-                </Slide>
-              ))}
-            </ul>
-          </div>
-          <div className="">
-            <Slide yAxis={90} delay={0.1} className={"mt-10 sm:mt-0"}>
-              <label htmlFor="newsletter" className="block">
-                Subscribe to our news letter
-              </label>
-              <input
-                type="email"
-                id="newsletter"
-                className="bg-transparent border-solid border-2 border-white my-4 px-2 py-1 rounded-xl w-full"
+    <footer className="pt-24 pb-12 bg-brand-dark border-t border-brand-dark-lighter/30 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+          {/* Column 1: Brand */}
+          <div className="space-y-6">
+            <Slide yAxis={20}>
+              <img
+                src={logo}
+                width={180}
+                height={45}
+                alt="World Global Ledger"
+                className="brightness-0 invert mb-4"
               />
+              <p className="text-brand-text-muted leading-relaxed text-sm">
+                Join the financial revolution. We are redefining banking by
+                eliminating intermediaries and giving you complete control over
+                your assets.
+              </p>
+              <div className="flex items-center gap-4 mt-6">
+                {[FaTwitter, FaLinkedin, FaFacebook, FaInstagram].map(
+                  (Icon, idx) => (
+                    <a
+                      key={idx}
+                      href="#"
+                      className="w-10 h-10 rounded-full bg-brand-dark-lighter/50 flex items-center justify-center text-brand-text-muted hover:bg-brand-primary hover:text-brand-dark transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  )
+                )}
+              </div>
             </Slide>
-            <Slide yAxis={90} delay={0.3}>
-              <button className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-[#136b09] hover:bg-[#1c8d0c] highlight-white/20">
-                Subscribe
-              </button>
+          </div>
+
+          {/* Column 2: Company */}
+          <div>
+            <Slide yAxis={20} delay={0.1}>
+              <h3 className="text-white font-bold text-lg mb-6 tracking-wide">
+                Company
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  { title: "Home", path: "/" },
+                  { title: "About Us", path: "/#about" },
+                  { title: "Services", path: "/#services" },
+                  { title: "Contact", path: "/contact" },
+                ].map((link, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={link.path}
+                      className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </Slide>
+          </div>
+
+          {/* Column 3: Legal & Support */}
+          <div>
+            <Slide yAxis={20} delay={0.2}>
+              <h3 className="text-white font-bold text-lg mb-6 tracking-wide">
+                Support
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  { title: "Help Center", path: "/" },
+                  { title: "Terms of Service", path: "/" },
+                  { title: "Privacy Policy", path: "/" },
+                  { title: "Cookie Policy", path: "/" },
+                ].map((link, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={link.path}
+                      className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Slide>
+          </div>
+
+          {/* Column 4: Newsletter */}
+          <div>
+            <Slide yAxis={20} delay={0.3}>
+              <h3 className="text-white font-bold text-lg mb-6 tracking-wide">
+                Newsletter
+              </h3>
+              <p className="text-brand-text-muted text-sm mb-4">
+                Subscribe to get special offers, free giveaways, and
+                once-in-a-lifetime deals.
+              </p>
+              <form className="relative">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full bg-brand-dark-lighter/50 border border-brand-dark-lighter text-white pl-4 pr-12 py-3 rounded-xl focus:outline-none focus:border-brand-primary placeholder:text-brand-text-muted/50 transition-colors dark-input-autofill"
+                />
+                <button
+                  type="button"
+                  className="absolute right-2 top-2 p-2 bg-brand-primary rounded-lg text-brand-dark hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20"
+                >
+                  <FaPaperPlane size={14} />
+                </button>
+              </form>
+            </Slide>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-brand-dark-lighter/30 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-brand-text-muted/60 text-sm text-center md:text-left">
+            &copy; {new Date().getFullYear()} World Global Ledger. All rights
+            reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              to="/"
+              className="text-brand-text-muted/60 hover:text-white text-sm transition-colors"
+            >
+              Privacy
+            </Link>
+            <Link
+              to="/"
+              className="text-brand-text-muted/60 hover:text-white text-sm transition-colors"
+            >
+              Terms
+            </Link>
+            <Link
+              to="/"
+              className="text-brand-text-muted/60 hover:text-white text-sm transition-colors"
+            >
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>
