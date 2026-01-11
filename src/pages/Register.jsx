@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { registrationFormField } from "../data";
-import { useState } from "react";
-import registrationImage from "../assets/registration-image.webp";
+import { useState, useEffect } from "react";
 import { addDataToDb, createUser, updateUserProfile } from "../utils/auth";
 import { signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
@@ -76,36 +75,50 @@ function Register() {
     }
   };
 
-  return (
-    <section className=" px-3 mt-[14vh] mb-[10vh] bg-bottom bg-no-repeat bottom-10">
-      {!isVerificationLinkSent ? (
-        <div className="md:flex md:justify-between md:items-center max-w-[1200px] md:m-auto md:p-5">
-          <div className="hidden md:block w-[45%]">
-            <img className="w-full h-full" src={registrationImage} alt="" />
-          </div>
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
-          <div className="md:w-[45%]">
+  return (
+    <section className="min-h-screen pt-20 pb-20 flex items-center justify-center bg-brand-dark px-4 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      {!isVerificationLinkSent ? (
+        <div className="relative z-10 w-full max-w-2xl mx-auto px-4">
+          <div className="bg-brand-dark-lighter/30 backdrop-blur-sm border border-brand-dark-lighter/50 p-8 rounded-3xl shadow-xl">
             <form
-              className="flex flex-col gap-3"
+              className="flex flex-col gap-6"
               onSubmit={async (e) => await onSubmit(e)}
               id="registrationForm"
             >
-              <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-5xl tracking-tight text-center text-white py-10 md:py-5 md:pt-10 md:w-full md:text-left">
-                Create an account
-              </h1>
+              <div className="text-center">
+                <h1 className="font-bold text-4xl sm:text-5xl tracking-tight text-white mb-2">
+                  Create an account
+                </h1>
+                <p className="text-brand-text-muted text-sm">
+                  Join the world's most secure decentralized ledger
+                </p>
+              </div>
+
               {!error ? null : (
-                <p className="text-white bg-red-500 w-full p-2 rounded-md font-semibold">
+                <p className="text-white bg-red-500/10 border border-red-500/20 w-full p-3 rounded-xl font-medium text-sm text-red-500 flex items-center gap-2">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-red-500"></span>
                   {error}
                 </p>
               )}
 
-              <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:justify-between">
+              <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:justify-between">
                 {registrationFormField.map((field) => (
                   <div
-                    className="flex flex-col gap-1 md:w-[45%]"
+                    className="flex flex-col gap-2 md:w-[48%]"
                     key={field.name}
                   >
-                    <label htmlFor={field.name} className="capitalize">
+                    <label
+                      htmlFor={field.name}
+                      className="capitalize text-sm font-medium text-brand-text-muted pl-1"
+                    >
                       {field.label}
                     </label>
                     <Input
@@ -133,34 +146,52 @@ function Register() {
                               }
                             }
                       }
-                      className="py-5"
+                      className="h-12 bg-brand-dark-lighter/50 border-brand-dark-lighter text-white placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
                     />
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 pl-1">
                 <input
                   type="checkbox"
                   name="hasAcceptedTerms"
                   id="hasAcceptedTerms"
                   required
+                  className="w-4 h-4 rounded border-brand-dark-lighter/50 bg-brand-dark-lighter/30 text-brand-primary focus:ring-brand-primary/20"
                 />
-                <label htmlFor="hasAcceptedTerms" className="">
-                  I accept the <span className="text-blue-400">terms</span> and{" "}
-                  <span className="text-blue-400">privacy policy</span>
+                <label
+                  htmlFor="hasAcceptedTerms"
+                  className="text-sm text-brand-text-muted"
+                >
+                  I accept the{" "}
+                  <span className="text-brand-primary hover:text-brand-primary/80 cursor-pointer transition-colors">
+                    terms
+                  </span>{" "}
+                  and{" "}
+                  <span className="text-brand-primary hover:text-brand-primary/80 cursor-pointer transition-colors">
+                    privacy policy
+                  </span>
                 </label>
               </div>
-              <Button variant="gooeyLeft" type="submit" disabled={isSubmitting}>
+              <Button
+                variant="gooeyLeft"
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base mt-2"
+              >
                 {!isSubmitting ? null : (
-                  <Loader2 className="animate-spin mr-2" />
+                  <Loader2 className="animate-spin mr-2 h-5 w-5" />
                 )}
-                {!isSubmitting ? "Register" : "Creating your account"}
+                {!isSubmitting ? "Register" : "Creating your account..."}
               </Button>
             </form>
-            <div className="flex py-4 gap-2">
+            <div className="flex py-6 gap-2 text-sm text-brand-text-muted justify-center border-t border-brand-dark-lighter/50 mt-8">
               <p>Already have an account? </p>
-              <Link to={"/login"} className="text-blue-400">
+              <Link
+                to={"/login"}
+                className="text-brand-primary font-semibold hover:text-brand-primary/80 transition-colors"
+              >
                 Login
               </Link>
             </div>
