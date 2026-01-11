@@ -25,12 +25,6 @@ function Hero() {
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         <Slide yAxis={50}>
-          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-brand-primary/30 bg-brand-primary/10 backdrop-blur-sm">
-            <span className="text-brand-primary font-semibold text-sm tracking-wide uppercase">
-              Banking Reimagined
-            </span>
-          </div>
-
           <h1 className="mt-4 text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
             The Digital Bank for Your <br className="hidden md:block" />
             <span className="text-gradient">Crypto Assets</span>
