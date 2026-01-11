@@ -43,7 +43,7 @@ function Header() {
               {[
                 { title: "Home", path: "/" },
                 { title: "Services", path: "/#services" },
-                { title: "About", path: "/#about" },
+                { title: "About", path: "/about" },
                 { title: "Contact", path: "/contact" },
               ].map((link) => (
                 <li key={link.title}>
