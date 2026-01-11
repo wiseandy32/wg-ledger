@@ -30,7 +30,7 @@ function DashboardLayout() {
 
     const timer = setTimeout(() => {
       setIsPageLoading(false);
-    }, 2500); // 2.5s to match PageLoader animation
+    }, 1500); // 1.5s to match PageLoader animation
 
     return () => clearTimeout(timer);
   }, [location.pathname]);

@@ -21,8 +21,8 @@ function PageLoader() {
         animate={{
           opacity: [0, 1, 1, 0],
           transition: {
-            duration: 2.5,
-            times: [0, 0.05, 0.85, 1], // Stays visible until ~2.1s
+            duration: 1.5,
+            times: [0, 0.05, 0.85, 1],
             ease: "easeInOut",
           },
         }}
@@ -48,8 +48,8 @@ function PageLoader() {
                 color: ["#10b981", "#10b981", "#ffffff"],
               }}
               transition={{
-                strokeDashoffset: { duration: 1.2, ease: "easeInOut" },
-                color: { duration: 2, times: [0, 0.6, 0.7] }, // Changes to white at ~1.2s
+                strokeDashoffset: { duration: 0.8, ease: "easeInOut" },
+                color: { duration: 1.2, times: [0, 0.6, 0.7] }, // Changes color matching logo reveal
               }}
             />
             {/* Inner Drawing Circle */}
@@ -68,11 +68,11 @@ function PageLoader() {
               }}
               transition={{
                 strokeDashoffset: {
-                  duration: 1,
-                  delay: 0.2,
+                  duration: 0.7,
+                  delay: 0.1,
                   ease: "easeInOut",
                 },
-                color: { duration: 2, times: [0, 0.6, 0.7] },
+                color: { duration: 1.2, times: [0, 0.6, 0.7] },
               }}
             />
           </svg>
@@ -86,8 +86,8 @@ function PageLoader() {
               scale: [0.9, 0.9, 1, 1],
             }}
             transition={{
-              duration: 2,
-              times: [0, 0.6, 0.75, 1], // Appears at ~1.2s as circles finish
+              duration: 1.2,
+              times: [0, 0.6, 0.75, 1],
               ease: "easeOut",
             }}
           >
