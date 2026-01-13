@@ -1,13 +1,20 @@
 import { auth } from "../services/firebase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import MessageCard from "./components/MessageCard";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Loader2, ArrowLeft, Mail, CheckCircle2 } from "lucide-react";
 
 function ForgotPassword() {
   const [isResetLinkSent, setIsResetLinkSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const sendPasswordResetLink = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
     const formData = new FormData(e.target);
     const email = formData.get("email");
     try {
@@ -17,57 +24,115 @@ function ForgotPassword() {
       setIsResetLinkSent(true);
     } catch (error) {
       console.error(error);
+      const { code } = error;
+      if (code === "auth/user-not-found") {
+        setError("No account found with this email");
+      } else if (code === "auth/invalid-email") {
+        setError("Please enter a valid email address");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  return (
-    <section className="h-[120vh] mb-[10vh] bg-bottom bg-no-repeat bg-[#021035] bottom-10 inset-0  sm:h-[100dvh] md:h-[105dvh] relative">
-      <div className="mt-[12vh] md:pt-[6vh] px-5 absolute inset-0 h-[135vh] w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:16px_16px] md:h-full">
-        <div
-          className="p-2 md:p-0 md:flex md:justify-center md:items-center max-w-[600px] md:m-auto md:py-5"
-          style={{ backgroundColor: "#021035" }}
-        >
-          {!isResetLinkSent ? (
-            <div>
-              <form
-                className="flex flex-col gap-3"
-                onSubmit={async (e) => await sendPasswordResetLink(e)}
-              >
-                <h1 className="font-extrabold text-4xl md:text-5xl  tracking-tight text-center text-white py-10 md:py-3 md:pt-0 md:w-full md:text-left">
-                  Password Reset
-                </h1>
-                <div className="flex flex-col gap-3 md:justify-between">
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="capitalize">
-                      Enter email address
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      id={"email"}
-                      name={"email"}
-                      className="py-2 px-1 rounded-md"
-                    />
-                  </div>
-                </div>
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
-                <button
-                  type="submit"
-                  className="focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-400 highlight-white/20 hover:bg-sky-400 hover:font-bold mt-3"
+  return (
+    <section className="min-h-screen pt-20 pb-20 flex items-center justify-center bg-brand-dark px-4 relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="relative z-10 w-full max-w-md mx-auto px-4">
+        <div className="bg-brand-dark-lighter/30 backdrop-blur-sm border border-brand-dark-lighter/50 p-8 rounded-3xl shadow-xl">
+          {!isResetLinkSent ? (
+            <form
+              className="flex flex-col gap-6"
+              onSubmit={sendPasswordResetLink}
+            >
+              <div className="text-center">
+                <h1 className="font-bold text-3xl sm:text-4xl tracking-tight text-white mb-3">
+                  Reset Password
+                </h1>
+                <p className="text-brand-text-muted text-sm">
+                  Enter your email address to receive a password reset link
+                </p>
+              </div>
+
+              {!error ? null : (
+                <p className="text-white bg-red-500/10 border border-red-500/20 w-full p-3 rounded-xl font-medium text-sm text-red-500 flex items-center gap-2">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                  {error}
+                </p>
+              )}
+
+              <div className="flex flex-col gap-2">
+                <label
+                  htmlFor="email"
+                  className="capitalize text-sm font-medium text-brand-text-muted pl-1"
                 >
-                  Send password reset link
-                </button>
-              </form>
-            </div>
+                  Email Address
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-brand-text-muted/50" />
+                  <Input
+                    type="email"
+                    required
+                    id="email"
+                    name="email"
+                    placeholder="name@example.com"
+                    className="h-12 pl-12 bg-brand-dark-lighter/50 border-brand-dark-lighter text-white placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 mt-2">
+                <Button
+                  variant="gooeyLeft"
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full h-12 bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base"
+                >
+                  {!isSubmitting ? null : (
+                    <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                  )}
+                  {!isSubmitting ? "Send Reset Link" : "Sending..."}
+                </Button>
+
+                <Link
+                  to="/login"
+                  className="flex items-center justify-center gap-2 text-brand-text-muted hover:text-white transition-colors text-sm font-medium"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Login
+                </Link>
+              </div>
+            </form>
           ) : (
-            <MessageCard
-              title={"Password reset email sent"}
-              subtext={
-                "We've sent a password reset link to your email. Please check your inbox."
-              }
-              cta={"Login"}
-              to={"/login"}
-            />
+            <div className="text-center py-4 flex flex-col items-center">
+              <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
+                <CheckCircle2 className="h-8 w-8 text-green-500" />
+              </div>
+              <h1 className="font-bold text-2xl sm:text-3xl tracking-tight text-white mb-3">
+                Email Sent
+              </h1>
+              <p className="text-brand-text-muted text-sm mb-8">
+                We've sent a password reset link to your email. Please check
+                your inbox and follow the instructions.
+              </p>
+              <Link to="/login" className="w-full">
+                <Button
+                  variant="gooeyLeft"
+                  className="w-full h-12 bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base"
+                >
+                  Return to Login
+                </Button>
+              </Link>
+            </div>
           )}
         </div>
       </div>
