@@ -1,18 +1,22 @@
 import { motion } from "framer-motion";
 import logo from "../../assets/logo.png";
+import { useTheme } from "@/context/theme-provider";
 
 function PageLoader() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#021035] overflow-hidden"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-white dark:bg-[#021035] overflow-hidden"
     >
       {/* Cinematic Background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary/10 via-[#021035] to-[#021035] opacity-50"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary/10 via-white to-white dark:via-[#021035] dark:to-[#021035] opacity-50"
       ></motion.div>
 
       <motion.div
@@ -45,7 +49,7 @@ function PageLoader() {
               initial={{ strokeDashoffset: 301.6 }}
               animate={{
                 strokeDashoffset: 0,
-                color: ["#10b981", "#10b981", "#ffffff"],
+                color: ["#10b981", "#10b981", isDark ? "#ffffff" : "#021035"],
               }}
               transition={{
                 strokeDashoffset: { duration: 0.8, ease: "easeInOut" },
@@ -64,7 +68,7 @@ function PageLoader() {
               initial={{ strokeDashoffset: 251.3 }}
               animate={{
                 strokeDashoffset: 0,
-                color: ["#f59e0b", "#f59e0b", "#ffffff"],
+                color: ["#f59e0b", "#f59e0b", isDark ? "#ffffff" : "#021035"],
               }}
               transition={{
                 strokeDashoffset: {
@@ -79,7 +83,7 @@ function PageLoader() {
 
           {/* Logo Centerpiece */}
           <motion.div
-            className="absolute z-10 p-8 rounded-full bg-[#021035]/50 backdrop-blur-sm shadow-[0_0_50px_rgba(16,185,129,0.1)]"
+            className="absolute z-10 p-8 rounded-full bg-white/50 dark:bg-[#021035]/50 backdrop-blur-sm shadow-[0_0_50px_rgba(16,185,129,0.1)]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{
               opacity: [0, 0, 1, 1],
@@ -94,7 +98,7 @@ function PageLoader() {
             <img
               src={logo}
               alt="Logo"
-              className="w-24 md:w-32 h-auto object-contain brightness-0 invert"
+              className="w-24 md:w-32 h-auto object-contain dark:brightness-0 dark:invert"
             />
           </motion.div>
         </div>
