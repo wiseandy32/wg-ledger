@@ -69,7 +69,7 @@ function Dashboard({ children }) {
           </div>
           <div className="justify-self-end flex gap-3">
             {/* <ConnectKitButton mode={theme} /> */}
-            <ModeToggle />
+            {/* <ModeToggle /> */}
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0 md:w-[98.5%]">
