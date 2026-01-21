@@ -17,10 +17,10 @@ const partners = [
 
 function Partners() {
   return (
-    <section className="py-24 bg-brand-dark/50 border-t border-brand-dark-lighter/30">
+    <section className="py-24 bg-zinc-50 dark:bg-brand-dark/50 border-t border-gray-200 dark:border-brand-dark-lighter/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Slide yAxis={20}>
-          <p className="text-center text-brand-text-muted/60 text-sm font-bold tracking-[0.2em] uppercase mb-12">
+          <p className="text-center text-brand-dark/60 dark:text-brand-text-muted/60 text-sm font-bold tracking-[0.2em] uppercase mb-12">
             Trusted by Industry Leaders
           </p>
         </Slide>
@@ -40,7 +40,7 @@ function Partners() {
                 <img
                   src={src}
                   alt="Partner"
-                  className="relative h-10 md:h-12 w-auto object-contain grayscale opacity-50 brightness-200 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500 transform group-hover:scale-110"
+                  className="relative h-10 md:h-12 w-auto object-contain grayscale dark:grayscale opacity-100 dark:opacity-50 brightness-0 dark:brightness-200 group-hover:grayscale-0 group-hover:opacity-100 dark:group-hover:brightness-100 transition-all duration-500 transform group-hover:scale-110"
                 />
               </div>
             </Slide>

@@ -29,7 +29,7 @@ function TotalAssets({ balance, bitcoin_price }) {
       <div className="relative z-10 flex max-sm:flex-col max-sm:gap-6 md:items-center justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h2 className="text-gray-400 text-sm font-medium tracking-wide uppercase">
+            <h2 className="text-gray-600 dark:text-gray-400 text-sm font-medium tracking-wide uppercase">
               Total Assets
             </h2>
             <button
@@ -45,7 +45,7 @@ function TotalAssets({ balance, bitcoin_price }) {
           </div>
 
           <div className="flex items-baseline gap-3">
-            <span className="text-4xl md:text-5xl text-white font-bold tracking-tight tabular-nums premium-gradient-text">
+            <span className="text-4xl md:text-5xl text-brand-dark dark:text-white font-bold tracking-tight tabular-nums premium-gradient-text">
               {isVisible
                 ? `$${formatNumberWithCommas(balance)}`
                 : formatHiddenNumber(8)}
@@ -55,8 +55,8 @@ function TotalAssets({ balance, bitcoin_price }) {
             ) : null}
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-gray-400/80 font-medium tabular-nums">
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/5">
+          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400/80 font-medium tabular-nums">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
               <span className="text-brand-primary">≈</span>
               {isVisible
                 ? `${(balance / currentBitcoinPrice).toFixed(8)} BTC`

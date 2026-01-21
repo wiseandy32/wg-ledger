@@ -5,7 +5,7 @@ import aboutUsImage from "@/assets/about-image-2.avif";
 function AboutUs() {
   return (
     <section
-      className="relative py-20 overflow-hidden bg-brand-dark"
+      className="relative py-20 overflow-hidden bg-zinc-50 dark:bg-brand-dark"
       id="about"
     >
       {/* Background decoration */}
@@ -15,19 +15,19 @@ function AboutUs() {
         <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
           {/* Content Side */}
           <Slide xAxis={-50} className="w-full lg:w-1/2">
-            <div className="glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group hover:border-brand-primary/20 transition-all duration-500">
+            <div className="glass-card bg-white dark:bg-brand-dark-lighter/30 p-8 md:p-10 rounded-2xl relative overflow-hidden group hover:border-brand-primary/20 transition-all duration-500">
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-brand-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
               <span className="inline-block text-brand-primary font-bold tracking-wider text-sm uppercase mb-3">
                 Next-Gen Banking
               </span>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark dark:text-white mb-6 leading-tight">
                 Traditional Banking Security, <br />
                 <span className="text-gradient">Blockchain Freedom</span>
               </h2>
 
-              <p className="text-brand-text-muted mb-8 leading-relaxed text-lg">
+              <p className="text-gray-600 dark:text-brand-text-muted mb-8 leading-relaxed text-lg">
                 We are not just an exchange; we are a full-service digital
                 custodian. Manage your crypto portfolio with the same ease and
                 security as a traditional bank account, but with instant global
@@ -63,8 +63,8 @@ function AboutUs() {
 
           {/* Image Side */}
           <Slide xAxis={50} className="w-full lg:w-1/2 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-brand-dark-lighter/50 group">
-              <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all duration-500 z-10"></div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-brand-dark-lighter/50 group">
+              <div className="absolute inset-0 bg-white/10 dark:bg-brand-dark/20 group-hover:bg-transparent transition-all duration-500 z-10"></div>
               <img
                 src={aboutUsImage}
                 alt="About WGL"
@@ -78,7 +78,9 @@ function AboutUs() {
                     <p className="text-brand-text-muted text-xs uppercase">
                       Total Volume
                     </p>
-                    <p className="text-white font-bold text-xl">$2.4B+</p>
+                    <p className="text-brand-dark dark:text-white font-bold text-xl">
+                      $2.4B+
+                    </p>
                   </div>
                   <div className="h-10 w-10 rounded-full bg-brand-primary/20 flex items-center justify-center text-brand-primary">
                     ⚡

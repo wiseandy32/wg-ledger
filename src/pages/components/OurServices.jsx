@@ -5,7 +5,7 @@ import { MdOutlineSupportAgent } from "react-icons/md";
 
 function OurServices() {
   return (
-    <section className="relative py-24 bg-brand-dark overflow-hidden">
+    <section className="relative py-24 bg-white dark:bg-brand-dark overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[100px] rounded-full -translate-y-1/2 pointer-events-none"></div>
 
@@ -15,7 +15,7 @@ function OurServices() {
           <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
             Comprehensive Digital Finance
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-white">
+          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
             A Full-Service <span className="text-gradient">Crypto Bank</span>
           </h2>
           <p className="mt-4 text-brand-text-muted max-w-2xl mx-auto text-lg">
@@ -32,8 +32,8 @@ function OurServices() {
             yAxis={50}
             className="md:col-span-3 h-full min-h-[500px]"
           >
-            <div className="h-full w-full rounded-2xl overflow-hidden border border-brand-dark-lighter/50 shadow-2xl relative group">
-              <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all duration-300 pointer-events-none z-10"></div>
+            <div className="h-full w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-brand-dark-lighter/50 shadow-2xl relative group">
+              <div className="absolute inset-0 bg-white/10 dark:bg-brand-dark/20 group-hover:bg-transparent transition-all duration-300 pointer-events-none z-10"></div>
               <iframe
                 width="100%"
                 height="100%"
@@ -48,14 +48,14 @@ function OurServices() {
 
           {/* Service Card 1: Interest/Yield */}
           <Slide xAxis={50} className="md:col-span-1 h-full">
-            <div className="glass-card p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6">
                 <FaHandHoldingDollar size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 High-Yield Vaults
               </h3>
-              <p className="text-brand-text-muted text-sm leading-relaxed mb-4">
+              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-4">
                 Earn interest on your crypto assets just like a savings account,
                 but with significantly higher APY rates.
               </p>
@@ -64,7 +64,7 @@ function OurServices() {
                 {["APY Returns", "Asset Liquidity", "Security"].map(
                   (skill, i) => (
                     <div key={i}>
-                      <div className="flex justify-between text-xs text-brand-text mb-1">
+                      <div className="flex justify-between text-xs text-gray-700 dark:text-brand-text mb-1">
                         <span>{skill}</span>
                         <span className="text-brand-primary">
                           Best in Class
@@ -82,14 +82,14 @@ function OurServices() {
 
           {/* Service Card 2: Private Banking */}
           <Slide yAxis={50} delay={0.2} className="md:col-span-1">
-            <div className="glass-card p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
                 <MdOutlineSupportAgent size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 Private Banking
               </h3>
-              <p className="text-brand-text-muted text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-6">
                 Dedicated account managers and priority support for
                 high-net-worth individuals and institutional clients.
               </p>
@@ -101,7 +101,7 @@ function OurServices() {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-xs text-brand-text-muted"
+                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
                     {item}
@@ -113,14 +113,14 @@ function OurServices() {
 
           {/* Service Card 3: Fund Recovery */}
           <Slide yAxis={50} delay={0.3} className="md:col-span-1">
-            <div className="glass-card p-8 rounded-2xl h-full flex flex-col hover:border-brand-primary/30 transition-all duration-300">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full flex flex-col hover:border-brand-primary/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6">
                 <IoIosThunderstorm size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 Fund Recovery
               </h3>
-              <p className="text-brand-text-muted text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-6">
                 Lost funds? Our unique blockchain rollback functionality
                 (client-exclusive) offers a safety net others cannot provide.
               </p>
@@ -132,7 +132,7 @@ function OurServices() {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-xs text-brand-text-muted"
+                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
                     {item}

@@ -195,6 +195,9 @@ footer {
 }
 
 .c {
+  background-color: white;
+}
+.dark .c {
   background-color: rgb(11, 17, 32);
 }
 
@@ -255,19 +258,19 @@ footer {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%; /* Zinc-50: Softer than pure white */
     /* my app background color */
     /* --background: 223, 49%, 8%; */
     --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* Pure white cards pop against Zinc-50 */
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 160 84% 39%; /* Use Brand Primary directly */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
+    --muted: 210 40% 90%; /* Slightly darker for better contrast */
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -433,10 +436,13 @@ footer {
 }
 
 .customModal {
-  background-color: #1e1e1e !important;
+  background-color: white !important;
   width: 100% !important;
   max-width: 500px !important;
   border-radius: 10px;
+}
+.dark .customModal {
+  background-color: #1e1e1e !important;
 }
 
 @layer utilities {

@@ -67,19 +67,19 @@ function Login() {
   }, []);
 
   return (
-    <section className="min-h-screen pt-20 pb-20 flex items-center justify-center bg-brand-dark px-4 relative overflow-hidden">
+    <section className="min-h-screen pt-20 pb-20 flex items-center justify-center bg-slate-50 dark:bg-brand-dark px-4 relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-md mx-auto px-4">
-        <div className="bg-brand-dark-lighter/30 backdrop-blur-sm border border-brand-dark-lighter/50 p-8 rounded-3xl shadow-xl">
+        <div className="bg-white dark:bg-brand-dark-lighter/30 backdrop-blur-sm border border-gray-200 dark:border-brand-dark-lighter/50 p-8 rounded-3xl shadow-xl">
           <form className="flex flex-col gap-6" onSubmit={(e) => login(e)}>
             <div className="text-center">
-              <h1 className="font-bold text-4xl sm:text-5xl tracking-tight text-white mb-2">
+              <h1 className="font-bold text-4xl sm:text-5xl tracking-tight text-brand-dark dark:text-white mb-2">
                 Welcome back!
               </h1>
-              <p className="text-brand-text-muted text-sm">
+              <p className="text-gray-600 dark:text-brand-text-muted text-sm">
                 Sign in to access your secure ledger
               </p>
             </div>
@@ -95,7 +95,7 @@ function Login() {
                 <div className="flex flex-col gap-2" key={field.name}>
                   <label
                     htmlFor={field.name}
-                    className="capitalize text-sm font-medium text-brand-text-muted pl-1"
+                    className="capitalize text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
                   >
                     {field.label}
                   </label>
@@ -105,7 +105,7 @@ function Login() {
                     required
                     id={field.name}
                     name={field.name}
-                    className="h-12 bg-brand-dark-lighter/50 border-brand-dark-lighter text-white placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
+                    className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
                   />
                 </div>
               ))}

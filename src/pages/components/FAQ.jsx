@@ -33,8 +33,8 @@ const faqs = [
 function FAQItem({ question, answer, isOpen, onClick }) {
   return (
     <div
-      className={`border-b border-brand-dark-lighter transition-colors duration-300 ${
-        isOpen ? "bg-brand-dark-lighter/10" : "bg-transparent"
+      className={`border-b border-gray-200 dark:border-brand-dark-lighter transition-colors duration-300 ${
+        isOpen ? "bg-zinc-50 dark:bg-brand-dark-lighter/10" : "bg-transparent"
       }`}
     >
       <button
@@ -45,7 +45,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
           className={`text-lg font-medium text-left transition-colors duration-300 ${
             isOpen
               ? "text-brand-primary"
-              : "text-white group-hover:text-brand-primary"
+              : "text-brand-dark dark:text-white group-hover:text-brand-primary"
           }`}
         >
           {question}
@@ -63,7 +63,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
           isOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
         }`}
       >
-        <p className="px-4 text-brand-text-muted text-base leading-relaxed">
+        <p className="px-4 text-gray-600 dark:text-brand-text-muted text-base leading-relaxed">
           {answer}
         </p>
       </div>
@@ -75,22 +75,22 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-24 bg-brand-dark relative z-10">
+    <section className="py-24 bg-zinc-50 dark:bg-brand-dark relative z-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Slide yAxis={50} className="text-center mb-16">
           <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
             Common Inquiries
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-white">
+          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
             Frequently Asked <span className="text-gradient">Questions</span>
           </h2>
-          <p className="mt-4 text-brand-text-muted text-lg max-w-2xl mx-auto">
+          <p className="mt-4 text-gray-600 dark:text-brand-text-muted text-lg max-w-2xl mx-auto">
             Everything you need to know about banking with the World Global
             Ledger.
           </p>
         </Slide>
 
-        <div className="bg-brand-dark-lighter/20 backdrop-blur-sm border border-brand-dark-lighter/50 rounded-2xl overflow-hidden">
+        <div className="bg-white dark:bg-brand-dark-lighter/20 backdrop-blur-sm border border-gray-200 dark:border-brand-dark-lighter/50 rounded-2xl overflow-hidden">
           {faqs.map((faq, index) => (
             <Slide key={index} delay={index * 0.1} yAxis={20}>
               <FAQItem

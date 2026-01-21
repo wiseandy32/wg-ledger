@@ -21,7 +21,7 @@ function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           scrolled
-            ? "bg-brand-dark/80 backdrop-blur-md shadow-lg shadow-brand-primary/5 py-4"
+            ? "bg-white/80 dark:bg-brand-dark/80 backdrop-blur-md shadow-lg shadow-brand-primary/5 py-4"
             : "bg-transparent py-6"
         }`}
       >
@@ -32,7 +32,7 @@ function Header() {
               width={160}
               height={40}
               alt="World Global Ledger"
-              className="brightness-0 invert group-hover:opacity-80 transition-opacity"
+              className="dark:brightness-0 dark:invert group-hover:opacity-80 transition-opacity"
             />
           </Link>
 
@@ -49,7 +49,7 @@ function Header() {
                 <li key={link.title}>
                   <Link
                     to={link.path}
-                    className="text-brand-text-muted hover:text-brand-primary font-medium text-sm transition-colors uppercase tracking-wider"
+                    className="text-gray-600 dark:text-brand-text-muted hover:text-brand-primary font-medium text-sm transition-colors uppercase tracking-wider"
                   >
                     {link.title}
                   </Link>
@@ -61,7 +61,7 @@ function Header() {
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
                 <Link
                   to="/login"
-                  className="text-white hover:text-brand-primary font-semibold text-sm transition-colors"
+                  className="text-brand-dark dark:text-white hover:text-brand-primary font-semibold text-sm transition-colors"
                 >
                   Log In
                 </Link>

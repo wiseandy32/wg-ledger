@@ -44,7 +44,7 @@ function MobileNav() {
   return (
     <>
       <div
-        className="md:hidden z-[10001] relative cursor-pointer text-white hover:text-brand-primary transition-colors p-2"
+        className="md:hidden z-[10001] relative cursor-pointer text-brand-dark dark:text-white hover:text-brand-primary transition-colors p-2"
         onClick={() => setIsMenuVisible((prev) => !prev)}
       >
         {!isMenuVisible ? (
@@ -61,7 +61,7 @@ function MobileNav() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 w-full h-screen bg-brand-dark/95 backdrop-blur-xl z-[10000] flex flex-col justify-center items-center md:hidden"
+            className="fixed inset-0 w-full h-screen bg-white/95 dark:bg-brand-dark/95 backdrop-blur-xl z-[10000] flex flex-col justify-center items-center md:hidden"
           >
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
@@ -72,7 +72,7 @@ function MobileNav() {
                 <li key={link.title}>
                   <Link
                     to={link.path}
-                    className="text-3xl font-bold text-white hover:text-brand-primary transition-colors uppercase tracking-widest"
+                    className="text-3xl font-bold text-brand-dark dark:text-white hover:text-brand-primary transition-colors uppercase tracking-widest"
                     onClick={() => setIsMenuVisible(false)}
                   >
                     {link.title}
@@ -87,14 +87,14 @@ function MobileNav() {
                   <Link
                     to="/login"
                     onClick={() => setIsMenuVisible(false)}
-                    className="w-full h-14 flex items-center justify-center rounded-xl border border-brand-dark-lighter text-white font-semibold hover:border-brand-primary hover:text-brand-primary transition-all uppercase tracking-wider text-sm"
+                    className="w-full h-14 flex items-center justify-center rounded-xl border border-gray-200 dark:border-brand-dark-lighter text-brand-dark dark:text-white font-semibold hover:border-brand-primary hover:text-brand-primary transition-all uppercase tracking-wider text-sm"
                   >
                     Log In
                   </Link>
                   <Link
                     to="/register"
                     onClick={() => setIsMenuVisible(false)}
-                    className="w-full h-14 flex items-center justify-center rounded-xl bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all uppercase tracking-wider text-sm"
+                    className="w-full h-14 flex items-center justify-center rounded-xl bg-brand-primary text-white dark:text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all uppercase tracking-wider text-sm"
                   >
                     Get Started
                   </Link>
