@@ -45,6 +45,7 @@ import solQRCode from "@/assets/sol-qr.jpg";
 import trumpQRCode from "@/assets/trump-qr.jpg";
 import adaQRCode from "@/assets/ada-qr.jpg";
 import xdceQRCode from "@/assets/xdce-qr.jpg";
+import shibaQRCode from "@/assets/shiba-qr.jpeg";
 import { DollarSign } from "lucide-react";
 
 export const registrationFormField = [
@@ -274,7 +275,7 @@ export const wallets = [
   },
   {
     name: "SHIBA",
-    id: "shiba",
+    id: "shiba-inu",
     icon: shibaIcon,
     balance: 0.0,
     value: "shiba_balance",
@@ -312,6 +313,7 @@ export const depositMethods = [
   { name: "Solana", id: "solana", icon: solIcon, path: "sol" },
   { name: "ADA", id: "cardano", icon: adaIcon, path: "cardano" },
   { name: "XDCE", id: "xdce-crowd-sale", icon: xdceIcon, path: "xdce" },
+  { name: "SHIBA", id: "shiba-inu", icon: shibaIcon, path: "shiba" },
   // { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
 ];
 
@@ -398,6 +400,14 @@ export const paymentGateways = [
     extra: "(ERC20)",
     icon: xdceIcon,
     qrCode: xdceQRCode,
+    walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
+  },
+  {
+    type: "shiba",
+    value: "shiba_balance",
+    id: "shiba-inu",
+    icon: shibaIcon,
+    qrCode: shibaQRCode,
     walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
   },
   // {
