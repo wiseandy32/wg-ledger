@@ -24,7 +24,7 @@ function Dashboard({ children }) {
   return (
     <>
       <SidebarInset>
-        <header className="mb-2 w-[97.5%] justify-between flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 border-solid border-b-2 border-slate-200 dark:border-slate-600/50">
+        <header className="sticky top-0 z-50 mb-2 w-[97.5%] justify-between flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 border-solid border-b-2 border-slate-200 dark:border-slate-600/50 bg-background/80 backdrop-blur-md">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
