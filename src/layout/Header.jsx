@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import MobileNav from "../pages/components/MobileNav";
 import logo from "../assets/logo.png";
 import { useState, useEffect } from "react";
+import ModeToggle from "../components/theme-toggle";
 
 function Header() {
   const { pathname } = useLocation();
@@ -59,6 +60,7 @@ function Header() {
 
             {!path.includes("admin") && !path.includes("user") && (
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
+                <ModeToggle />
                 <Link
                   to="/login"
                   className="text-brand-dark dark:text-white hover:text-brand-primary font-semibold text-sm transition-colors"

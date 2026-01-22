@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import { useLocation } from "react-router-dom";
+import ModeToggle from "../../components/theme-toggle";
 
 function MobileNav() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -82,6 +83,9 @@ function MobileNav() {
             </ul>
 
             <div className="flex flex-col gap-6 w-full max-w-xs px-6 relative z-10">
+              <div className="flex justify-center mb-4">
+                <ModeToggle />
+              </div>
               {!path.includes("admin") && !path.includes("user") ? (
                 <>
                   <Link
