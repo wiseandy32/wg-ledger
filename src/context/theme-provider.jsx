@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 
-// type Theme = "dark" | "light" | "system"
 const initialState = {
   theme: "system",
   setTheme: () => null,
+  toggleTheme: () => null,
 };
 
 const ThemeProviderContext = createContext(initialState);
@@ -18,6 +18,11 @@ export function ThemeProvider({
   const [theme, setTheme] = useState(
     () => localStorage.getItem(storageKey) || defaultTheme,
   );
+
+  // Animation state
+  const [transitioning, setTransitioning] = useState(false);
+  const [clickCoords, setClickCoords] = useState({ x: 0, y: 0 });
+  const [nextTheme, setNextTheme] = useState(null);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -37,12 +42,62 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
+  const updateTheme = (newTheme) => {
+    localStorage.setItem(storageKey, newTheme);
+    setTheme(newTheme);
+  };
+
+  const toggleTheme = async (x, y) => {
+    let effectiveTheme = theme;
+    if (theme === "system") {
+      effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+    const nextTheme = effectiveTheme === "light" ? "dark" : "light";
+
+    if (!document.startViewTransition) {
+      updateTheme(nextTheme);
+      return;
+    }
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        updateTheme(nextTheme);
+      });
+    });
+
+    try {
+      await transition.ready;
+
+      const right = window.innerWidth - x;
+      const bottom = window.innerHeight - y;
+      const maxRadius = Math.hypot(Math.max(x, right), Math.max(y, bottom));
+
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${maxRadius}px at ${x}px ${y}px)`,
+      ];
+
+      document.documentElement.animate(
+        {
+          clipPath: clipPath,
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const value = {
     theme,
-    setTheme: (theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
+    setTheme: updateTheme,
+    toggleTheme,
   };
 
   return (
