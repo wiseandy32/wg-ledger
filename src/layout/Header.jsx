@@ -46,16 +46,23 @@ function Header() {
                 { title: "Services", path: "/services" },
                 { title: "About", path: "/about" },
                 { title: "Contact", path: "/contact" },
-              ].map((link) => (
-                <li key={link.title}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-600 dark:text-gray-200 hover:text-brand-primary font-medium text-sm transition-colors uppercase tracking-wider"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
+              ].map((link) => {
+                const isActive = pathname === link.path;
+                return (
+                  <li key={link.title}>
+                    <Link
+                      to={link.path}
+                      className={`text-sm font-medium transition-colors uppercase tracking-wider ${
+                        isActive
+                          ? "text-brand-primary font-bold"
+                          : "text-gray-600 dark:text-gray-200 hover:text-brand-primary"
+                      }`}
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
             {!path.includes("admin") && !path.includes("user") && (
