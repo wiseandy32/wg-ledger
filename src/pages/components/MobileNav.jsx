@@ -44,15 +44,18 @@ function MobileNav() {
 
   return (
     <>
-      <div
-        className="md:hidden z-[10001] relative cursor-pointer text-brand-dark dark:text-white hover:text-brand-primary transition-colors p-2"
-        onClick={() => setIsMenuVisible((prev) => !prev)}
-      >
-        {!isMenuVisible ? (
-          <GiHamburgerMenu className="h-6 w-6" />
-        ) : (
-          <ImCross className="h-6 w-6 fixed top-8 right-6" />
-        )}
+      <div className="md:hidden z-[10001] relative flex items-center gap-4">
+        <ModeToggle />
+        <div
+          className="cursor-pointer text-brand-dark dark:text-white hover:text-brand-primary transition-colors p-2"
+          onClick={() => setIsMenuVisible((prev) => !prev)}
+        >
+          {!isMenuVisible ? (
+            <GiHamburgerMenu className="h-6 w-6" />
+          ) : (
+            <ImCross className="h-6 w-6 fixed top-8 right-6" />
+          )}
+        </div>
       </div>
 
       <AnimatePresence>
@@ -83,9 +86,6 @@ function MobileNav() {
             </ul>
 
             <div className="flex flex-col gap-6 w-full max-w-xs px-6 relative z-10">
-              <div className="flex justify-center mb-4">
-                <ModeToggle />
-              </div>
               {!path.includes("admin") && !path.includes("user") ? (
                 <>
                   <Link
