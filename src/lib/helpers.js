@@ -20,18 +20,18 @@ export const filterCountries = (
   countries = [],
   priorityCountries = [],
   whitelist = [],
-  blacklist = []
+  blacklist = [],
 ) => {
   let countriesListedFirst = [];
   let filteredCountries = countries;
 
   if (whitelist.length > 0) {
     filteredCountries = countries.filter(
-      ({ countryShortCode }) => whitelist.indexOf(countryShortCode) > -1
+      ({ countryShortCode }) => whitelist.indexOf(countryShortCode) > -1,
     );
   } else if (blacklist.length > 0) {
     filteredCountries = countries.filter(
-      ({ countryShortCode }) => blacklist.indexOf(countryShortCode) === -1
+      ({ countryShortCode }) => blacklist.indexOf(countryShortCode) === -1,
     );
   }
 
@@ -39,7 +39,7 @@ export const filterCountries = (
     // ensure the countries are added in the order in which they are specified by the user
     priorityCountries.forEach((slug) => {
       const result = filteredCountries.find(
-        ({ countryShortCode }) => countryShortCode === slug
+        ({ countryShortCode }) => countryShortCode === slug,
       );
       if (result) {
         countriesListedFirst.push(result);
@@ -48,7 +48,7 @@ export const filterCountries = (
 
     filteredCountries = filteredCountries.filter(
       ({ countryShortCode }) =>
-        priorityCountries.indexOf(countryShortCode) === -1
+        priorityCountries.indexOf(countryShortCode) === -1,
     );
   }
 
@@ -61,18 +61,18 @@ export const filterRegions = (
   regions = [],
   priorityRegions = [],
   whitelist = [],
-  blacklist = []
+  blacklist = [],
 ) => {
   let regionsListedFirst = [];
   let filteredRegions = regions;
 
   if (whitelist.length > 0) {
     filteredRegions = regions.filter(
-      ({ shortCode }) => whitelist.indexOf(shortCode) > -1
+      ({ shortCode }) => whitelist.indexOf(shortCode) > -1,
     );
   } else if (blacklist.length > 0) {
     filteredRegions = regions.filter(
-      ({ shortCode }) => blacklist.indexOf(shortCode) === -1
+      ({ shortCode }) => blacklist.indexOf(shortCode) === -1,
     );
   }
 
@@ -80,7 +80,7 @@ export const filterRegions = (
     // ensure the Regions are added in the order in which they are specified by the user
     priorityRegions.forEach((slug) => {
       const result = filteredRegions.find(
-        ({ shortCode }) => shortCode === slug
+        ({ shortCode }) => shortCode === slug,
       );
       if (result) {
         regionsListedFirst.push(result);
@@ -88,7 +88,7 @@ export const filterRegions = (
     });
 
     filteredRegions = filteredRegions.filter(
-      ({ shortCode }) => priorityRegions.indexOf(shortCode) === -1
+      ({ shortCode }) => priorityRegions.indexOf(shortCode) === -1,
     );
   }
 
@@ -115,13 +115,13 @@ export const getSingleDocument = async (uid, queryKey = "uid") => {
 export const getSubCollectionDocuments = async (
   parentCollection,
   parentDocId,
-  subCollectionName
+  subCollectionName,
 ) => {
   const subCollectionRef = collection(
     db,
     parentCollection,
     parentDocId,
-    subCollectionName
+    subCollectionName,
   );
 
   try {
@@ -138,18 +138,18 @@ const getSingleSubCollectionDocument = async (
   parentDocId,
   subCollectionName,
   queryKey,
-  requestId
+  requestId,
 ) => {
   const subCollectionRef = collection(
     db,
     parentCollection,
     parentDocId,
-    subCollectionName
+    subCollectionName,
   );
 
   const document = query(
     subCollectionRef,
-    where(`${queryKey}`, "==", requestId)
+    where(`${queryKey}`, "==", requestId),
   );
   try {
     const querySnapshot = await getDocs(document);
@@ -166,10 +166,10 @@ export const addDataToSubCollection = async (
   parentCollection,
   parentDocId,
   subCollectionName,
-  data
+  data,
 ) => {
   const subCollectionRef = doc(
-    collection(db, parentCollection, parentDocId, subCollectionName)
+    collection(db, parentCollection, parentDocId, subCollectionName),
   );
 
   try {
@@ -186,7 +186,7 @@ export const addDataToSubCollection = async (
 export const getTransactionDetail = async (
   requestId,
   documentName,
-  queryKey = "docRef"
+  queryKey = "docRef",
 ) => {
   const depositRef = collection(db, `${documentName}`);
   const document = query(depositRef, where(`${queryKey}`, "==", requestId));
@@ -248,14 +248,14 @@ export const updateSubCollectionDocument = async (
   parentDocId,
   subCollectionName,
   subDocId,
-  data
+  data,
 ) => {
   const docRef = doc(
     db,
     parentCollection,
     parentDocId,
     subCollectionName,
-    subDocId
+    subDocId,
   );
 
   try {
@@ -283,7 +283,7 @@ export const handleRequestApproval = (
   requestType,
   documentId,
   requestId,
-  userRef
+  userRef,
 ) => {
   if (doc.isConfirmed) {
     toast.info(
@@ -303,10 +303,10 @@ export const handleRequestApproval = (
 
             await updateFirebaseDb("users", document.docRef, {
               [`${doc.method}`]: increment(
-                requestType === "deposit" ? -doc.amount : doc.amount
+                requestType === "deposit" ? -doc.amount : doc.amount,
               ),
               ledger_balance: increment(
-                requestType === "deposit" ? -doc.amount : doc.amount
+                requestType === "deposit" ? -doc.amount : doc.amount,
               ),
             });
 
@@ -320,7 +320,7 @@ export const handleRequestApproval = (
                 userRef,
                 "transactions",
                 "id",
-                doc.docRef
+                doc.docRef,
               );
 
             await updateSubCollectionDocument(
@@ -330,14 +330,14 @@ export const handleRequestApproval = (
               transactionHistoryDetail.docRef,
               {
                 status: "pending",
-              }
+              },
             );
             toast.success(
-              `${doc.name} ${requestType} request has been reversed`
+              `${doc.name} ${requestType} request has been reversed`,
             );
           },
         },
-      }
+      },
     );
   } else {
     toast.info(`Click confirm to approve ${doc.name} ${requestType} request`, {
@@ -358,18 +358,18 @@ export const handleRequestApproval = (
               requestType === "deposit"
                 ? "depositRequests"
                 : "withdrawalRequests"
-            }`
+            }`,
           );
           await updateFirebaseDb("users", document.docRef, {
             [`${doc.method}`]: increment(
-              requestType === "deposit" ? doc.amount : -doc.amount
+              requestType === "deposit" ? doc.amount : -doc.amount,
             ),
             ledger_balance: increment(
-              requestType === "deposit" ? doc.amount : -doc.amount
+              requestType === "deposit" ? doc.amount : -doc.amount,
             ),
 
             withdrawal_balance: increment(
-              requestType === "withdrawal" ? doc.amount : 0
+              requestType === "withdrawal" ? doc.amount : 0,
             ),
           });
 
@@ -382,7 +382,7 @@ export const handleRequestApproval = (
             userRef,
             "transactions",
             "id",
-            doc.docRef
+            doc.docRef,
           );
 
           await updateSubCollectionDocument(
@@ -392,12 +392,12 @@ export const handleRequestApproval = (
             transactionHistoryDetail.docRef,
             {
               status: "confirmed",
-            }
+            },
           );
 
           await emailjs.send(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID_REQUEST,
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REQUEST,
             {
               subject: `${capitalizeWord(requestType)} Request Approval`,
               customer_name: `${capitalizeWord(transaction.name)}`,
@@ -407,7 +407,7 @@ export const handleRequestApproval = (
               request_amount: `$${formatNumberWithCommas(+transaction.amount)}`,
               to_email: `${transaction.email}`,
               company_name: "Quantum Assets Ledger",
-            }
+            },
           );
 
           toast.success(`${doc.name} ${requestType} request has been approved`);
@@ -433,19 +433,19 @@ export const processData = (newData, oldData) => {
   if (allFalsy) return; // Exit if all values are falsy
   // Filter newData to remove falsy values
   const filteredNewData = Object.fromEntries(
-    Object.entries(newData).filter(([, value]) => value)
+    Object.entries(newData).filter(([, value]) => value),
   );
   // Check if filteredNewData is the same as the oldData
   const hasDifferences = Object.entries(filteredNewData).some(
-    ([key, value]) => oldData[key] !== value
+    ([key, value]) => oldData[key] !== value,
   );
   if (!hasDifferences) return; // Exit if there are no differences
 
   // Create a new object with differing values
   const updatedValues = Object.fromEntries(
     Object.entries(filteredNewData).filter(
-      ([key, value]) => oldData[key] !== value
-    )
+      ([key, value]) => oldData[key] !== value,
+    ),
   );
 
   return Object.keys(updatedValues).length > 0 ? updatedValues : null;
@@ -475,13 +475,13 @@ export const subscribeToSubCollection = (
   parentCollection,
   parentDocId,
   subCollectionName,
-  onUpdate
+  onUpdate,
 ) => {
   const subCollectionRef = collection(
     db,
     parentCollection,
     parentDocId,
-    subCollectionName
+    subCollectionName,
   );
 
   // subscribe to real time update
@@ -490,7 +490,7 @@ export const subscribeToSubCollection = (
     () => onUpdate(),
     (error) => {
       console.error("Error subscribing to updates: ", error);
-    }
+    },
   );
 
   return unsubscribe;
@@ -500,7 +500,7 @@ const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    "x-cg-demo-api-key": import.meta.env.VITE_COINGECKO_API_KEY,
+    "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_API_KEY,
   },
 };
 
@@ -512,9 +512,9 @@ export const getCoinsData = async (coinList) => {
 
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinList.join(
-        "%2C"
+        "%2C",
       )}&price_change_percentage=1h`,
-      options
+      options,
     );
     const data = await response.json();
     return data;
@@ -526,7 +526,7 @@ export const getCoinsData = async (coinList) => {
 export const getCurrentBitcoinPrice = async () => {
   const response = await fetch(
     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
-    options
+    options,
   );
 
   const data = await response.json();
@@ -556,9 +556,8 @@ export const convertCoin = async (
   fromCoinBalanceField,
   toCoinBalanceField,
   fromQty,
-  toQty
+  toQty,
 ) => {
-
   if (
     !userId ||
     !fromCoinId ||

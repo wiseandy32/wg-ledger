@@ -1,11 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
-import MobileNav from "../pages/components/MobileNav";
-import logo from "../assets/logo.png";
+import Link from "next/link";
+import MobileNav from "../views/components/MobileNav";
 import { useState, useEffect } from "react";
 import ModeToggle from "../components/theme-toggle";
+import { usePathname } from "next/navigation";
 
 function Header() {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const path = pathname.split("/");
   const [scrolled, setScrolled] = useState(false);
 
@@ -27,9 +27,9 @@ function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <Link to={"/"} className="flex items-center gap-2 group">
+          <Link href={"/"} className="flex items-center gap-2 group">
             <img
-              src={logo}
+              src="/logo.png"
               width={160}
               height={40}
               alt="World Global Ledger"
@@ -51,7 +51,7 @@ function Header() {
                 return (
                   <li key={link.title}>
                     <Link
-                      to={link.path}
+                      href={link.path}
                       className={`text-sm font-medium transition-colors uppercase tracking-wider ${
                         isActive
                           ? "text-brand-primary font-bold"
@@ -69,13 +69,13 @@ function Header() {
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
                 <ModeToggle />
                 <Link
-                  to="/login"
+                  href="/login"
                   className="text-brand-dark dark:text-white hover:text-brand-primary font-semibold text-sm transition-colors"
                 >
                   Log In
                 </Link>
                 <Link
-                  to="/register"
+                  href="/register"
                   className="px-5 py-2.5 rounded-lg bg-brand-primary text-brand-dark font-bold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transform hover:-translate-y-0.5"
                 >
                   Get Started

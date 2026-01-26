@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable react/prop-types */
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
@@ -29,7 +30,7 @@ export function DateRangePicker({ className, onDateRangeChange }) {
     <div
       className={cn(
         "grid gap-2 w-full md:max-w-[auto] lg:max-w-[330px]",
-        className
+        className,
       )}
     >
       <Popover>
@@ -40,7 +41,7 @@ export function DateRangePicker({ className, onDateRangeChange }) {
             className={cn(
               // "w-[300px] justify-start text-left font-normal",
               "w-full justify-start text-left font-normal",
-              !date && "text-muted-foreground"
+              !date && "text-muted-foreground",
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

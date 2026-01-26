@@ -1,3 +1,4 @@
+"use client";
 import { GrUploadOption } from "react-icons/gr";
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -8,10 +9,9 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import logo from "@/assets/logo.png";
 import { LayoutGrid } from "lucide-react";
 import { Download } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
 import { User2 } from "lucide-react";
 import { ArrowRightLeft } from "lucide-react";
 // This is sample data.
@@ -24,22 +24,22 @@ const data = {
     },
     {
       title: "Deposit",
-      url: "deposit",
+      url: "/user/deposit",
       icon: Download,
     },
     {
       title: "Withdraw",
-      url: "withdraw",
+      url: "/user/withdraw",
       icon: GrUploadOption,
     },
     {
       title: "Convert",
-      url: "convert",
+      url: "/user/convert",
       icon: ArrowRightLeft,
     },
     {
       title: "Transactions",
-      url: "transactions",
+      url: "/user/transactions",
       icon: ArrowRightLeft,
     },
   ],
@@ -51,25 +51,25 @@ const data = {
     },
     {
       title: "Deposits",
-      url: "deposits",
+      url: "/admin/deposits",
       icon: Download,
     },
     {
       title: "Withdrawals",
-      url: "withdrawals",
+      url: "/admin/withdrawals",
       icon: GrUploadOption,
     },
   ],
 };
 
 export function AppSidebar({ ...props }) {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <img
-          src={logo}
+          src="/logo.png"
           alt="World Global Ledger"
           className="dark:brightness-0 dark:invert w-40 ml-2 pt-2"
         />

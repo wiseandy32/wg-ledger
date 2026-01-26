@@ -42,10 +42,10 @@ export const columns = [
       const type = row.original.type;
       const amount =
         type === "conversion" ? row.original.fromAmount : row.original.amount;
-      
+
       // For conversions, we just show the USD value involved
       if (type === "conversion") {
-         return <span>${formatNumberWithCommas(amount)}</span>;
+        return <span>${formatNumberWithCommas(amount)}</span>;
       }
 
       return (
@@ -60,8 +60,8 @@ export const columns = [
               type === "deposit" && row.original.status === "confirmed"
                 ? "text-green-500"
                 : type === "withdrawal" && row.original.status === "confirmed"
-                ? "text-red-500"
-                : ""
+                  ? "text-red-500"
+                  : ""
             }`}
           >
             {`$${formatNumberWithCommas(amount)}`}
@@ -79,9 +79,9 @@ export const columns = [
       return rowDate >= start && rowDate <= end;
     },
     cell: ({ row }) => {
-        // Fallback for conversion date which might be distinct or use same field
-        return <p>{row.original.creationDate || row.original.date}</p>
-    }
+      // Fallback for conversion date which might be distinct or use same field
+      return <p>{row.original.creationDate || row.original.date}</p>;
+    },
   },
   {
     accessorKey: "status",
@@ -95,8 +95,8 @@ export const columns = [
             status === "confirmed" || status === "completed"
               ? "text-green-500 border-green-500"
               : status === "declined"
-              ? "text-red-500 border-red-500"
-              : ""
+                ? "text-red-500 border-red-500"
+                : ""
           }`}
         >
           {status}
@@ -106,6 +106,5 @@ export const columns = [
   },
 ];
 
-
-
+export const transactionColumns = columns;
 export const conversionColumns = columns;

@@ -4,14 +4,14 @@ import Footer from "./Footer";
 import emailjs from "@emailjs/browser";
 import { ScrollRestoration } from "react-router-dom/dist";
 import { useState, useEffect } from "react";
-import PageLoader from "../pages/components/PageLoader";
+import PageLoader from "../views/components/PageLoader";
 import { AnimatePresence } from "framer-motion";
 
 function Layout() {
   const location = useLocation();
-  emailjs.init({ publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY });
+  emailjs.init({ publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY });
   const [loading, setLoading] = useState(
-    !location.pathname.startsWith("/admin")
+    !location.pathname.startsWith("/admin"),
   );
 
   useEffect(() => {

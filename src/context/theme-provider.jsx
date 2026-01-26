@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 
@@ -16,7 +17,10 @@ export function ThemeProvider({
   ...props
 }) {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem(storageKey) || defaultTheme,
+    () =>
+      (typeof window !== "undefined"
+        ? localStorage.getItem(storageKey)
+        : null) || defaultTheme,
   );
 
   // Animation state
@@ -43,7 +47,9 @@ export function ThemeProvider({
   }, [theme]);
 
   const updateTheme = (newTheme) => {
-    localStorage.setItem(storageKey, newTheme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(storageKey, newTheme);
+    }
     setTheme(newTheme);
   };
 

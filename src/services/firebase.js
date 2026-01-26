@@ -9,17 +9,19 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_APP_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_APP_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_APP_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_APP_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_APP_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementID: import.meta.env.VITE_FIREBASE_ANALYTICS_MEASUREMENT_ID,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APP_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_APP_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_APP_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_APP_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementID: process.env.NEXT_PUBLIC_FIREBASE_ANALYTICS_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const analytics = getAnalytics(app);
+// Only initialize analytics on the client side (browser)
+export const analytics =
+  typeof window !== "undefined" ? getAnalytics(app) : null;

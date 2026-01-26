@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { AuthContext } from "./use-auth";
@@ -8,18 +9,26 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchUserByID } from "@/lib/helpers";
 
 function AuthProvider({ children }) {
-  const [uid, setUid] = useState("");
-  const { data: user } = useQuery({
+  const [uid, setUid] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("wglid") || "";
+    }
+    return "";
+  });
+  const { data: user, isLoading } = useQuery({
     queryKey: ["uid", uid],
     queryFn: async () => {
+      if (!uid) return null;
       const user = await fetchUserByID(uid);
       return user;
     },
+    enabled: !!uid,
   });
 
   const values = {
     user,
     uid,
+    isLoading,
   };
 
   useEffect(() => {

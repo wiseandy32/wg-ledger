@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import Slide from "../pages/components/Slide";
-import logo from "../assets/logo.png";
+import Link from "next/link";
+import Slide from "../views/components/Slide";
 import {
   FaTwitter,
   FaLinkedin,
@@ -18,7 +17,7 @@ function Footer() {
           <div className="space-y-6">
             <Slide yAxis={20}>
               <img
-                src={logo}
+                src="/logo.png"
                 width={180}
                 height={45}
                 alt="World Global Ledger"
@@ -39,7 +38,7 @@ function Footer() {
                     >
                       <Icon size={18} />
                     </a>
-                  )
+                  ),
                 )}
               </div>
             </Slide>
@@ -60,7 +59,7 @@ function Footer() {
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link
-                      to={link.path}
+                      href={link.path}
                       className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
@@ -86,7 +85,7 @@ function Footer() {
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link
-                      to={link.path}
+                      href={link.path}
                       className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
@@ -132,19 +131,19 @@ function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              to="/"
+              href="/"
               className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Privacy
             </Link>
             <Link
-              to="/"
+              href="/"
               className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Terms
             </Link>
             <Link
-              to="/"
+              href="/"
               className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Sitemap

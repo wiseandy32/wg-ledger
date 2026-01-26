@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable react/prop-types */
 import { useState, useCallback } from "react";
 import {
@@ -37,7 +38,7 @@ export function DataTable({
 }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState(
-    defaultType ? [{ id: "type", value: defaultType }] : []
+    defaultType ? [{ id: "type", value: defaultType }] : [],
   );
   const [, setDateRange] = useState({
     from: undefined,
@@ -75,7 +76,7 @@ export function DataTable({
         table.getColumn("creationDate")?.setFilterValue(undefined);
       }
     },
-    [table]
+    [table],
   );
 
   const handleClearFilters = useCallback(() => {
@@ -167,7 +168,7 @@ export function DataTable({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -187,7 +188,7 @@ export function DataTable({
                     <TableCell key={cell.id} className="py-4 px-6">
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

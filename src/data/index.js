@@ -1,51 +1,41 @@
-// import chooseUsImage1 from "@/assets/choose-us-image-1.png";
-// import chooseUsImage2 from "@/assets/choose-us-image-2.png";
-// import chooseUsImage3 from "@/assets/choose-us-image-3.png";
-// import chooseUsImage4 from "@/assets/choose-us-image-4.jpg";
-// import chooseUsImage5 from "@/assets/choose-us-image-5.webp";
-// import chooseUsImage6 from "@/assets/choose-us-image-6.jfif";
-
-import regulatoryImg from "@/assets/regulatory_compliance.png";
-import securityImg from "@/assets/institutional_security.png";
-import globalImg from "@/assets/global_banking.png";
-import liquidityImg from "@/assets/instant_liquidity.png";
-import wealthImg from "@/assets/private_wealth.png";
-import auditImg from "@/assets/transparent_audits.png";
-import btcIcon from "@/assets/btc-logo.png";
-import ethIcon from "@/assets/eth-logo.png";
-import usdtIcon from "@/assets/usdt-logo.png";
-import xlmIcon from "@/assets/xlm-logo.png";
-import xrpIcon from "@/assets/xrp-logo.png";
-import dogeIcon from "@/assets/doge-logo.png";
-import ltcIcon from "@/assets/ltc-logo.png";
-import algoIcon from "@/assets/algo-logo.png";
-import solIcon from "@/assets/sol-logo.png";
-import bnbIcon from "@/assets/bnb-logo.png";
-import qtumIcon from "@/assets/qtum-logo.png";
-import tezosIcon from "@/assets/tezos-logo.png";
-import thetaIcon from "@/assets/theta-logo.png";
-import fileCoinIcon from "@/assets/filecoin-logo.png";
-import nanoIcon from "@/assets/nano-logo.png";
-import shibaIcon from "@/assets/shiba-logo.png";
-import trumpIcon from "@/assets/trump-logo.png";
-import adaIcon from "@/assets/ada-logo.webp";
-import xdceIcon from "@/assets/xdce-logo.svg";
-// import stellarIcon from "@/assets/stellar-logo.jfif";
-// import rippleIcon from "@/assets/ripple-logo.png";
-// import tetherIcon from "@/assets/tether-logo.png";
-// import tronIcon from "@/assets/tron-logo.png";
-import bitcoinQRCode from "@/assets/bitcoin-qr.jpg";
-import ethQRCode from "@/assets/eth-qr.jpg";
-import xrpQRCode from "@/assets/xrp-qr.jpg";
-import xlmQRCode from "@/assets/xlm-qr.jpg";
-import usdtQRCode from "@/assets/usdt-trc20-qr.jpg";
-import dogeQRCode from "@/assets/doge-qr.jpg";
-import algoQRCode from "@/assets/algo-qr.jpg";
-import solQRCode from "@/assets/sol-qr.jpg";
-import trumpQRCode from "@/assets/trump-qr.jpg";
-import adaQRCode from "@/assets/ada-qr.jpg";
-import xdceQRCode from "@/assets/xdce-qr.jpg";
-import shibaQRCode from "@/assets/shiba-qr.jpeg";
+// All images are now served from public/assets folder
+const regulatoryImg = "/assets/regulatory_compliance.png";
+const securityImg = "/assets/institutional_security.png";
+const globalImg = "/assets/global_banking.png";
+const liquidityImg = "/assets/instant_liquidity.png";
+const wealthImg = "/assets/private_wealth.png";
+const auditImg = "/assets/transparent_audits.png";
+const btcIcon = "/assets/btc-logo.png";
+const ethIcon = "/assets/eth-logo.png";
+const usdtIcon = "/assets/usdt-logo.png";
+const xlmIcon = "/assets/xlm-logo.png";
+const xrpIcon = "/assets/xrp-logo.png";
+const dogeIcon = "/assets/doge-logo.png";
+const ltcIcon = "/assets/ltc-logo.png";
+const algoIcon = "/assets/algo-logo.png";
+const solIcon = "/assets/sol-logo.png";
+const bnbIcon = "/assets/bnb-logo.png";
+const qtumIcon = "/assets/qtum-logo.png";
+const tezosIcon = "/assets/tezos-logo.png";
+const thetaIcon = "/assets/theta-logo.png";
+const fileCoinIcon = "/assets/filecoin-logo.png";
+const nanoIcon = "/assets/nano-logo.png";
+const shibaIcon = "/assets/shiba-logo.png";
+const trumpIcon = "/assets/trump-logo.png";
+const adaIcon = "/assets/ada-logo.webp";
+const xdceIcon = "/assets/xdce-logo.svg";
+const bitcoinQRCode = "/assets/bitcoin-qr.jpg";
+const ethQRCode = "/assets/eth-qr.jpg";
+const xrpQRCode = "/assets/xrp-qr.jpg";
+const xlmQRCode = "/assets/xlm-qr.jpg";
+const usdtQRCode = "/assets/usdt-trc20-qr.jpg";
+const dogeQRCode = "/assets/doge-qr.jpg";
+const algoQRCode = "/assets/algo-qr.jpg";
+const solQRCode = "/assets/sol-qr.jpg";
+const trumpQRCode = "/assets/trump-qr.jpg";
+const adaQRCode = "/assets/ada-qr.jpg";
+const xdceQRCode = "/assets/xdce-qr.jpg";
+const shibaQRCode = "/assets/shiba-qr.jpeg";
 import { DollarSign } from "lucide-react";
 
 export const registrationFormField = [
@@ -155,12 +145,6 @@ export const chooseUsCardInfo = [
 ];
 
 export const wallets = [
-  // {
-  //   name: "Ledger",
-  //   icon: DollarSign,
-  //   balance: 0.0,
-  //   value: "ledger_balance",
-  // },
   {
     name: "BTC",
     id: "bitcoin",
@@ -224,13 +208,6 @@ export const wallets = [
     balance: 0.0,
     value: "SOL_balance",
   },
-  // {
-  //   name: "TRUMP",
-  //   id: "official-trump",
-  //   icon: trumpIcon,
-  //   balance: 0.0,
-  //   value: "TRUMP_balance",
-  // },
   {
     name: "BNB",
     id: "binancecoin",
@@ -314,7 +291,6 @@ export const depositMethods = [
   { name: "ADA", id: "cardano", icon: adaIcon, path: "cardano" },
   { name: "XDCE", id: "xdce-crowd-sale", icon: xdceIcon, path: "xdce" },
   { name: "SHIBA", id: "shiba-inu", icon: shibaIcon, path: "shiba" },
-  // { name: "Trump", id: "official-trump", icon: trumpIcon, path: "trump" },
 ];
 
 export const paymentGateways = [
@@ -410,14 +386,6 @@ export const paymentGateways = [
     qrCode: shibaQRCode,
     walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
   },
-  // {
-  //   type: "Trump",
-  //   value: "Trump_balance",
-  //   id: "official-trump",
-  //   icon: trumpIcon,
-  //   qrCode: trumpQRCode,
-  //   walletAddress: "2perJNJLGXiVgqEK8HJLbgrDRKmfGLRAyvZZh9GPAzx6",
-  // },
 ];
 
 export const withdrawalOptions = [
@@ -493,8 +461,4 @@ export const withdrawalOptions = [
     title: "XDCE (ERC20)",
     value: "xdce_balance",
   },
-  // {
-  //   title: "TRUMP",
-  //   value: "TRUMP_balance",
-  // },
 ];

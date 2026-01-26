@@ -1,3 +1,4 @@
+"use client";
 import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,14 +18,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { logout } from "@/utils/auth";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth/use-auth";
 import { capitalizeFirstLettersOfName } from "@/lib/helpers";
 
 export function NavUser() {
   const { isMobile, setOpenMobile } = useSidebar();
   const { user, userImage } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <SidebarMenu>
@@ -82,7 +83,7 @@ export function NavUser() {
                 <BadgeCheck />
                 <span
                   onClick={() => {
-                    navigate("/user/profile");
+                    router.push("/user/profile");
                     setOpenMobile(false);
                   }}
                 >
@@ -91,7 +92,7 @@ export function NavUser() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => logout(navigate)}>
+            <DropdownMenuItem onClick={() => logout(router.push)}>
               <LogOut />
               Log out
             </DropdownMenuItem>
