@@ -53,22 +53,6 @@ function CompleteProfile() {
 
       await updateFirebaseDb("users", user.docRef, profileData);
 
-      // Trigger welcome email
-      try {
-        await fetch("/api/send-welcome-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: user.email,
-            name: profileData.displayName,
-          }),
-        });
-      } catch (error) {
-        console.error("Error sending welcome email:", error);
-      }
-
       toast.success("Profile completed successfully!");
       qc.invalidateQueries({ queryKey: ["uid", uid] });
       router.push("/user");
