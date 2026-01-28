@@ -18,7 +18,7 @@ export default function AdminLayout({ children }) {
     if (!isLoading) {
       if (!uid) {
         router.push(
-          `/login?from=${encodeURIComponent(window.location.pathname)}`,
+          `/auth/login?from=${encodeURIComponent(window.location.pathname)}`,
         );
       } else if (user && !user.isAdmin) {
         router.push("/user");

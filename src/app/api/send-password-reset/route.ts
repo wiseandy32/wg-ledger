@@ -8,7 +8,7 @@ console.log("Resend key:", process.env.RESEND_API_KEY ? "Loaded" : "Missing");
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const actionCodeSettings = {
-  url: "https://www.worldquantumnetwork.com/login",
+  url: "https://www.worldquantumnetwork.com/auth/login",
 };
 
 export async function POST(req: NextRequest) {

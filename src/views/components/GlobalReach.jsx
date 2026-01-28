@@ -33,7 +33,7 @@ function GlobalReach() {
             </p>
             <div className="mt-8">
               <Link
-                href="/register"
+                href="/auth/register"
                 className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white dark:text-brand-dark bg-brand-primary rounded-full hover:bg-brand-primary/90 transition-all duration-300 shadow-lg shadow-brand-primary/20 hover:scale-105"
               >
                 Open an Account

@@ -18,10 +18,12 @@ export default function UserLayout({ children }) {
     if (!isLoading) {
       if (!uid) {
         router.push(
-          `/login?from=${encodeURIComponent(window.location.pathname)}`,
+          `/auth/login?from=${encodeURIComponent(window.location.pathname)}`,
         );
       } else if (user?.isAdmin) {
         router.push("/admin");
+      } else if (!user?.isAccountVerified) {
+        router.push("/auth/complete-profile");
       } else {
         setChecking(false);
       }

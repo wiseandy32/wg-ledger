@@ -109,7 +109,7 @@ function ForgotPassword() {
                 </Button>
 
                 <Link
-                  href="/login"
+                  href="/auth/login"
                   className="flex items-center justify-center gap-2 text-gray-600 dark:text-brand-text-muted hover:text-brand-dark dark:hover:text-white transition-colors text-sm font-medium"
                 >
                   <ArrowLeft className="h-4 w-4" />
@@ -129,7 +129,7 @@ function ForgotPassword() {
                 We've sent a password reset link to your email. Please check
                 your inbox and follow the instructions.
               </p>
-              <Link href="/login" className="w-full">
+              <Link href="/auth/login" className="w-full">
                 <Button
                   variant="gooeyLeft"
                   className="w-full h-12 bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base"

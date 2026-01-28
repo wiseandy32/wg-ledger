@@ -39,13 +39,13 @@ function Hero() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              href="/register"
+              href="/auth/register"
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-primary text-white font-bold text-lg hover:bg-brand-primary/90 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
             >
               Get Started Now
             </Link>
             <Link
-              href="/login"
+              href="/auth/login"
               className="w-full sm:w-auto px-8 py-4 rounded-xl glass-button text-white font-semibold text-lg hover:text-brand-primary hover:border-brand-primary/50"
             >
               Login to Dashboard

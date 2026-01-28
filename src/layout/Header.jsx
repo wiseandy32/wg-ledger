@@ -69,13 +69,13 @@ function Header() {
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
                 <ModeToggle />
                 <Link
-                  href="/login"
+                  href="/auth/login"
                   className="text-brand-dark dark:text-white hover:text-brand-primary font-semibold text-sm transition-colors"
                 >
                   Log In
                 </Link>
                 <Link
-                  href="/register"
+                  href="/auth/register"
                   className="px-5 py-2.5 rounded-lg bg-brand-primary text-brand-dark font-bold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transform hover:-translate-y-0.5"
                 >
                   Get Started

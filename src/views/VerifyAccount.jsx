@@ -23,7 +23,7 @@ export default function VerifyPage() {
           verificationToken: token,
         });
         setStatus("Account successfully verified!");
-        setTimeout(() => router.push("/login"), 3000);
+        setTimeout(() => router.push("/auth/login"), 3000);
       } catch (error) {
         console.error(error);
         setStatus("Unable to verify your account.");

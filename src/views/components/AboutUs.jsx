@@ -53,7 +53,7 @@ function AboutUs() {
               </ul>
 
               <Link
-                href="/login"
+                href="/auth/login"
                 className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-brand-primary text-white font-semibold hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/25 transition-all duration-300"
               >
                 Connect Wallet

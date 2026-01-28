@@ -107,7 +107,7 @@ function About() {
             </div>
             <div className="pt-6">
               <Link
-                href="/register"
+                href="/auth/register"
                 className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all"
               >
                 Get Started

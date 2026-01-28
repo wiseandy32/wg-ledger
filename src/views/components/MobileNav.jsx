@@ -88,14 +88,14 @@ function MobileNav() {
               {!path.includes("admin") && !path.includes("user") ? (
                 <>
                   <Link
-                    href="/login"
+                    href="/auth/login"
                     onClick={() => setIsMenuVisible(false)}
                     className="w-full h-14 flex items-center justify-center rounded-xl border border-gray-200 dark:border-brand-dark-lighter text-brand-dark dark:text-white font-semibold hover:border-brand-primary hover:text-brand-primary transition-all uppercase tracking-wider text-sm"
                   >
                     Log In
                   </Link>
                   <Link
-                    href="/register"
+                    href="/auth/register"
                     onClick={() => setIsMenuVisible(false)}
                     className="w-full h-14 flex items-center justify-center rounded-xl bg-brand-primary text-white dark:text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all uppercase tracking-wider text-sm"
                   >
