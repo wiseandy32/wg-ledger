@@ -8,8 +8,6 @@ import { Await } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import DashboardSkeleton from "@/components/DashboardSkeleton";
 import { Navigate } from "react-router-dom";
-import PageLoader from "@/views/components/PageLoader";
-import { AnimatePresence } from "framer-motion";
 
 function DashboardLayout() {
   const data = useLoaderData();
@@ -24,22 +22,10 @@ function DashboardLayout() {
       setIsPageLoading(false);
       return;
     }
-
-    // Show loader on path change
-    setIsPageLoading(true);
-
-    const timer = setTimeout(() => {
-      setIsPageLoading(false);
-    }, 1500); // 1.5s to match PageLoader animation
-
-    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
     <SidebarProvider>
-      <AnimatePresence mode="wait">
-        {isPageLoading && <PageLoader key="page-loader" />}
-      </AnimatePresence>
       <AppSidebar />
       <Dashboard>
         <Suspense fallback={<DashboardSkeleton />}>

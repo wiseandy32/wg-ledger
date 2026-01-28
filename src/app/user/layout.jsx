@@ -6,8 +6,6 @@ import Dashboard from "@/views/Dashboard";
 import { AuthContext } from "@/context/auth/use-auth";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import PageLoader from "@/views/components/PageLoader";
-import { AnimatePresence } from "framer-motion";
 
 export default function UserLayout({ children }) {
   const { user, uid, isLoading } = useContext(AuthContext);
@@ -31,19 +29,13 @@ export default function UserLayout({ children }) {
   }, [uid, user, isLoading, router]);
 
   if (isLoading || checking) {
-    return (
-      <AnimatePresence>
-        <PageLoader key="loader" subtext="Authenticating..." />
-      </AnimatePresence>
-    );
+    return null; // or a minimal loading spinner if preferred, but null prevents flash
   }
 
   return (
     <SidebarProvider>
       <AppSidebar />
-      <Dashboard>
-        <AnimatePresence mode="wait">{children}</AnimatePresence>
-      </Dashboard>
+      <Dashboard>{children}</Dashboard>
     </SidebarProvider>
   );
 }
