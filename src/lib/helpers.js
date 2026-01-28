@@ -14,7 +14,6 @@ import {
   runTransaction,
 } from "firebase/firestore";
 import { toast } from "sonner";
-import emailjs from "@emailjs/browser";
 
 export const filterCountries = (
   countries = [],
@@ -395,20 +394,32 @@ export const handleRequestApproval = (
             },
           );
 
-          await emailjs.send(
-            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REQUEST,
-            {
-              subject: `${capitalizeWord(requestType)} Request Approval`,
-              customer_name: `${capitalizeWord(transaction.name)}`,
-              request_type: `${capitalizeWord(requestType)}`,
-              transaction_id: `${transaction.docRef.slice(0, 7)}`,
-              request_method: `${capitalizeWord(transaction.coin)}`,
-              request_amount: `$${formatNumberWithCommas(+transaction.amount)}`,
-              to_email: `${transaction.email}`,
-              company_name: "Quantum Assets Ledger",
-            },
-          );
+          const endpoint =
+            requestType === "deposit"
+              ? "/api/send-deposit-approval"
+              : "/api/send-withdrawal-approval";
+
+          try {
+            await fetch(endpoint, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: transaction.email,
+                name: transaction.name,
+                amount: transaction.amount,
+                coin: transaction.coin,
+                transactionReference: transaction.docRef,
+                date: transaction.date || getCurrentDate(),
+              }),
+            });
+          } catch (error) {
+            console.error(
+              `Error sending ${requestType} approval email:`,
+              error,
+            );
+          }
 
           toast.success(`${doc.name} ${requestType} request has been approved`);
         },
