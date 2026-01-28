@@ -1,7 +1,5 @@
 "use client";
-import { auth } from "../services/firebase";
 import { useState, useEffect } from "react";
-import { sendPasswordResetEmail } from "firebase/auth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,20 +17,26 @@ function ForgotPassword() {
     const formData = new FormData(e.target);
     const email = formData.get("email");
     try {
-      await sendPasswordResetEmail(auth, email, {
-        url: "https://www.worldglobal-ledger.com/login",
+      const response = await fetch("/api/send-password-reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
-      setIsResetLinkSent(true);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsResetLinkSent(true);
+      } else {
+        setError(
+          data.message || data.error || "An error occurred. Please try again.",
+        );
+      }
     } catch (error) {
       console.error(error);
-      const { code } = error;
-      if (code === "auth/user-not-found") {
-        setError("No account found with this email");
-      } else if (code === "auth/invalid-email") {
-        setError("Please enter a valid email address");
-      } else {
-        setError("An error occurred. Please try again.");
-      }
+      setError("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
