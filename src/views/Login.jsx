@@ -36,15 +36,6 @@ function Login() {
         return;
       }
 
-      if (!user.emailVerified) {
-        if (!userDoc?.isAccountVerified) {
-          signOut(auth);
-          setIsSubmitting(false);
-          setError("Email verification is required. Please verify your email.");
-          return;
-        }
-      }
-
       const from = searchParams.get("from") || "/user";
       router.push(from);
     } catch (error) {
@@ -112,7 +103,7 @@ function Login() {
               ))}
             </div>
             <Link
-              href={"forgot-password"}
+              href={"/auth/forgot-password"}
               className="self-end text-brand-primary hover:text-brand-primary/80 transition-colors text-sm font-medium"
             >
               Forgot password?
@@ -132,7 +123,7 @@ function Login() {
           <div className="flex py-6 gap-2 text-sm text-brand-text-muted justify-center border-t border-brand-dark-lighter/50 mt-12">
             <p>Don&apos;t have have an account? </p>
             <Link
-              href={"/register"}
+              href={"/auth/register"}
               className="text-brand-primary font-semibold hover:text-brand-primary/80 transition-colors"
             >
               Create one

@@ -12,8 +12,10 @@ import { Input } from "@/components/ui/input";
 import emailjs from "@emailjs/browser";
 import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 function Register() {
+  const router = useRouter();
   const [error, setError] = useState("");
   const [isVerificationLinkSent, setIsVerificationLinkSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,24 +53,9 @@ function Register() {
       };
 
       const ref = await addDataToDb("users", user);
-      const verificationLink = `${window.location.origin}/verify/${ref}?token=${verificationToken}`;
 
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REGISTER,
-        {
-          subject: "Email Verification",
-          User_name: `${user.name}`,
-          verification_link: `${verificationLink}`,
-          send_to: `${user.email}`,
-          company_name: "Quantum Assets Ledger",
-        },
-      );
-
-      // sign the user out, so they can login manually
-      await signOut(auth);
-
-      setIsVerificationLinkSent(true);
+      // Redirect to complete profile page instead of sending verification email and signing out
+      router.push("/auth/complete-profile");
     } catch (error) {
       console.error(error);
     } finally {
@@ -190,7 +177,7 @@ function Register() {
             <div className="flex py-6 gap-2 text-sm text-brand-text-muted justify-center border-t border-brand-dark-lighter/50 mt-8">
               <p>Already have an account? </p>
               <Link
-                href={"/login"}
+                href={"/auth/login"}
                 className="text-brand-primary font-semibold hover:text-brand-primary/80 transition-colors"
               >
                 Login
@@ -205,7 +192,7 @@ function Register() {
             "We have sent a verification link to your registered email address. Please check your inbox."
           }
           cta={"Login"}
-          to={"/login"}
+          to={"/auth/login"}
         />
       )}
     </section>
