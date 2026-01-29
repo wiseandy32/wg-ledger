@@ -31,6 +31,13 @@ function GateWay() {
   const { coinsData } = useCoinData();
   const qc = useQueryClient();
 
+  // Find gateway data by matching ID or type (case-insensitive)
+  const data = paymentGateways.find(
+    (gateway) =>
+      gateway.id.toLowerCase() === params?.gateway?.toLowerCase() ||
+      gateway.type.toLowerCase() === params?.gateway?.toLowerCase(),
+  );
+
   // Calculate transaction details
   const transactionDetails = useMemo(() => {
     const coin = (coinsData || []).find((c) => c.id === data.id);
@@ -52,12 +59,6 @@ function GateWay() {
       charge: "0.00",
     };
   }, [coinsData, data.id, data.type, amountDeposited]);
-  // Find gateway data by matching ID or type (case-insensitive)
-  const data = paymentGateways.find(
-    (gateway) =>
-      gateway.id.toLowerCase() === params?.gateway?.toLowerCase() ||
-      gateway.type.toLowerCase() === params?.gateway?.toLowerCase(),
-  );
 
   if (!data) return <div>Gateway not found</div>;
 
