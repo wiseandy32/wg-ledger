@@ -53,7 +53,7 @@ export const registrationFormField = [
   },
   {
     name: "country",
-    label: "Your nationality",
+    label: "Country",
     placeholder: "Select country",
     type: "country",
   },
