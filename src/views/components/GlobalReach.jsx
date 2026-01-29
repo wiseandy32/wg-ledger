@@ -19,14 +19,13 @@ function GlobalReach() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <Slide xAxis={-50} className="text-left">
-            <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
+            <span className="text-brand-icon font-bold tracking-wider uppercase text-sm">
               Global Infrastructure
             </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white leading-tight">
-              We provide our banking services{" "}
-              <span className="text-gradient">all over the world</span>
+              We provide our banking services all over the world
             </h2>
-            <p className="mt-6 text-gray-600 dark:text-brand-text-muted text-lg leading-relaxed">
+            <p className="mt-6 text-gray-800 dark:text-gray-300 text-lg leading-relaxed">
               World Global Ledger is a secure and robust e-Banking system,
               rapidly growing in popularity across the globe. We offer the best
               FDR, DPS, and Loan plans to our valued account holders.
@@ -34,7 +33,7 @@ function GlobalReach() {
             <div className="mt-8">
               <Link
                 href="/auth/register"
-                className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white dark:text-brand-dark bg-brand-primary rounded-full hover:bg-brand-primary/90 transition-all duration-300 shadow-lg shadow-brand-primary/20 hover:scale-105"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white dark:text-black bg-brand-icon rounded-full hover:bg-brand-icon/90 transition-all duration-300 shadow-lg shadow-brand-icon/20 hover:scale-105"
               >
                 Open an Account
               </Link>

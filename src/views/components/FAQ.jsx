@@ -44,14 +44,14 @@ function FAQItem({ question, answer, isOpen, onClick }) {
         <span
           className={`text-lg font-medium text-left transition-colors duration-300 ${
             isOpen
-              ? "text-brand-primary"
-              : "text-brand-dark dark:text-white group-hover:text-brand-primary"
+              ? "text-brand-icon"
+              : "text-brand-dark dark:text-white group-hover:text-brand-icon dark:group-hover:text-brand-icon"
           }`}
         >
           {question}
         </span>
         <span
-          className={`ml-6 flex-shrink-0 text-brand-primary transition-transform duration-300 ${
+          className={`ml-6 flex-shrink-0 text-brand-icon transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         >
@@ -63,7 +63,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
           isOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
         }`}
       >
-        <p className="px-4 text-gray-600 dark:text-brand-text-muted text-base leading-relaxed">
+        <p className="px-4 text-gray-800 dark:text-gray-300 text-base leading-relaxed">
           {answer}
         </p>
       </div>
@@ -78,13 +78,13 @@ function FAQ() {
     <section className="py-24 bg-zinc-50 dark:bg-brand-dark relative z-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Slide yAxis={50} className="text-center mb-16">
-          <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
+          <span className="text-brand-icon font-bold tracking-wider uppercase text-sm">
             Common Inquiries
           </span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
-            Frequently Asked <span className="text-gradient">Questions</span>
+            Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-gray-600 dark:text-brand-text-muted text-lg max-w-2xl mx-auto">
+          <p className="mt-4 text-gray-800 dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Everything you need to know about banking with the World Global
             Ledger.
           </p>

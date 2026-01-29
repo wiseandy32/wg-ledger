@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 
 import { useTheme } from "@/context/theme-provider";
 
-export default function ModeToggle() {
+export default function ModeToggle({ className }) {
   const { toggleTheme } = useTheme();
 
   return (
     <Button
       variant="ghost"
       size="icon"
+      className={className}
       onClick={(e) => toggleTheme(e.clientX, e.clientY)}
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

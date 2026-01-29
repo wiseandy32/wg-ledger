@@ -18,16 +18,16 @@ function AboutUs() {
             <div className="glass-card bg-white dark:bg-brand-dark-lighter/30 p-8 md:p-10 rounded-2xl relative overflow-hidden group hover:border-brand-primary/20 transition-all duration-500">
               <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-brand-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
-              <span className="inline-block text-brand-primary font-bold tracking-wider text-sm uppercase mb-3">
+              <span className="inline-block text-brand-icon font-bold tracking-wider uppercase text-sm mb-3">
                 Next-Gen Banking
               </span>
 
               <h2 className="text-3xl md:text-4xl font-bold text-brand-dark dark:text-white mb-6 leading-tight">
                 Traditional Banking Security, <br />
-                <span className="text-gradient">Blockchain Freedom</span>
+                Blockchain Freedom
               </h2>
 
-              <p className="text-gray-600 dark:text-brand-text-muted mb-8 leading-relaxed text-lg">
+              <p className="text-gray-800 dark:text-gray-300 mb-8 leading-relaxed text-lg">
                 We are not just an exchange; we are a full-service digital
                 custodian. Manage your crypto portfolio with the same ease and
                 security as a traditional bank account, but with instant global
@@ -54,7 +54,7 @@ function AboutUs() {
 
               <Link
                 href="/auth/login"
-                className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-brand-primary text-white font-semibold hover:bg-brand-primary/90 hover:shadow-lg hover:shadow-brand-primary/25 transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-brand-icon dark:bg-brand-icon text-black dark:text-black font-semibold hover:bg-brand-icon/90 dark:hover:bg-brand-icon/90 hover:shadow-lg hover:shadow-brand-icon/25 transition-all duration-300"
               >
                 Connect Wallet
               </Link>

@@ -22,8 +22,8 @@ function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           scrolled
-            ? "bg-white/80 dark:bg-brand-dark/80 backdrop-blur-md shadow-lg shadow-brand-primary/5 py-4"
-            : "bg-transparent py-6"
+            ? "bg-brand-primary/95 dark:bg-background/95 backdrop-blur-md shadow-lg shadow-black/20 py-4"
+            : "bg-brand-primary/95 dark:bg-transparent py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -33,7 +33,9 @@ function Header() {
               width={160}
               height={40}
               alt="World Global Ledger"
-              className="dark:brightness-0 dark:invert group-hover:opacity-80 transition-opacity"
+              className={`${
+                scrolled ? "brightness-0 invert" : "brightness-0 invert"
+              } group-hover:opacity-80 transition-all duration-300`}
             />
           </Link>
 
@@ -54,8 +56,8 @@ function Header() {
                       href={link.path}
                       className={`text-sm font-medium transition-colors uppercase tracking-wider ${
                         isActive
-                          ? "text-brand-primary font-bold"
-                          : "text-gray-600 dark:text-gray-200 hover:text-brand-primary"
+                          ? "text-white font-bold"
+                          : "text-white/80 hover:text-white"
                       }`}
                     >
                       {link.title}
@@ -67,16 +69,16 @@ function Header() {
 
             {!path.includes("admin") && !path.includes("user") && (
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
-                <ModeToggle />
+                <ModeToggle className="text-white hover:bg-white/10" />
                 <Link
                   href="/auth/login"
-                  className="text-brand-dark dark:text-white hover:text-brand-primary font-semibold text-sm transition-colors"
+                  className="text-white hover:text-white/80 font-semibold text-sm transition-colors"
                 >
                   Log In
                 </Link>
                 <Link
                   href="/auth/register"
-                  className="px-5 py-2.5 rounded-lg bg-brand-primary text-brand-dark font-bold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transform hover:-translate-y-0.5"
+                  className="px-5 py-2.5 rounded-lg bg-white dark:bg-brand-icon text-brand-primary dark:text-black font-bold text-sm hover:bg-white/90 dark:hover:bg-brand-icon/90 transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transform hover:-translate-y-0.5"
                 >
                   Get Started
                 </Link>

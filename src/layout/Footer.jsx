@@ -21,7 +21,7 @@ function Footer() {
                 width={180}
                 height={45}
                 alt="World Global Ledger"
-                className="dark:brightness-0 dark:invert mb-4"
+                className="brightness-0 dark:invert mb-4"
               />
               <p className="text-gray-600 dark:text-brand-text-muted leading-relaxed text-sm">
                 Join the financial revolution. We are redefining banking by
@@ -34,7 +34,7 @@ function Footer() {
                     <a
                       key={idx}
                       href="#"
-                      className="w-10 h-10 rounded-full bg-white dark:bg-brand-dark-lighter/50 flex items-center justify-center text-gray-600 dark:text-brand-text-muted hover:bg-brand-primary hover:text-brand-dark transition-all duration-300 transform hover:-translate-y-1"
+                      className="w-10 h-10 rounded-full bg-white dark:bg-brand-dark-lighter/50 flex items-center justify-center text-gray-600 dark:text-brand-text-muted hover:bg-brand-icon hover:text-black transition-all duration-300 transform hover:-translate-y-1"
                     >
                       <Icon size={18} />
                     </a>
@@ -60,7 +60,7 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       href={link.path}
-                      className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                      className="text-brand-text-muted hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
                     </Link>
@@ -86,7 +86,7 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       href={link.path}
-                      className="text-brand-text-muted hover:text-brand-primary transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                      className="text-brand-text-muted hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
                     </Link>
@@ -110,11 +110,11 @@ function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full bg-white dark:bg-brand-dark-lighter/50 border border-gray-300 dark:border-brand-dark-lighter text-brand-dark dark:text-white pl-4 pr-12 py-3 rounded-xl focus:outline-none focus:border-brand-primary placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/50 transition-colors dark-input-autofill"
+                  className="w-full bg-white dark:bg-brand-dark-lighter/50 border border-gray-300 dark:border-brand-dark-lighter text-brand-dark dark:text-white pl-4 pr-12 py-3 rounded-xl focus:outline-none focus:border-brand-icon placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/50 transition-colors dark-input-autofill"
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-2 p-2 bg-brand-primary rounded-lg text-brand-dark hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20"
+                  className="absolute right-2 top-2 p-2 bg-brand-icon rounded-lg text-white dark:text-black hover:bg-brand-icon/90 transition-colors shadow-lg shadow-brand-icon/20"
                 >
                   <FaPaperPlane size={14} />
                 </button>

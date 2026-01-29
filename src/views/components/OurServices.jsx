@@ -7,16 +7,16 @@ function OurServices() {
   return (
     <section className="relative py-24 bg-white dark:bg-brand-dark overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[100px] rounded-full -translate-y-1/2 pointer-events-none"></div>
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-icon/5 blur-[100px] rounded-full -translate-y-1/2 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <Slide yAxis={50} className="text-center mb-16">
-          <span className="text-brand-primary font-bold tracking-wider uppercase text-sm">
+          <span className="text-brand-icon font-bold tracking-wider uppercase text-sm">
             Comprehensive Digital Finance
           </span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
-            A Full-Service <span className="text-gradient">Crypto Bank</span>
+            A Full-Service Crypto Bank
           </h2>
           <p className="mt-4 text-brand-text-muted max-w-2xl mx-auto text-lg">
             From savings to settlements, we provide every financial tool you
@@ -48,8 +48,8 @@ function OurServices() {
 
           {/* Service Card 1: Interest/Yield */}
           <Slide xAxis={50} className="md:col-span-1 h-full">
-            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-icon/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-brand-icon/10 flex items-center justify-center text-brand-icon mb-6">
                 <FaHandHoldingDollar size={24} />
               </div>
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
@@ -66,15 +66,13 @@ function OurServices() {
                     <div key={i}>
                       <div className="flex justify-between text-xs text-gray-700 dark:text-brand-text mb-1">
                         <span>{skill}</span>
-                        <span className="text-brand-primary">
-                          Best in Class
-                        </span>
+                        <span className="text-brand-icon">Best in Class</span>
                       </div>
                       <div className="h-1.5 w-full bg-brand-dark-lighter rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-brand-primary to-brand-accent w-[98%]"></div>
+                        <div className="h-full bg-brand-icon w-[98%]"></div>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -82,8 +80,8 @@ function OurServices() {
 
           {/* Service Card 2: Private Banking */}
           <Slide yAxis={50} delay={0.2} className="md:col-span-1">
-            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full hover:border-brand-icon/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-brand-icon/10 dark:bg-brand-icon/10 flex items-center justify-center text-brand-icon dark:text-brand-icon mb-6">
                 <MdOutlineSupportAgent size={24} />
               </div>
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
@@ -103,7 +101,7 @@ function OurServices() {
                     key={i}
                     className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-icon dark:bg-brand-icon"></div>
                     {item}
                   </li>
                 ))}
@@ -113,8 +111,8 @@ function OurServices() {
 
           {/* Service Card 3: Fund Recovery */}
           <Slide yAxis={50} delay={0.3} className="md:col-span-1">
-            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full flex flex-col hover:border-brand-primary/30 transition-all duration-300">
-              <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-6">
+            <div className="glass-card bg-zinc-50 dark:bg-brand-dark-lighter/30 p-8 rounded-2xl h-full flex flex-col hover:border-brand-icon/30 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full bg-brand-icon/10 dark:bg-brand-icon/10 flex items-center justify-center text-brand-icon dark:text-brand-icon mb-6">
                 <IoIosThunderstorm size={24} />
               </div>
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
@@ -134,7 +132,7 @@ function OurServices() {
                     key={i}
                     className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-icon dark:bg-brand-icon"></div>
                     {item}
                   </li>
                 ))}

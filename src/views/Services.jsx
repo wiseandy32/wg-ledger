@@ -49,35 +49,31 @@ const services = [
 
 function Services() {
   return (
-    <div className="bg-background min-h-screen relative overflow-hidden pt-20 transition-colors duration-300">
-      {/* Background Ambience */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <div className="text-center mb-24">
+    <div className="bg-zinc-50 dark:bg-brand-dark min-h-screen relative overflow-hidden">
+      {/* Hero Section */}
+      <div className="pt-32 pb-20 relative bg-brand-icon dark:bg-brand-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-brand-primary font-bold tracking-wider uppercase text-sm mb-4 block">
+            <span className="text-white/60 font-bold tracking-wider uppercase text-sm mb-4 block">
               World Global Ledger Ecosystem
             </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-brand-dark dark:text-white tracking-tight mb-6">
-              A Full-Service{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">
-                Crypto Bank
-              </span>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
+              A Full-Service Crypto Bank
             </h1>
-            <p className="text-xl text-gray-600 dark:text-brand-text-muted max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
               From automated yield generation to institutional custody, we
               provide every financial tool you need to secure and grow your
               wealth.
             </p>
           </motion.div>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
         {/* Video Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,22 +110,22 @@ function Services() {
               } gap-12 items-center`}
             >
               <div className="w-full lg:w-1/2">
-                <div className="w-16 h-16 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-brand-primary/10 dark:bg-brand-icon/10 flex items-center justify-center text-brand-icon mb-6">
                   {service.icon}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-dark dark:text-white mb-6">
                   {service.title}
                 </h2>
-                <p className="text-lg text-gray-600 dark:text-brand-text-muted leading-relaxed mb-8">
+                <p className="text-lg text-gray-800 dark:text-gray-300 leading-relaxed mb-8">
                   {service.description}
                 </p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {service.features.map((feature, fIdx) => (
                     <li
                       key={fIdx}
-                      className="flex items-center gap-3 text-gray-600 dark:text-brand-text-muted"
+                      className="flex items-center gap-3 text-gray-800 dark:text-gray-300"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-brand-primary"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-brand-primary dark:bg-brand-icon"></div>
                       {feature}
                     </li>
                   ))}
@@ -140,7 +136,7 @@ function Services() {
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   {/* Decorative Abstract Graphic */}
                   <div className="relative z-10 text-center">
-                    <div className="text-9xl opacity-10 text-brand-primary group-hover:scale-110 transition-transform duration-700">
+                    <div className="text-9xl opacity-10 text-brand-primary dark:text-brand-icon group-hover:scale-110 transition-transform duration-700">
                       {service.icon}
                     </div>
                   </div>
@@ -150,18 +146,19 @@ function Services() {
           ))}
         </div>
 
-        <div className="mt-32 text-center">
-          <div className="bg-brand-primary/10 border border-brand-primary/20 rounded-3xl p-12 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-dark dark:text-white mb-4">
+        <div className="w-screen relative left-1/2 -translate-x-1/2 bg-brand-icon dark:bg-background py-24 mt-32 mb-[-64px] pb-32">
+          <div className="absolute inset-0 bg-brand-accent/5 mix-blend-overlay pointer-events-none dark:hidden"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Ready to upgrade your financial infrastructure?
             </h2>
-            <p className="text-gray-600 dark:text-brand-text-muted mb-8">
+            <p className="text-white/80 mb-8 text-lg">
               Join thousands of institutions and individuals banking on the
               future.
             </p>
             <Link
               href="/auth/register"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all text-lg"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white dark:bg-brand-icon text-brand-icon dark:text-black font-bold hover:bg-white/90 dark:hover:bg-brand-icon/90 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all text-lg"
             >
               Open Your Account
             </Link>

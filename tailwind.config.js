@@ -36,6 +36,8 @@ export default {
           text: "hsl(var(--brand-text) / <alpha-value>)",
           muted: "hsl(var(--brand-text-muted) / <alpha-value>)",
           accent: "hsl(var(--brand-accent) / <alpha-value>)",
+          icon: "hsl(var(--brand-icon) / <alpha-value>)",
+          "icon-cyan": "hsl(var(--brand-icon-cyan) / <alpha-value>)",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

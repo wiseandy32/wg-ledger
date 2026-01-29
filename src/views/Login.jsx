@@ -112,7 +112,7 @@ function Login() {
               variant="gooeyLeft"
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-12 bg-brand-primary text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base mt-2"
+              className="w-full h-12 bg-brand-primary text-white dark:text-brand-dark font-bold hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all rounded-xl text-base mt-2"
             >
               {!isSubmitting ? null : (
                 <Loader2 className="animate-spin mr-2 h-5 w-5" />

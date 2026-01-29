@@ -11,12 +11,14 @@
   /* color: rgba(255, 255, 255, 0.87); */
 
   /* Brand Variables - HSL Channels for Tailwind Opacity Support */
-  --brand-dark: 240 10% 4%; /* #09090B Zinc-950 (Rich Black) */
-  --brand-dark-lighter: 240 6% 10%; /* #18181B Zinc-900 (Dark Charcoal) */
-  --brand-primary: 160 84% 39%; /* #10B981 Emerald Green */
+  --brand-primary: 233 80% 14%; /* Deep Blue */
+  --brand-icon: 233 80% 14%; /* Deep Blue for light mode */
+  --brand-icon-cyan: 197 97% 66%; /* Bright Cyan utility */
+  --brand-accent: 199 89% 60%; /* #38BDF8 Sky Blue */
   --brand-text: 0 0% 98%; /* #FAFAFA Zinc-50 */
   --brand-text-muted: 240 5% 65%; /* #A1A1AA Zinc-400 */
-  --brand-accent: 199 89% 60%; /* #38BDF8 Sky Blue */
+  --brand-dark: 240 10% 4%; /* #09090B Zinc-950 (Rich Black) */
+  --brand-dark-lighter: 240 6% 10%; /* #18181B Zinc-900 (Dark Charcoal) */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -160,7 +162,7 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(2, 16, 53, 0.3);
+  background-color: rgba(9, 9, 11, 0.5); /* Zinc-950 equivalent */
   z-index: 1;
   cursor: pointer;
 }
@@ -225,6 +227,10 @@ footer {
 
 /* Modern Redesign Utilities */
 .text-gradient {
+  color: hsl(var(--primary));
+}
+
+.dark .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-accent to-brand-primary bg-[length:200%_auto] animate-shine;
 }
 
@@ -266,8 +272,8 @@ footer {
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 160 84% 39%; /* Use Brand Primary directly */
-    --primary-foreground: 210 40% 98%;
+    --primary: 233 80% 14%; /* Deep Blue */
+    --primary-foreground: 0 0% 100%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 90%; /* Slightly darker for better contrast */
@@ -330,46 +336,39 @@ footer {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   } */
-  .dark {
-    --background: 220 12% 8%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 12% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 220 7% 15%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 50% 50%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 240 4.9% 83.9%;
+}
 
-    /* project specific colors for dashboard text */
-    --dashboard-card-bg: 220 12% 15%;
-    --dashboard-card-bg-hover: 220 12% 20%;
-    --dashboard-card-heading-text: 0 0% 95%;
-    --dashboard-card-sub-text: 0 0% 70%;
-  }
+.dark {
+  --background: 220 12% 8%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 197 97% 66%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 220 12% 15%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 85.7% 97.3%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+
+  /* Brand Overrides for Dark Mode */
+  --brand-primary: 197 97% 66%; /* Cyan in dark mode */
+  --brand-icon: 197 97% 66%; /* Cyan in dark mode */
+  --brand-accent: 197 97% 66%;
+
+  /* Dashboard specific */
+  --dashboard-card-bg: 220 12% 15%;
+  --dashboard-card-bg-hover: 220 12% 20%;
+  --dashboard-card-heading-text: 0 0% 95%;
+  --dashboard-card-sub-text: 0 0% 70%;
 }
 
 @layer base {
@@ -395,7 +394,7 @@ footer {
   height: 10px;
   border-radius: 16px;
   transition: 0.1s linear;
-  background-color: rgba(103, 148, 241, 0.3);
+  background-color: hsl(var(--brand-icon) / 0.2);
 }
 
 .skill-box .skillbar:not(:last-child) {
