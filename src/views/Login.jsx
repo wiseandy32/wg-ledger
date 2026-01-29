@@ -7,13 +7,14 @@ import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { getSingleDocument } from "@/lib/helpers";
 
 function Login() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -91,14 +92,35 @@ function Login() {
                   >
                     {field.label}
                   </label>
-                  <Input
-                    type={field.type}
-                    placeholder={field?.placeholder}
-                    required
-                    id={field.name}
-                    name={field.name}
-                    className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
-                  />
+                  <div className="relative">
+                    <Input
+                      type={
+                        field.name === "password"
+                          ? showPassword
+                            ? "text"
+                            : "password"
+                          : field.type
+                      }
+                      placeholder={field?.placeholder}
+                      required
+                      id={field.name}
+                      name={field.name}
+                      className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all pr-11"
+                    />
+                    {field.name === "password" && (
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:text-brand-text-muted/50 dark:hover:text-brand-text-muted transition-colors"
+                      >
+                        {showPassword ? (
+                          <EyeOff size={20} />
+                        ) : (
+                          <Eye size={20} />
+                        )}
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
