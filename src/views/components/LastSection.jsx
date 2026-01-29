@@ -37,7 +37,7 @@ function LastSection() {
           <div className="flex-1 flex justify-center md:justify-end relative">
             <Slide xAxis={50} delay={0.2} className="relative z-10">
               <img
-                src="/assets/hand-holding-credit-card.webp"
+                src="/assets/qfs-card.png"
                 alt="Global Banking Card"
                 className="w-full max-w-sm md:max-w-md object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
               />
