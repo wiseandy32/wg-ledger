@@ -37,20 +37,6 @@ const shibaQRCode = "/assets/shiba-qr.jpeg";
 
 export const registrationFormField = [
   {
-    name: "firstName",
-    label: "First name",
-    placeholder: "Enter your first name",
-    type: "text",
-    min: 2,
-  },
-  {
-    name: "lastName",
-    label: "Last name",
-    placeholder: "Enter your last name",
-    type: "text",
-    min: 2,
-  },
-  {
     name: "email",
     label: "Email address",
     placeholder: "sample@gmail.com",

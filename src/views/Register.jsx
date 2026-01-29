@@ -2,14 +2,8 @@
 import Link from "next/link";
 import { registrationFormField } from "../data";
 import { useState, useEffect } from "react";
-import {
-  addDataToDb,
-  createUser,
-  setDataToDb,
-  updateUserProfile,
-} from "../utils/auth";
+import { createUser, setDataToDb } from "../utils/auth";
 import { auth } from "../services/firebase";
-import MessageCard from "./components/MessageCard";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -36,16 +30,12 @@ function Register() {
         formData.get("password"),
         setError,
       );
-      // update user displayName
-      await updateUserProfile({
-        displayName: `${formData.get("firstName")} ${formData.get("lastName")}`,
-      });
 
       const uid = auth.currentUser.uid;
       const verificationToken = uuidv4();
 
       const user = {
-        name: `${formData.get("firstName")} ${formData.get("lastName")}`,
+        name: formData.get("username"),
         username: formData.get("username"),
         email: formData.get("email"),
         uid,
