@@ -3,7 +3,6 @@ import { Resend } from "resend";
 import { render, pretty } from "@react-email/render";
 import { initAdmin } from "@/lib/firebase-admin";
 import ForgotPasswordEmail from "emails/forgot-password-email";
-console.log("Resend key:", process.env.RESEND_API_KEY ? "Loaded" : "Missing");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -24,8 +23,6 @@ export async function POST(req: NextRequest) {
       email,
       actionCodeSettings,
     );
-
-    console.error("Generated reset link:", resetLink);
 
     const html = await pretty(await render(ForgotPasswordEmail({ resetLink })));
 

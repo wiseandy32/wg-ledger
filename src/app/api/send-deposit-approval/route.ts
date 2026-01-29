@@ -3,8 +3,6 @@ import { Resend } from "resend";
 import { render, pretty } from "@react-email/render";
 import DepositApprovalEmail from "emails/deposit-approval-email";
 
-console.log("Resend key:", process.env.RESEND_API_KEY ? "Loaded" : "Missing");
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
