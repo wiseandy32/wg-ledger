@@ -18,7 +18,7 @@ function OurServices() {
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand-dark dark:text-white">
             A Full-Service Crypto Bank
           </h2>
-          <p className="mt-4 text-brand-text-muted max-w-2xl mx-auto text-lg">
+          <p className="mt-4 text-brand-text-muted dark:text-gray-200 max-w-2xl mx-auto text-lg">
             From savings to settlements, we provide every financial tool you
             need to maximize your digital capital.
           </p>
@@ -55,7 +55,7 @@ function OurServices() {
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 High-Yield Vaults
               </h3>
-              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-4">
+              <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-4">
                 Earn interest on your crypto assets just like a savings account,
                 but with significantly higher APY rates.
               </p>
@@ -87,7 +87,7 @@ function OurServices() {
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 Private Banking
               </h3>
-              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-6">
                 Dedicated account managers and priority support for
                 high-net-worth individuals and institutional clients.
               </p>
@@ -99,7 +99,7 @@ function OurServices() {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
+                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-200"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-icon dark:bg-brand-icon"></div>
                     {item}
@@ -118,7 +118,7 @@ function OurServices() {
               <h3 className="text-xl font-bold text-brand-dark dark:text-white mb-3">
                 Fund Recovery
               </h3>
-              <p className="text-gray-600 dark:text-brand-text-muted text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 dark:text-gray-200 text-sm leading-relaxed mb-6">
                 Lost funds? Our unique blockchain rollback functionality
                 (client-exclusive) offers a safety net others cannot provide.
               </p>
@@ -130,7 +130,7 @@ function OurServices() {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-brand-text-muted"
+                    className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-200"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-brand-icon dark:bg-brand-icon"></div>
                     {item}

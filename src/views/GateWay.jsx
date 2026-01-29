@@ -175,7 +175,7 @@ function GateWay() {
         <h1 className="text-3xl font-bold premium-gradient-text capitalize">
           {data.type} {data?.extra} Gateway
         </h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 text-muted-foreground dark:text-gray-200">
           Scan the QR code or copy the {data.type} address to make your deposit
         </p>
       </div>
@@ -202,7 +202,7 @@ function GateWay() {
         <div className="grid w-full items-center gap-3 relative">
           <Label
             htmlFor="walletAddress"
-            className="text-sm font-medium text-muted-foreground uppercase tracking-tight"
+            className="text-sm font-medium text-muted-foreground dark:text-gray-200 uppercase tracking-tight"
           >
             {data.type} Address
           </Label>
@@ -224,7 +224,7 @@ function GateWay() {
             </Button>
           </div>
           {data?.extra && (
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground dark:text-gray-200">
               Network type:{" "}
               <span className="text-foreground font-semibold">
                 {data?.extra}
@@ -236,7 +236,7 @@ function GateWay() {
         <div className="grid w-full items-center gap-3 pt-4 border-t border-border/50">
           <Label
             htmlFor="depositAmount"
-            className="text-sm font-medium text-muted-foreground uppercase tracking-tight"
+            className="text-sm font-medium text-muted-foreground dark:text-gray-200 uppercase tracking-tight"
           >
             Deposit Amount ($)
           </Label>
@@ -259,11 +259,15 @@ function GateWay() {
           </div>
           <div className="glass-card bg-muted/30 p-4 rounded-xl space-y-3 text-sm">
             <div className="flex justify-between items-center">
-              <span className="text-muted-foreground">Charge</span>
+              <span className="text-muted-foreground dark:text-gray-200">
+                Charge
+              </span>
               <span className="font-medium">${transactionDetails.charge}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-muted-foreground">Exchange Rate</span>
+              <span className="text-muted-foreground dark:text-gray-200">
+                Exchange Rate
+              </span>
               <span className="font-medium">
                 1 {data.type.toUpperCase()} = $
                 {transactionDetails.displayPrice.toFixed(
@@ -272,7 +276,7 @@ function GateWay() {
               </span>
             </div>
             <div className="flex justify-between items-center border-t border-border/30 pt-2 mt-2">
-              <span className="text-muted-foreground font-medium">
+              <span className="text-muted-foreground dark:text-gray-200 font-medium">
                 You will receive
               </span>
               <span className="font-bold text-foreground text-base">
@@ -315,7 +319,7 @@ function GateWay() {
             <h3 className="text-2xl font-bold premium-gradient-text">
               Confirm Transaction
             </h3>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground dark:text-gray-200 text-sm">
               Please provide the transaction hash or ID of your deposit for
               verification.
             </p>
@@ -324,7 +328,7 @@ function GateWay() {
           <div className="space-y-3">
             <Label
               htmlFor="txHash"
-              className="text-xs font-bold uppercase tracking-widest opacity-60"
+              className="text-xs font-bold uppercase tracking-widest dark:text-gray-200"
             >
               Transaction Hash
             </Label>

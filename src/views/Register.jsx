@@ -115,7 +115,7 @@ function Register() {
                 >
                   <label
                     htmlFor={field.name}
-                    className="capitalize text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                    className="capitalize text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                   >
                     {field.label}
                   </label>

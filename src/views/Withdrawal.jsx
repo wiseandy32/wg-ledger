@@ -109,7 +109,7 @@ function Withdrawal() {
         <h1 className="text-3xl font-bold premium-gradient-text">
           Withdrawal Request
         </h1>
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 text-muted-foreground dark:text-gray-200">
           Please fill the form below to request a withdrawal
         </p>
       </div>
@@ -130,7 +130,7 @@ function Withdrawal() {
         <div className="grid w-full items-center gap-3">
           <Label
             htmlFor="amount"
-            className="text-sm font-medium text-muted-foreground uppercase tracking-tight"
+            className="text-sm font-medium text-muted-foreground dark:text-gray-200 uppercase tracking-tight"
           >
             Amount ($)
           </Label>
@@ -143,7 +143,7 @@ function Withdrawal() {
             className="py-6 glass-input"
             required
           />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground dark:text-gray-200">
             Minimum withdrawal amount: $10
           </p>
         </div>
@@ -151,7 +151,7 @@ function Withdrawal() {
         <div className="grid w-full items-center gap-3">
           <Label
             htmlFor="WithdrawalMethod"
-            className="text-sm font-medium text-muted-foreground uppercase tracking-tight"
+            className="text-sm font-medium text-muted-foreground dark:text-gray-200 uppercase tracking-tight"
           >
             Withdrawal Method
           </Label>
@@ -175,7 +175,7 @@ function Withdrawal() {
         <div className="grid w-full items-center gap-3">
           <Label
             htmlFor="walletAddress"
-            className="text-sm font-medium text-muted-foreground uppercase tracking-tight"
+            className="text-sm font-medium text-muted-foreground dark:text-gray-200 uppercase tracking-tight"
           >
             Wallet Address
           </Label>
@@ -187,7 +187,7 @@ function Withdrawal() {
             className="py-6 glass-input font-mono text-sm"
             required
           />
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground dark:text-gray-200">
             Double-check your wallet address to avoid loss of funds
           </p>
         </div>

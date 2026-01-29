@@ -23,7 +23,7 @@ function Footer() {
                 alt="World Global Ledger"
                 className="brightness-0 dark:invert mb-4"
               />
-              <p className="text-gray-600 dark:text-brand-text-muted leading-relaxed text-sm">
+              <p className="text-gray-600 dark:text-gray-200 leading-relaxed text-sm">
                 Join the financial revolution. We are redefining banking by
                 eliminating intermediaries and giving you complete control over
                 your assets.
@@ -34,7 +34,7 @@ function Footer() {
                     <a
                       key={idx}
                       href="#"
-                      className="w-10 h-10 rounded-full bg-white dark:bg-brand-dark-lighter/50 flex items-center justify-center text-gray-600 dark:text-brand-text-muted hover:bg-brand-icon hover:text-black transition-all duration-300 transform hover:-translate-y-1"
+                      className="w-10 h-10 rounded-full bg-white dark:bg-brand-dark-lighter/50 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-brand-icon hover:text-black transition-all duration-300 transform hover:-translate-y-1"
                     >
                       <Icon size={18} />
                     </a>
@@ -60,7 +60,7 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       href={link.path}
-                      className="text-brand-text-muted hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                      className="text-brand-text-muted dark:text-gray-200 hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
                     </Link>
@@ -86,7 +86,7 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       href={link.path}
-                      className="text-brand-text-muted hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
+                      className="text-brand-text-muted dark:text-gray-200 hover:text-brand-icon transition-colors text-sm hover:translate-x-1 inline-block transform duration-200"
                     >
                       {link.title}
                     </Link>
@@ -102,7 +102,7 @@ function Footer() {
               <h3 className="text-brand-dark dark:text-white font-bold text-lg mb-6 tracking-wide">
                 Newsletter
               </h3>
-              <p className="text-gray-600 dark:text-brand-text-muted text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-200 text-sm mb-4">
                 Subscribe to get special offers, free giveaways, and
                 once-in-a-lifetime deals.
               </p>
@@ -125,26 +125,26 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-brand-dark-lighter/30 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 dark:text-brand-text-muted/60 text-sm text-center md:text-left">
+          <p className="text-gray-500 dark:text-gray-300 text-sm text-center md:text-left">
             &copy; {new Date().getFullYear()} World Global Ledger. All rights
             reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/"
-              className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Privacy
             </Link>
             <Link
               href="/"
-              className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Terms
             </Link>
             <Link
               href="/"
-              className="text-gray-500 dark:text-brand-text-muted/60 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Sitemap
             </Link>

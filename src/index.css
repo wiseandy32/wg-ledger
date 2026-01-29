@@ -369,6 +369,16 @@ footer {
   --dashboard-card-bg-hover: 220 12% 20%;
   --dashboard-card-heading-text: 0 0% 95%;
   --dashboard-card-sub-text: 0 0% 70%;
+
+  /* Sidebar Overrides */
+  --sidebar-background: 220 12% 8%;
+  --sidebar-foreground: 240 5% 96%;
+  --sidebar-primary: 197 97% 66%;
+  --sidebar-primary-foreground: 0 0% 0%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 5% 96%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
 }
 
 @layer base {

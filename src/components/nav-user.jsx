@@ -49,7 +49,9 @@ export function NavUser() {
                 <span className="truncate font-semibold capitalize">
                   {user?.name}
                 </span>
-                <span className="truncate text-xs">{user?.email}</span>
+                <span className="truncate text-xs dark:text-gray-400">
+                  {user?.email}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -72,7 +74,9 @@ export function NavUser() {
                   <span className="truncate font-semibold capitalize">
                     {user?.name}
                   </span>
-                  <span className="truncate text-xs">{user?.email}</span>
+                  <span className="truncate text-xs dark:text-gray-400">
+                    {user?.email}
+                  </span>
                 </div>
               </div>
             </DropdownMenuLabel>

@@ -87,7 +87,7 @@ function CompleteProfile() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="firstName"
-                  className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                 >
                   First Name <span className="text-red-500">*</span>
                 </label>
@@ -103,7 +103,7 @@ function CompleteProfile() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="lastName"
-                  className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                 >
                   Last Name <span className="text-red-500">*</span>
                 </label>
@@ -121,7 +121,7 @@ function CompleteProfile() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="image"
-                className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
               >
                 Image
               </label>
@@ -140,7 +140,7 @@ function CompleteProfile() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="address"
-                className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
               >
                 Address
               </label>
@@ -157,7 +157,7 @@ function CompleteProfile() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="state"
-                  className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                 >
                   Region
                 </label>
@@ -172,7 +172,7 @@ function CompleteProfile() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="zipCode"
-                  className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                 >
                   Zip Code
                 </label>
@@ -189,7 +189,7 @@ function CompleteProfile() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="city"
-                className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
               >
                 City
               </label>

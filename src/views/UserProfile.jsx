@@ -313,7 +313,10 @@ function UserProfile() {
             <div className="px-5 pb-5 pt-5 grid md:grid-cols-2 gap-4 items-center">
               {/* <div className="flex flex-col gap-1 md:w-[45%]"> */}
               <div className="flex flex-col gap-1 md:col-start-1 md:col-end-2">
-                <label htmlFor="newPassword" className="capitalize">
+                <label
+                  htmlFor="newPassword"
+                  className="capitalize text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
+                >
                   New Password
                 </label>
                 <Input
@@ -334,7 +337,10 @@ function UserProfile() {
                 />
               </div>
               <div className="flex flex-col gap-1 md:col-start-2 md:col-end-3">
-                <label htmlFor="confirmNewPassword" className="capitalize">
+                <label
+                  htmlFor="confirmNewPassword"
+                  className="capitalize text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
+                >
                   Confirm new Password
                 </label>
                 <Input

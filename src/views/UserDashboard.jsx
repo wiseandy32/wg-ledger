@@ -137,7 +137,7 @@ function UserDashboard() {
         <h1 className="text-3xl md:text-5xl font-bold capitalize premium-gradient-text w-fit">
           Welcome, {user?.name}
         </h1>
-        <p className="text-muted-foreground text-sm md:text-base font-light tracking-wide">
+        <p className="text-muted-foreground dark:text-gray-200 text-sm md:text-base font-light tracking-wide">
           Here&apos;s an overview of your account and the latest cryptocurrency
           prices.
         </p>
@@ -149,7 +149,7 @@ function UserDashboard() {
             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
               <Wallet className="w-8 h-8" />
             </div>
-            <p className="text-sm text-muted-foreground font-medium z-10">
+            <p className="text-sm text-muted-foreground dark:text-gray-200 font-medium z-10">
               Pending Deposits
             </p>
             <p className="text-2xl font-bold text-foreground z-10">
@@ -160,7 +160,7 @@ function UserDashboard() {
             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
               <Banknote className="w-8 h-8" />
             </div>
-            <p className="text-sm text-muted-foreground font-medium z-10">
+            <p className="text-sm text-muted-foreground dark:text-gray-200 font-medium z-10">
               Pending Withdrawals
             </p>
             <p className="text-2xl font-bold text-foreground z-10">
@@ -171,7 +171,7 @@ function UserDashboard() {
             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
               <Landmark className="w-8 h-8 text-brand-primary" />
             </div>
-            <p className="text-sm text-muted-foreground font-medium z-10">
+            <p className="text-sm text-muted-foreground dark:text-gray-200 font-medium z-10">
               Total Deposits
             </p>
             <p className="text-2xl font-bold text-foreground z-10">
@@ -182,7 +182,7 @@ function UserDashboard() {
             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
               <CreditCard className="w-8 h-8 text-orange-500" />
             </div>
-            <p className="text-sm text-muted-foreground font-medium z-10">
+            <p className="text-sm text-muted-foreground dark:text-gray-200 font-medium z-10">
               Total Withdrawals
             </p>
             <p className="text-2xl font-bold text-foreground z-10">
@@ -257,7 +257,7 @@ function UserDashboard() {
             </div>
 
             <div className="relative z-10">
-              <p className="text-muted-foreground text-sm font-medium tracking-wide mb-1">
+              <p className="text-muted-foreground dark:text-gray-200 text-sm font-medium tracking-wide mb-1">
                 {wallet?.name}{" "}
                 {!wallet?.name?.includes("Withdrawal") ? "Balance" : ""}
               </p>
@@ -277,7 +277,7 @@ function UserDashboard() {
                     )}`}
                   </motion.span>
                 </AnimatePresence>
-                <span className="text-sm font-normal text-muted-foreground ml-1">
+                <span className="text-sm font-normal text-muted-foreground dark:text-gray-200 ml-1">
                   USD
                 </span>
               </p>

@@ -72,7 +72,7 @@ function Login() {
               <h1 className="font-bold text-4xl sm:text-5xl tracking-tight text-brand-dark dark:text-white mb-2">
                 Welcome back!
               </h1>
-              <p className="text-gray-600 dark:text-brand-text-muted text-sm">
+              <p className="text-gray-600 dark:text-gray-200 text-sm">
                 Sign in to access your secure ledger
               </p>
             </div>
@@ -88,7 +88,7 @@ function Login() {
                 <div className="flex flex-col gap-2" key={field.name}>
                   <label
                     htmlFor={field.name}
-                    className="capitalize text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
+                    className="capitalize text-sm font-medium text-gray-700 dark:text-gray-200 pl-1"
                   >
                     {field.label}
                   </label>

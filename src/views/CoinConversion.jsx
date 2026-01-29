@@ -166,7 +166,7 @@ const CoinConversion = () => {
         <h2 className="text-3xl font-bold premium-gradient-text">
           Convert Coins
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground dark:text-gray-200">
           Instantly swap your assets between different cryptocurrencies with
           zero fees.
         </p>
@@ -176,7 +176,7 @@ const CoinConversion = () => {
         <div className="col-span-4 md:col-span-2 glass-card p-8 space-y-8 rounded-2xl">
           <div className="space-y-6">
             <div className="space-y-3">
-              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground dark:text-gray-200">
                 From
               </Label>
               <Select value={fromCoin} onValueChange={setFromCoin}>
@@ -193,7 +193,7 @@ const CoinConversion = () => {
                           className="w-5 h-5 object-contain"
                         />
                         <span className="font-medium">{wallet.name}</span>
-                        <span className="text-xs text-muted-foreground opacity-70">
+                        <span className="text-xs text-muted-foreground dark:text-gray-200">
                           (Balance: $
                           {formatNumberWithCommas(user?.[wallet.value] || 0)})
                         </span>
@@ -205,7 +205,7 @@ const CoinConversion = () => {
             </div>
 
             <div className="space-y-3">
-              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground dark:text-gray-200">
                 To
               </Label>
               <Select value={toCoin} onValueChange={setToCoin}>
@@ -232,7 +232,7 @@ const CoinConversion = () => {
             </div>
 
             <div className="space-y-3">
-              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground opacity-70">
+              <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground dark:text-gray-200">
                 Amount (USD)
               </Label>
               <Input
@@ -245,7 +245,7 @@ const CoinConversion = () => {
             </div>
 
             {fromCoin && toCoin && (
-              <div className="p-3 rounded-xl bg-muted/30 border border-border/30 text-xs font-medium text-muted-foreground flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-muted/30 border border-border/30 text-xs font-medium text-muted-foreground dark:text-gray-200 flex items-center gap-2">
                 <Loader2 className="w-3 h-3 text-brand-primary animate-pulse" />
                 {exchangeRate > 0 ? (
                   <>
@@ -265,14 +265,14 @@ const CoinConversion = () => {
             {deductedAmount > 0 && (
               <div className="glass-card bg-muted/20 p-5 rounded-2xl space-y-4 border-border/30">
                 <div className="flex justify-between items-start">
-                  <span className="text-sm font-semibold text-muted-foreground uppercase tracking-tight">
+                  <span className="text-sm font-semibold text-muted-foreground dark:text-gray-200 uppercase tracking-tight">
                     You Pay
                   </span>
                   <div className="text-right">
                     <span className="text-xl font-bold block text-foreground tracking-tight">
                       ${formatNumberWithCommas(deductedAmount.toFixed(2))}
                     </span>
-                    <span className="text-xs font-mono text-muted-foreground">
+                    <span className="text-xs font-mono text-muted-foreground dark:text-gray-200">
                       ≈{" "}
                       {getEstimatedQuantity(fromCoin, deductedAmount).toFixed(
                         8,
@@ -285,14 +285,14 @@ const CoinConversion = () => {
                 <div className="h-px bg-border/50" />
 
                 <div className="flex justify-between items-start">
-                  <span className="text-sm font-semibold text-muted-foreground uppercase tracking-tight">
+                  <span className="text-sm font-semibold text-muted-foreground dark:text-gray-200 uppercase tracking-tight">
                     You Receive
                   </span>
                   <div className="text-right">
                     <span className="text-xl font-bold block text-brand-primary tracking-tight">
                       ${formatNumberWithCommas(convertedAmount.toFixed(2))}
                     </span>
-                    <span className="text-xs font-mono text-muted-foreground">
+                    <span className="text-xs font-mono text-muted-foreground dark:text-gray-200">
                       ≈{" "}
                       {getEstimatedQuantity(toCoin, convertedAmount).toFixed(8)}{" "}
                       {wallets.find((w) => w.id === toCoin)?.name}
