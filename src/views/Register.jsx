@@ -7,6 +7,8 @@ import { auth } from "../services/firebase";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { CountryDropdown } from "@/components/country-dropdown";
 import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
@@ -17,6 +19,8 @@ function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [phoneValue, setPhoneValue] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +46,8 @@ function Register() {
         isDeleted: false,
         isAdmin: false,
         isAccountVerified: false,
+        phone: formData.get("phone"),
+        country: formData.get("country"),
         verificationToken,
         verificationTokenCreatedAt: serverTimestamp(),
       };
@@ -102,69 +108,97 @@ function Register() {
                   >
                     {field.label}
                   </label>
-                  <div className="relative">
-                    <Input
-                      type={
-                        field.name === "password"
-                          ? showPassword
-                            ? "text"
-                            : "password"
-                          : field.name === "confirmPassword"
-                            ? showConfirmPassword
-                              ? "text"
-                              : "password"
-                            : field.type
-                      }
+                  {field.type === "country" ? (
+                    <CountryDropdown
+                      placeholder={field.placeholder}
+                      name={field.name}
+                      value={selectedCountry?.alpha3}
+                      onChange={(country) => {
+                        setSelectedCountry(country);
+                        if (country.countryCallingCodes?.[0]) {
+                          setPhoneValue(country.countryCallingCodes[0]);
+                        }
+                      }}
+                      className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
+                    />
+                  ) : field.type === "phone" ? (
+                    <PhoneInput
                       placeholder={field?.placeholder}
                       required
                       id={field.name}
                       name={field.name}
-                      pattern={field?.pattern}
-                      title={field?.title}
-                      minLength={field?.min}
-                      onBlur={
-                        field.name !== "confirmPassword"
-                          ? null
-                          : (e) => {
-                              const password = e.target
-                                .closest("form")
-                                .querySelector('input[name="password"]').value;
-                              if (password !== e.target.value) {
-                                setError(
-                                  "Passwords do not match. Please ensure both fields are identical",
-                                );
-                              } else {
-                                setError("");
-                              }
-                            }
-                      }
-                      className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all pr-11"
+                      value={phoneValue}
+                      onChange={(e) => setPhoneValue(e.target.value)}
+                      defaultCountry={selectedCountry?.alpha2}
+                      className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
                     />
-                    {(field.name === "password" ||
-                      field.name === "confirmPassword") && (
-                      <button
-                        type="button"
-                        onClick={() =>
+                  ) : (
+                    <div className="relative">
+                      <Input
+                        type={
                           field.name === "password"
-                            ? setShowPassword(!showPassword)
-                            : setShowConfirmPassword(!showConfirmPassword)
+                            ? showPassword
+                              ? "text"
+                              : "password"
+                            : field.name === "confirmPassword"
+                              ? showConfirmPassword
+                                ? "text"
+                                : "password"
+                              : field.type
                         }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:text-brand-text-muted/50 dark:hover:text-brand-text-muted transition-colors"
-                      >
-                        {field.name === "password" ? (
-                          showPassword ? (
+                        placeholder={field?.placeholder}
+                        required
+                        id={field.name}
+                        name={field.name}
+                        pattern={field?.pattern}
+                        title={field?.title}
+                        minLength={field?.min}
+                        onBlur={
+                          field.name !== "confirmPassword"
+                            ? null
+                            : (e) => {
+                                const password = e.target
+                                  .closest("form")
+                                  .querySelector(
+                                    'input[name="password"]',
+                                  ).value;
+                                if (password !== e.target.value) {
+                                  setError(
+                                    "Passwords do not match. Please ensure both fields are identical",
+                                  );
+                                } else {
+                                  setError("");
+                                }
+                              }
+                        }
+                        className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all pr-11"
+                      />
+                      {(field.name === "password" ||
+                        field.name === "confirmPassword") && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            field.name === "password"
+                              ? setShowPassword(!showPassword)
+                              : setShowConfirmPassword(!showConfirmPassword)
+                          }
+                          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 dark:text-brand-text-muted/50 dark:hover:text-brand-text-muted transition-colors"
+                        >
+                          {field.name === "password" ? (
+                            showPassword ? (
+                              <EyeOff size={20} />
+                            ) : (
+                              <Eye size={20} />
+                            )
+                          ) : showConfirmPassword ? (
                             <EyeOff size={20} />
                           ) : (
                             <Eye size={20} />
-                          )
-                        ) : showConfirmPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
-                      </button>
-                    )}
-                  </div>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

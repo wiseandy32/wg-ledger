@@ -52,6 +52,18 @@ export const registrationFormField = [
     min: 4,
   },
   {
+    name: "country",
+    label: "Your nationality",
+    placeholder: "Select country",
+    type: "country",
+  },
+  {
+    name: "phone",
+    label: "Phone Number",
+    placeholder: "Enter your phone number",
+    type: "phone",
+  },
+  {
     name: "password",
     label: "Password",
     placeholder: "Enter a password",
