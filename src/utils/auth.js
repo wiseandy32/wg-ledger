@@ -34,6 +34,20 @@ export const addDataToDb = async (field, data) => {
   }
 };
 
+export const setDataToDb = async (field, docId, data) => {
+  try {
+    const docRef = doc(db, field, docId);
+    const updatedData = {
+      ...data,
+      docRef: docId,
+    };
+    await setDoc(docRef, updatedData, { merge: true });
+    return docId;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const updateUserProfile = async (newInfo) => {
   try {
     await updateProfile(auth.currentUser, newInfo);

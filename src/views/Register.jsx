@@ -2,7 +2,12 @@
 import Link from "next/link";
 import { registrationFormField } from "../data";
 import { useState, useEffect } from "react";
-import { addDataToDb, createUser, updateUserProfile } from "../utils/auth";
+import {
+  addDataToDb,
+  createUser,
+  setDataToDb,
+  updateUserProfile,
+} from "../utils/auth";
 import { auth } from "../services/firebase";
 import MessageCard from "./components/MessageCard";
 import { Button } from "@/components/ui/button";
@@ -40,9 +45,9 @@ function Register() {
       const verificationToken = uuidv4();
 
       const user = {
-        name: auth.currentUser.displayName,
+        name: `${formData.get("firstName")} ${formData.get("lastName")}`,
         username: formData.get("username"),
-        email: auth.currentUser.email,
+        email: formData.get("email"),
         uid,
         isDeleted: false,
         isAdmin: false,
@@ -50,6 +55,8 @@ function Register() {
         verificationToken,
         verificationTokenCreatedAt: serverTimestamp(),
       };
+
+      await setDataToDb("users", uid, user);
 
       // Redirect to complete profile page instead of sending verification email and signing out
       router.push("/auth/complete-profile");
