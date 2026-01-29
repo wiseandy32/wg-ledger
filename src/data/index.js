@@ -21,7 +21,6 @@ const thetaIcon = "/assets/theta-logo.png";
 const fileCoinIcon = "/assets/filecoin-logo.png";
 const nanoIcon = "/assets/nano-logo.png";
 const shibaIcon = "/assets/shiba-logo.png";
-const trumpIcon = "/assets/trump-logo.png";
 const adaIcon = "/assets/ada-logo.webp";
 const xdceIcon = "/assets/xdce-logo.svg";
 const bitcoinQRCode = "/assets/bitcoin-qr.jpg";
@@ -32,11 +31,9 @@ const usdtQRCode = "/assets/usdt-trc20-qr.jpg";
 const dogeQRCode = "/assets/doge-qr.jpg";
 const algoQRCode = "/assets/algo-qr.jpg";
 const solQRCode = "/assets/sol-qr.jpg";
-const trumpQRCode = "/assets/trump-qr.jpg";
 const adaQRCode = "/assets/ada-qr.jpg";
 const xdceQRCode = "/assets/xdce-qr.jpg";
 const shibaQRCode = "/assets/shiba-qr.jpeg";
-import { DollarSign } from "lucide-react";
 
 export const registrationFormField = [
   {

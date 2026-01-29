@@ -1,13 +1,12 @@
 "use client";
 
-import { Eye, EyeOff, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { formatNumberWithCommas, getCurrentBitcoinPrice } from "@/lib/helpers";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
-function TotalAssets({ balance, bitcoin_price }) {
+function TotalAssets({ balance }) {
   const [isVisible, setIsVisible] = useState(true);
   const { data: currentBitcoinPrice } = useQuery({
     queryKey: ["currentBitcoinPrice"],

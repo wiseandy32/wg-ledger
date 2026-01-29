@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 
 export default function NotFoundError() {
   const router = useRouter();
-  const error = useRouteError();
-  console.error(error);
+
   return (
     <div className="h-svh">
       <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-2">

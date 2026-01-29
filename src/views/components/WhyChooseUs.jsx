@@ -13,9 +13,9 @@ function WhyChooseUs() {
             Bank-Grade Reliability
           </h2>
           <p className="max-w-3xl mx-auto text-gray-300 text-lg leading-relaxed">
-            We've rebuilt the banking stack from the ground up using blockchain
-            technology. Enjoy faster settlements, better rates, and superior
-            security.
+            We&apos;ve rebuilt the banking stack from the ground up using
+            blockchain technology. Enjoy faster settlements, better rates, and
+            superior security.
           </p>
         </Slide>
 

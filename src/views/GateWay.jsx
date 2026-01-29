@@ -9,7 +9,6 @@ import {
   getCurrentDate,
   formatNumberWithCommas,
 } from "@/lib/helpers";
-// import { auth } from "@/services/firebase";
 import { addDataToDb } from "@/utils/auth";
 import { Check, CopyIcon, Info } from "lucide-react";
 import { useState, useRef, useMemo } from "react";
@@ -22,16 +21,8 @@ import { toast } from "sonner";
 function GateWay() {
   const params = useParams();
   const router = useRouter();
-  // Find gateway data by matching ID or type (case-insensitive)
-  const data = paymentGateways.find(
-    (gateway) =>
-      gateway.id.toLowerCase() === params?.gateway?.toLowerCase() ||
-      gateway.type.toLowerCase() === params?.gateway?.toLowerCase(),
-  );
-
-  if (!data) return <div>Gateway not found</div>;
-
   const inputRef = useRef();
+
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isHashModalOpen, setIsHashModalOpen] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
@@ -61,6 +52,14 @@ function GateWay() {
       charge: "0.00",
     };
   }, [coinsData, data.id, data.type, amountDeposited]);
+  // Find gateway data by matching ID or type (case-insensitive)
+  const data = paymentGateways.find(
+    (gateway) =>
+      gateway.id.toLowerCase() === params?.gateway?.toLowerCase() ||
+      gateway.type.toLowerCase() === params?.gateway?.toLowerCase(),
+  );
+
+  if (!data) return <div>Gateway not found</div>;
 
   const handleCopy = () => {
     const textToCopy = inputRef.current.value;
@@ -295,7 +294,7 @@ function GateWay() {
           type="submit"
           variant="gooeyLeft"
         >
-          I've Made the Deposit
+          I&apos;ve Made the Deposit
         </Button>
       </form>
 
@@ -391,7 +390,7 @@ function GateWay() {
               <span className="font-mono text-xs block mt-1 text-foreground bg-muted/50 p-1 rounded">
                 {transactionHash?.slice(0, 10)}...{transactionHash?.slice(-10)}
               </span>
-              is being processed. You'll be notified once confirmed.
+              is being processed. You&apos;ll be notified once confirmed.
             </p>
           </div>
 

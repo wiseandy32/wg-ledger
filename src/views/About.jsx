@@ -40,8 +40,9 @@ function About() {
               Redefining Trust
             </h1>
             <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-              We are building the world's most secure and transparent digital
-              banking infrastructure, strictly for the future of finance.
+              We are building the world&apos;s most secure and transparent
+              digital banking infrastructure, strictly for the future of
+              finance.
             </p>
           </motion.div>
         </div>
@@ -209,8 +210,8 @@ function About() {
                 The <span className="text-white">Foundation</span>
               </h2>
               <p className="text-lg text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
-                World Global Ledger stands as the world's most secure ledger,
-                specially crafted by the{" "}
+                World Global Ledger stands as the world&apos;s most secure
+                ledger, specially crafted by the{" "}
                 <span className="text-white font-medium">
                   Quantum Financial System
                 </span>{" "}

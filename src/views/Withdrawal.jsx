@@ -21,7 +21,6 @@ import { Loader2, AlertCircle } from "lucide-react";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import Modal from "react-responsive-modal";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 function Withdrawal() {
@@ -227,7 +226,7 @@ function Withdrawal() {
             </p>
             <p className="text-muted-foreground text-sm leading-relaxed px-2">
               Your withdrawal request has been successfully received and is
-              being processed. You'll be notified once it's approved.
+              being processed. You&apos;ll be notified once it&apos;s approved.
             </p>
           </div>
 

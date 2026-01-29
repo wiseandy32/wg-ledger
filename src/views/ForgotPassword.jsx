@@ -126,8 +126,8 @@ function ForgotPassword() {
                 Email Sent
               </h1>
               <p className="text-gray-600 dark:text-brand-text-muted text-sm mb-8">
-                We've sent a password reset link to your email. Please check
-                your inbox and follow the instructions.
+                We&apos;ve sent a password reset link to your email. Please
+                check your inbox and follow the instructions.
               </p>
               <Link href="/auth/login" className="w-full">
                 <Button

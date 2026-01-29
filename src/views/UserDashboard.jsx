@@ -16,8 +16,6 @@ import { columns } from "@/components/columns";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
-  ArrowUp,
-  ArrowDown,
   Wallet,
   Banknote,
   Landmark,
@@ -26,7 +24,6 @@ import {
 
 function UserDashboard() {
   const { user } = useAuth();
-  const { theme } = useTheme();
   const { coinsData } = useCoinData();
 
   const { data: recentTransactionsRaw } = useQuery({
@@ -209,7 +206,7 @@ function UserDashboard() {
           },
         }}
       >
-        {dashboardWallets.map((wallet, index) => (
+        {dashboardWallets.map((wallet) => (
           <motion.div
             key={wallet?.name}
             variants={{

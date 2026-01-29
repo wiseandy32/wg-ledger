@@ -1,5 +1,4 @@
 import Slide from "./Slide";
-import { motion } from "framer-motion";
 
 const partners = [
   "/company1.png",

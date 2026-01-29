@@ -78,7 +78,7 @@ function Testimonials() {
                   </div>
 
                   <p className="text-gray-700 text-lg leading-relaxed mb-8 relative z-10 min-h-[100px]">
-                    "{item.quote}"
+                    &quot;{item.quote}&quot;
                   </p>
 
                   <div className="mt-auto border-t border-gray-100 pt-4">

@@ -1,9 +1,8 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Dashboard from "@/views/Dashboard";
-import { Outlet, useLocation } from "react-router-dom";
-import emailjs from "@emailjs/browser";
-import { Suspense, useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
 import { Await } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import DashboardSkeleton from "@/components/DashboardSkeleton";
@@ -11,18 +10,6 @@ import { Navigate } from "react-router-dom";
 
 function DashboardLayout() {
   const data = useLoaderData();
-  const location = useLocation();
-  const [isPageLoading, setIsPageLoading] = useState(false);
-
-  emailjs.init({ publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY });
-
-  useEffect(() => {
-    // Skip loader for admin routes
-    if (location.pathname.startsWith("/admin")) {
-      setIsPageLoading(false);
-      return;
-    }
-  }, [location.pathname]);
 
   return (
     <SidebarProvider>
