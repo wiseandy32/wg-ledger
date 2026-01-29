@@ -52,7 +52,7 @@ function CompleteProfile() {
         profileData.photo = displayPicture;
       }
 
-      await setDataToDb("users", uid, profileData);
+      await setDataToDb("users", user.docRef, profileData);
 
       toast.success("Profile completed successfully!");
       qc.invalidateQueries({ queryKey: ["uid", uid] });

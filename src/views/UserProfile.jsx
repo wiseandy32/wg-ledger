@@ -363,7 +363,8 @@ function UserProfile() {
                 />
               </div>
               {!error ? null : (
-                <p className="text-white bg-red-500 w-full p-2 rounded-md font-semibold">
+                <p className="bg-red-500/10 border border-red-500/20 w-full p-2 rounded-xl font-medium text-sm text-red-600 dark:text-red-400 flex items-center gap-2">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
                   {error}
                 </p>
               )}

@@ -11,6 +11,7 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/country-dropdown";
 import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp } from "firebase/firestore";
+import { getSingleDocument } from "../lib/helpers";
 import { useRouter } from "next/navigation";
 
 function Register() {
@@ -35,12 +36,22 @@ function Register() {
         setError,
       );
 
+      const username = formData.get("username").toLowerCase();
+
+      // Check if username is already taken
+      const existingUser = await getSingleDocument(username, "username");
+      if (existingUser) {
+        setError("This username is already taken. Please choose another one.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const uid = auth.currentUser.uid;
       const verificationToken = uuidv4();
 
       const user = {
         name: formData.get("username"),
-        username: formData.get("username"),
+        username: username,
         email: formData.get("email"),
         uid,
         isDeleted: false,
@@ -52,7 +63,7 @@ function Register() {
         verificationTokenCreatedAt: serverTimestamp(),
       };
 
-      await setDataToDb("users", uid, user);
+      await setDataToDb("users", username, user);
 
       // Redirect to complete profile page instead of sending verification email and signing out
       router.push("/auth/complete-profile");
@@ -90,8 +101,8 @@ function Register() {
             </div>
 
             {!error ? null : (
-              <p className="text-white bg-red-500/10 border border-red-500/20 w-full p-3 rounded-xl font-medium text-sm text-red-500 flex items-center gap-2">
-                <span className="block w-1.5 h-1.5 rounded-full bg-red-500"></span>
+              <p className="bg-red-500/10 border border-red-500/20 w-full p-3 rounded-xl font-medium text-sm text-red-600 dark:text-red-400 flex items-center gap-2">
+                <span className="block w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
                 {error}
               </p>
             )}
