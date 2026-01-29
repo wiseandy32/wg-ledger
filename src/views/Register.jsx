@@ -58,7 +58,7 @@ function Register() {
         isAdmin: false,
         isAccountVerified: false,
         phone: formData.get("phone"),
-        country: formData.get("country"),
+        country: selectedCountry?.name,
         verificationToken,
         verificationTokenCreatedAt: serverTimestamp(),
       };
@@ -130,6 +130,7 @@ function Register() {
                           setPhoneValue(country.countryCallingCodes[0]);
                         }
                       }}
+                      required
                       className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-brand-text-muted/30 focus:border-brand-primary focus:ring-brand-primary/20 rounded-xl transition-all"
                     />
                   ) : field.type === "phone" ? (

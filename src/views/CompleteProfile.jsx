@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Info } from "lucide-react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import RegionSelect from "@/components/region-select";
 
 function CompleteProfile() {
   const { user, uid } = useContext(AuthContext);
@@ -17,6 +18,7 @@ function CompleteProfile() {
   const qc = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [displayPicture, setDisplayPicture] = useState("");
+  const [region, setRegion] = useState(user?.region || "");
   const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
@@ -41,7 +43,7 @@ function CompleteProfile() {
         firstName: formData.get("firstName"),
         lastName: formData.get("lastName"),
         address: formData.get("address"),
-        state: formData.get("state"),
+        region: region,
         zipCode: formData.get("zipCode"),
         city: formData.get("city"),
         displayName: `${formData.get("firstName")} ${formData.get("lastName")}`,
@@ -157,13 +159,13 @@ function CompleteProfile() {
                   htmlFor="state"
                   className="text-sm font-medium text-gray-700 dark:text-brand-text-muted pl-1"
                 >
-                  State
+                  Region
                 </label>
-                <Input
-                  type="text"
-                  id="state"
-                  name="state"
-                  placeholder="Enter state"
+                <RegionSelect
+                  countryName={user?.country}
+                  value={region}
+                  onChange={(value) => setRegion(value)}
+                  placeholder="Select your region"
                   className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter rounded-xl"
                 />
               </div>
