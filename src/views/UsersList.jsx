@@ -204,11 +204,25 @@ function UsersList() {
                               action: {
                                 label: "Confirm",
                                 onClick: () => {
-                                  updateFirebaseDb("users", user.docRef, {
-                                    isDeleted: true,
-                                  });
-                                  toast.success(
-                                    `${user.name} account has been deleted.`,
+                                  toast.promise(
+                                    fetch("/api/admin/delete-user", {
+                                      method: "POST",
+                                      headers: {
+                                        "Content-Type": "application/json",
+                                      },
+                                      body: JSON.stringify({
+                                        uid: user.uid,
+                                        requesterUid: uid,
+                                      }),
+                                    }).then(async (res) => {
+                                      if (!res.ok) throw new Error("Failed");
+                                      return res.json();
+                                    }),
+                                    {
+                                      loading: "Deleting account...",
+                                      success: `${user.name} account has been permanently deleted.`,
+                                      error: "Failed to delete account",
+                                    },
                                   );
                                 },
                               },
