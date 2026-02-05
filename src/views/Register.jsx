@@ -9,8 +9,6 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { CountryDropdown } from "@/components/country-dropdown";
-import { v4 as uuidv4 } from "uuid";
-import { serverTimestamp } from "firebase/firestore";
 import { getSingleDocument } from "../lib/helpers";
 import { useRouter } from "next/navigation";
 
@@ -47,7 +45,6 @@ function Register() {
       }
 
       const uid = auth.currentUser.uid;
-      const verificationToken = uuidv4();
 
       const user = {
         name: formData.get("username"),
@@ -59,8 +56,6 @@ function Register() {
         isAccountVerified: false,
         phone: formData.get("phone"),
         country: selectedCountry?.name,
-        verificationToken,
-        verificationTokenCreatedAt: serverTimestamp(),
       };
 
       await setDataToDb("users", username, user);
