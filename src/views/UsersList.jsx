@@ -24,8 +24,10 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useAuth } from "@/context/auth/use-auth";
 
 function UsersList() {
+  const { uid } = useAuth();
   const [docs, setDocs] = useState([]);
   const filteredUsers = docs?.filter((user) => user.isDeleted === false);
 
@@ -141,6 +143,53 @@ function UsersList() {
                       </DropdownMenuItem>
 
                       <DropdownMenuItem
+                        onClick={async () => {
+                          const action = user.isDisabled ? "enable" : "disable";
+
+                          const toggleStatus = () => {
+                            toast.promise(
+                              fetch("/api/admin/toggle-status", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                  uid: user.uid,
+                                  disable: !user.isDisabled,
+                                  requesterUid: uid,
+                                }),
+                              }).then(async (res) => {
+                                if (!res.ok) throw new Error("Failed");
+                                return res.json();
+                              }),
+                              {
+                                loading: `${action === "disable" ? "Disabling" : "Enabling"} account...`,
+                                success: `Account ${action}d successfully`,
+                                error: `Failed to ${action} account`,
+                              },
+                            );
+                          };
+
+                          if (action === "disable") {
+                            toast.info(
+                              `Are you sure you want to disable ${user.name}? They will lose access.`,
+                              {
+                                duration: Infinity,
+                                cancel: { label: "Cancel", onClick: () => {} },
+                                action: {
+                                  label: "Confirm",
+                                  onClick: toggleStatus,
+                                },
+                              },
+                            );
+                          } else {
+                            toggleStatus();
+                          }
+                        }}
+                      >
+                        {user.isDisabled ? "Enable" : "Disable"} Account
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem
+                        className="text-red-600 focus:text-red-600 focus:bg-red-50"
                         onClick={() => {
                           toast.info(
                             `Are you sure you want to delete ${user.name} account? This step is irreversible`,
