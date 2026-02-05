@@ -65,8 +65,20 @@ function Register() {
 
       await setDataToDb("users", username, user);
 
-      // Redirect to complete profile page instead of sending verification email and signing out
-      router.push("/auth/complete-profile");
+      // Send verification email
+      try {
+        await fetch("/api/send-verification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: formData.get("email"), uid }),
+        });
+      } catch (err) {
+        console.error("Failed to trigger verification email", err);
+        // We still redirect, they can click resend on the next page
+      }
+
+      // Redirect to verify email page
+      router.push("/auth/verify-email");
     } catch (error) {
       console.error(error);
     } finally {

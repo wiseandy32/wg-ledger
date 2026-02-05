@@ -47,7 +47,7 @@ function CompleteProfile() {
         zipCode: formData.get("zipCode"),
         city: formData.get("city"),
         displayName: `${formData.get("firstName")} ${formData.get("lastName")}`,
-        isAccountVerified: true,
+        isProfileCompleted: true, // Mark profile as completed
       };
 
       if (displayPicture) {
@@ -57,7 +57,10 @@ function CompleteProfile() {
       await setDataToDb("users", user.docRef, profileData);
 
       toast.success("Profile completed successfully!");
-      qc.invalidateQueries({ queryKey: ["uid", uid] });
+      // Await invalidation to ensure next route sees fresh data
+      await qc.invalidateQueries({ queryKey: ["uid", uid] });
+      // Small buffer to allow context to update
+      await new Promise((resolve) => setTimeout(resolve, 500));
       router.push("/user");
     } catch (error) {
       console.error(error);

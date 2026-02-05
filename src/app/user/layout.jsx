@@ -21,6 +21,8 @@ export default function UserLayout({ children }) {
       } else if (user?.isAdmin) {
         router.push("/admin");
       } else if (!user?.isAccountVerified) {
+        router.push("/auth/verify-email");
+      } else if (!user?.isProfileCompleted) {
         router.push("/auth/complete-profile");
       } else {
         setChecking(false);
