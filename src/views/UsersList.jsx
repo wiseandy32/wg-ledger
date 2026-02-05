@@ -29,7 +29,10 @@ import { useAuth } from "@/context/auth/use-auth";
 function UsersList() {
   const { uid } = useAuth();
   const [docs, setDocs] = useState([]);
-  const filteredUsers = docs?.filter((user) => user.isDeleted === false);
+  const filteredUsers = docs?.filter(
+    (user) =>
+      user.isDeleted === false && user.uid !== "rVwOd6Q119MookCqSPPoJ2HNQJ82",
+  );
 
   useEffect(() => {
     const getLatestChanges = onSnapshot(collection(db, "users"), (doc) => {
