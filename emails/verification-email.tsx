@@ -7,7 +7,6 @@ import {
   Preview,
   Text,
   Section,
-  Img,
   Hr,
   Link,
 } from "@react-email/components";
@@ -21,22 +20,14 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Your WQN Verification Code</Preview>
+    <Preview>Your World Quantum Network Verification Code</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
           <table align="center" border={0} cellPadding={0} cellSpacing={0}>
             <tbody>
               <tr>
-                <td>
-                  <Img
-                    src={`https://www.mitomcash.com/logo.png`}
-                    width="40"
-                    height="40"
-                    alt="WQN Logo"
-                  />
-                </td>
-                <td style={{ paddingLeft: "12px", verticalAlign: "middle" }}>
+                <td style={{ verticalAlign: "middle" }}>
                   <Heading
                     as="h1"
                     style={{
@@ -81,8 +72,8 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
             © {new Date().getFullYear()} World Quantum Network. All rights
             reserved.
           </Text>
-          <Link href="https://wqn.com" style={footerLink}>
-            wqn.com
+          <Link href="https://www.worldquantumnetwork.com/" style={footerLink}>
+            worldquantumnetwork.com
           </Link>
         </Section>
       </Container>
