@@ -54,7 +54,7 @@ function Withdrawal() {
         method: formData.get("WithdrawalMethod"),
         coin: withdrawalMethod[0],
         userDocRef: user.docRef,
-        name: auth.currentUser.displayName,
+        name: user.displayName,
         amount: +formData.get("amount"),
         timestamp: Date.now(),
         walletAddress: formData.get("walletAddress"),
