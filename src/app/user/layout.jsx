@@ -18,6 +18,8 @@ export default function UserLayout({ children }) {
         router.push(
           `/auth/login?from=${encodeURIComponent(window.location.pathname)}`,
         );
+      } else if (typeof user?.isAccountVerified === "undefined") {
+        router.push("/auth/login");
       } else if (user?.isAdmin) {
         router.push("/admin");
       } else if (!user?.isAccountVerified) {
