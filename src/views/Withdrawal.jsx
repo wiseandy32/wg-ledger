@@ -165,6 +165,9 @@ function Withdrawal() {
                 {withdrawalOptions.map((option) => (
                   <SelectItem key={option.title} value={option.value}>
                     {option.title}
+                    {user?.[option.value] && +user[option.value] > 0
+                      ? ` - $${parseFloat(user[option.value]).toFixed(2)}`
+                      : ""}
                   </SelectItem>
                 ))}
               </SelectGroup>
