@@ -40,7 +40,7 @@ export const WithdrawalApprovalEmail: React.FC<
               textAlign: "center",
             }}
           >
-            World Quantum Network
+            Quantum Global System
           </Heading>
         </Section>
         <Hr style={hr} />
@@ -72,24 +72,24 @@ export const WithdrawalApprovalEmail: React.FC<
             </tbody>
           </table>
           <Text style={text}>
-            Thank you for choosing World Quantum Network. If you have any
+            Thank you for choosing Quantum Global System. If you have any
             questions or require further assistance, please do not hesitate to
             reach out to our support team.
           </Text>
           <Text style={text}>
             Best regards,
             <br />
-            The World Quantum Network Team
+            The Quantum Global System Team
           </Text>
         </Section>
         <Hr style={hr} />
         <Section style={footer}>
           <Text style={footerText}>
-            © {new Date().getFullYear()} World Quantum Network. All rights
+            © {new Date().getFullYear()} Quantum Global System. All rights
             reserved.
           </Text>
-          <Link href="https://worldquantumnetwork.com" style={footerLink}>
-            worldquantumnetwork.com
+          <Link href="https://www.quantumglobal-system.com" style={footerLink}>
+            www.quantumglobal-system.com
           </Link>
         </Section>
       </Container>

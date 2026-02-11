@@ -7,7 +7,7 @@ import ForgotPasswordEmail from "emails/forgot-password-email";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const actionCodeSettings = {
-  url: "https://www.worldquantumnetwork.com/auth/login",
+  url: "https://www.quantumglobal-system.com/auth/login",
 };
 
 export async function POST(req: NextRequest) {
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const html = await pretty(await render(ForgotPasswordEmail({ resetLink })));
 
     await resend.emails.send({
-      from: "World Quantum Network <admin@worldquantumnetwork.com>",
+      from: "Quantum Global System <no-reply@quantumglobal-system.com>",
       to: email,
       subject: "Reset Your Password",
       html,

@@ -20,7 +20,7 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
 }) => (
   <Html>
     <Head />
-    <Preview>Your World Quantum Network Verification Code</Preview>
+    <Preview>Your Quantum Global System Verification Code</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
@@ -39,7 +39,7 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
                       lineHeight: "24px",
                     }}
                   >
-                    World Quantum Network
+                    Quantum Global System
                   </Heading>
                 </td>
               </tr>
@@ -50,7 +50,7 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
         <Section style={content}>
           <Heading style={h1}>Verify Your Email Address</Heading>
           <Text style={text}>
-            Thank you for registering with World Quantum Network. To complete
+            Thank you for registering with Quantum Global System. To complete
             your account setup, please use the following verification code:
           </Text>
           <Section style={codeContainer}>
@@ -63,17 +63,17 @@ export const VerificationEmail: React.FC<Readonly<VerificationEmailProps>> = ({
           <Text style={text}>
             Best regards,
             <br />
-            The World Quantum Network Team
+            The Quantum Global System Team
           </Text>
         </Section>
         <Hr style={hr} />
         <Section style={footer}>
           <Text style={footerText}>
-            © {new Date().getFullYear()} World Quantum Network. All rights
+            © {new Date().getFullYear()} Quantum Global System. All rights
             reserved.
           </Text>
-          <Link href="https://www.worldquantumnetwork.com/" style={footerLink}>
-            worldquantumnetwork.com
+          <Link href="https://www.quantumglobal-system.com/" style={footerLink}>
+            www.quantumglobal-system.com
           </Link>
         </Section>
       </Container>

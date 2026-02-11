@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     );
 
     await resend.emails.send({
-      from: "World Quantum Network <admin@worldquantumnetwork.com>",
+      from: "Quantum Global System <no-reply@quantumglobal-system.com>",
       to: email,
       subject: "Verify Your Email Address",
       html,

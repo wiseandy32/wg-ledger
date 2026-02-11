@@ -21,7 +21,7 @@ export const ForgotPasswordEmail: React.FC<
 > = ({ resetLink }) => (
   <Html>
     <Head />
-    <Preview>Reset Your World Quantum Network Password</Preview>
+    <Preview>Reset Your Quantum Global System Password</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
@@ -37,15 +37,15 @@ export const ForgotPasswordEmail: React.FC<
               textAlign: "center",
             }}
           >
-            World Quantum Network
+            Quantum Global System
           </Heading>
         </Section>
         <Hr style={hr} />
         <Section style={content}>
           <Heading style={h1}>Reset Your Password</Heading>
           <Text style={text}>
-            We received a request to reset your password for your World Quantum
-            Network account. Click the button below to set a new password:
+            We received a request to reset your password for your Quantum Global
+            System account. Click the button below to set a new password:
           </Text>
           <Section style={{ textAlign: "center" }}>
             <Button style={button} href={resetLink}>
@@ -59,17 +59,17 @@ export const ForgotPasswordEmail: React.FC<
           <Text style={text}>
             Best regards,
             <br />
-            The World Quantum Network Team
+            The Quantum Global System Team
           </Text>
         </Section>
         <Hr style={hr} />
         <Section style={footer}>
           <Text style={footerText}>
-            © {new Date().getFullYear()} World Quantum Network. All rights
+            © {new Date().getFullYear()} Quantum Global System. All rights
             reserved.
           </Text>
-          <Link href="https://worldquantumnetwork.com" style={footerLink}>
-            worldquantumnetwork.com
+          <Link href="https://www.quantumglobal-system.com" style={footerLink}>
+            www.quantumglobal-system.com
           </Link>
         </Section>
       </Container>

@@ -30,9 +30,9 @@ export async function POST(req: NextRequest) {
     );
 
     await resend.emails.send({
-      from: "World Quantum Network <admin@worldquantumnetwork.com>",
+      from: "Quantum Global System <no-reply@quantumglobal-system.com>",
       to: email,
-      subject: "Withdrawal Approved - World Quantum Network",
+      subject: "Withdrawal Approved",
       html,
     });
 

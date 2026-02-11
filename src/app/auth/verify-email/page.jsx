@@ -1,7 +1,7 @@
 import VerifyEmail from "@/views/VerifyEmail";
 
 export const metadata = {
-  title: "Verify Email - World Quantum Network",
+  title: "Verify Email - Quantum Global System",
   description: "Verify your email address to complete registration.",
 };
 
