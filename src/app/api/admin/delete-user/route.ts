@@ -27,24 +27,66 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 1. Delete from Firebase Auth
-    await auth.deleteUser(uid);
-
-    // 2. Delete from Firestore
-    // Find doc by uid field
+    // 1. Find user document by uid field
     const snapshot = await adminDb
       .collection("users")
       .where("uid", "==", uid)
       .limit(1)
       .get();
 
-    if (!snapshot.empty) {
-      const docRef = snapshot.docs[0].ref;
-
-      await docRef.delete();
-    } else {
+    if (snapshot.empty) {
       console.warn(`Firestore document not found for uid: ${uid}`);
+      // Still try to delete from Auth even if Firestore doc not found
+      await auth.deleteUser(uid);
+      return NextResponse.json(
+        { message: "User deleted from Auth (Firestore doc not found)" },
+        { status: 200 },
+      );
     }
+
+    const userDocRef = snapshot.docs[0].ref;
+    const userDocId = snapshot.docs[0].id;
+
+    // 2. Delete all subcollections (transactions, etc.)
+    const subcollections = ["transactions"];
+
+    for (const subcollectionName of subcollections) {
+      const subcollectionRef = adminDb.collection(
+        `users/${userDocId}/${subcollectionName}`,
+      );
+      const subcollectionSnapshot = await subcollectionRef.get();
+
+      // Delete all documents in the subcollection using batch
+      const batchSize = 50; // Firestore batch limit
+      let batch = adminDb.batch();
+      let count = 0;
+
+      for (const doc of subcollectionSnapshot.docs) {
+        batch.delete(doc.ref);
+        count++;
+
+        if (count >= batchSize) {
+          await batch.commit();
+          batch = adminDb.batch();
+          count = 0;
+        }
+      }
+
+      // Commit any remaining deletions
+      if (count > 0) {
+        await batch.commit();
+      }
+
+      console.log(
+        `Deleted ${subcollectionSnapshot.size} documents from ${subcollectionName} subcollection`,
+      );
+    }
+
+    // 3. Delete the user document from Firestore
+    await userDocRef.delete();
+
+    // 4. Delete from Firebase Auth
+    await auth.deleteUser(uid);
 
     return NextResponse.json(
       { message: "User account deleted permanently" },
