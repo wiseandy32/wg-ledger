@@ -78,10 +78,9 @@ function Footer() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  { title: "Help Center", path: "/#help" },
+                  { title: "Help Center", path: "/contact" },
                   { title: "Terms of Service", path: "/terms" },
                   { title: "Privacy Policy", path: "/privacy" },
-                  { title: "Cookie Policy", path: "/privacy#cookies" },
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link
