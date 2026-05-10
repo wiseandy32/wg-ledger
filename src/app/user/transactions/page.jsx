@@ -8,3 +8,8 @@ export default function Page() {
     </Suspense>
   );
 }
+
+export const metadata = {
+  title: "Transactions | Quantum Global System",
+  description: "Web ledger application",
+};
