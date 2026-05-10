@@ -68,17 +68,17 @@ export default function TermsOfService() {
       )
     },
     {
-      title: "5. P2P Trading and Independent Trades",
+      title: "5. Trading and Independent Trades",
       content: (
         <div className="space-y-4">
           <p>
-            <strong>5.1 P2P Trading System Mechanism:</strong> The Quantum Global System features a peer-to-peer (P2P) matching engine allowing users to directly interact, trade, and settle digital and fiat instruments. You acknowledge that when engaging in P2P deals, you are entering into a transaction directly with another user. Quantum Global System provides the interface and order book but is not a counterparty to P2P trades.
+            <strong>5.1 Trading System Mechanism:</strong> The Quantum Global System features an advanced matching engine allowing users to trade and settle digital and fiat instruments. You acknowledge that when engaging in trades, you are entering into a direct platform transaction. Quantum Global System provides the interface and order book but is not a counterparty to these specialized trades.
           </p>
           <p>
-            <strong>5.2 Independent Withdrawals:</strong> Certain transactions explicitly utilize an independent settlement infrastructure. Specifically, when participating in our P2P Trading System, both buyers and sellers must independently verify, authorize, and submit their transaction withdrawals or fund transfers. A given trade is strictly considered non-final and will categorically avoid a 'completed' status until both parties have verifiably withdrawn or exchanged their respective assets confirming full satisfaction of the trade.
+            <strong>5.2 Independent Withdrawals:</strong> Certain transactions explicitly utilize an independent settlement infrastructure. Specifically, when participating in our Trading System, both buyers and sellers must independently verify, authorize, and submit their transaction withdrawals or fund transfers. A given trade is strictly considered non-final and will categorically avoid a 'completed' status until both parties have verifiably withdrawn or exchanged their respective assets confirming full satisfaction of the trade.
           </p>
           <p>
-            <strong>5.3 Dispute Resolution in P2P:</strong> Should conflicts arise concerning non-payment, delayed asset release, or asset receipt failure during an ongoing trade, users must utilize our internal arbitration system. Users grant the Quantum Global System compliance agents the irrevocable authority to scrutinize transaction logs, messaging histories, and on-chain proofs to adjudicate the dispute. The adjudication outcome derived by Quantum Global System is binding.
+            <strong>5.3 Dispute Resolution:</strong> Should conflicts arise concerning non-payment, delayed asset release, or asset receipt failure during an ongoing trade, users must utilize our internal arbitration system. Users grant the Quantum Global System compliance agents the irrevocable authority to scrutinize transaction logs, messaging histories, and on-chain proofs to adjudicate the dispute. The adjudication outcome derived by Quantum Global System is binding.
           </p>
         </div>
       )

@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
       content: (
         <div className="space-y-4">
           <p>
-            At Quantum Global System, we are wholly committed to safeguarding the privacy and security of our users' personal and financial data. This comprehensive Privacy Policy dictates the ongoing processes by which Quantum Global System ("we", "us", "our") collects, utilizes, manages, shares, and secures information deriving from your use of the quantumglobal-system.com website, associated applications, APIs, and P2P exchange platforms (collectively, the "Services").
+            At Quantum Global System, we are wholly committed to safeguarding the privacy and security of our users' personal and financial data. This comprehensive Privacy Policy dictates the ongoing processes by which Quantum Global System ("we", "us", "our") collects, utilizes, manages, shares, and secures information deriving from your use of the quantumglobal-system.com website, associated applications, APIs, and exchange platforms (collectively, the "Services").
           </p>
           <p>
             By opting to engage with our Services, you explicitly consent to the data practices modeled within this Privacy Policy. If you find any provision in this document unacceptable, you must immediately cease all interactions with the Quantum Global System platform.
@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
             The cardinal goals for processing your data strictly align with providing a frictionless yet exceptionally secure trading environment. Specific utilities include:
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Core Provisioning:</strong> Facilitating capital transfers, clearing cryptocurrency conversions, and reconciling peer-to-peer financial agreements.</li>
+            <li><strong>Core Provisioning:</strong> Facilitating capital transfers, clearing cryptocurrency conversions, and reconciling financial agreements.</li>
             <li><strong>Legal & Regulatory Adherence:</strong> Operating mandatory Anti-Money Laundering (AML) monitoring, fulfilling judicial subpoenas, and conducting systematic fraud deterrence protocols.</li>
             <li><strong>System Integrity:</strong> Analyzing vulnerability logs, diagnosing server distress nodes, and deploying automated safeguards against distributed denial-of-service (DDoS) impacts or unauthorized intrusion attempts.</li>
             <li><strong>Platform Optimization:</strong> Utilizing anonymized heuristics to redesign user interface flows, calibrate matching engine speeds, and personalize promotional initiatives.</li>
