@@ -78,10 +78,10 @@ function Footer() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  { title: "Help Center", path: "/" },
-                  { title: "Terms of Service", path: "/" },
-                  { title: "Privacy Policy", path: "/" },
-                  { title: "Cookie Policy", path: "/" },
+                  { title: "Help Center", path: "/#help" },
+                  { title: "Terms of Service", path: "/terms" },
+                  { title: "Privacy Policy", path: "/privacy" },
+                  { title: "Cookie Policy", path: "/privacy#cookies" },
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link
@@ -126,24 +126,24 @@ function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-brand-dark-lighter/30 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 dark:text-gray-300 text-sm text-center md:text-left">
-            &copy; {new Date().getFullYear()} World Global Ledger. All rights
+            &copy; {new Date().getFullYear()} Quantum Global System. All rights
             reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
-              href="/"
+              href="/privacy"
               className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Privacy
             </Link>
             <Link
-              href="/"
+              href="/terms"
               className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Terms
             </Link>
             <Link
-              href="/"
+              href="/#sitemap"
               className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Sitemap

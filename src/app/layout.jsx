@@ -6,7 +6,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "WG Ledger",
+  title: "Quantum Global System",
   description: "Web ledger application",
 };
 
