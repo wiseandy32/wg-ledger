@@ -236,17 +236,24 @@ function Register() {
               >
                 I accept the{" "}
                 <Link
-                  href="/terms"
+                  href="/policy/terms"
                   className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-all"
                 >
                   Terms of Service
-                </Link>{" "}
-                and{" "}
+                </Link>
+                {", "}
                 <Link
-                  href="/privacy"
+                  href="/policy/privacy"
                   className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-all"
                 >
                   Privacy Policy
+                </Link>
+                {", and "}
+                <Link
+                  href="/policy/company"
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-all"
+                >
+                  Company Policy
                 </Link>
               </label>
             </div>

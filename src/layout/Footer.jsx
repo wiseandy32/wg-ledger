@@ -79,8 +79,9 @@ function Footer() {
               <ul className="space-y-4">
                 {[
                   { title: "Help Center", path: "/contact" },
-                  { title: "Terms of Service", path: "/terms" },
-                  { title: "Privacy Policy", path: "/privacy" },
+                  { title: "Company Policy", path: "/policy/company" },
+                  { title: "Terms of Service", path: "/policy/terms" },
+                  { title: "Privacy Policy", path: "/policy/privacy" },
                 ].map((link, idx) => (
                   <li key={idx}>
                     <Link
@@ -130,13 +131,13 @@ function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              href="/privacy"
+              href="/policy/privacy"
               className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Privacy
             </Link>
             <Link
-              href="/terms"
+              href="/policy/terms"
               className="text-gray-500 dark:text-gray-300 hover:text-brand-dark dark:hover:text-white text-sm transition-colors"
             >
               Terms
