@@ -1,12 +1,6 @@
 import Link from "next/link";
 import Slide from "../views/components/Slide";
-import {
-  FaTwitter,
-  FaLinkedin,
-  FaFacebook,
-  FaInstagram,
-  FaPaperPlane,
-} from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -28,19 +22,6 @@ function Footer() {
                 eliminating intermediaries and giving you complete control over
                 your assets.
               </p>
-              <div className="flex items-center gap-4 mt-6">
-                {[FaTwitter, FaLinkedin, FaFacebook, FaInstagram].map(
-                  (Icon, idx) => (
-                    <a
-                      key={idx}
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-white dark:bg-brand-dark-lighter/50 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:bg-brand-icon hover:text-black transition-all duration-300 transform hover:-translate-y-1"
-                    >
-                      <Icon size={18} />
-                    </a>
-                  ),
-                )}
-              </div>
             </Slide>
           </div>
 
