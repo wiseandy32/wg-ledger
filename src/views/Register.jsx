@@ -28,11 +28,16 @@ function Register() {
     try {
       setIsSubmitting(true);
       // create a new user
-      await createUser(
+      const success = await createUser(
         formData.get("email"),
         formData.get("password"),
         setError,
       );
+
+      if (!success) {
+        setIsSubmitting(false);
+        return;
+      }
 
       const username = formData.get("username").toLowerCase();
 

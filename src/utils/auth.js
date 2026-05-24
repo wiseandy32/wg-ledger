@@ -9,11 +9,15 @@ import {
 export const createUser = async (email, password, onError) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
+    return true;
   } catch (error) {
     const { code } = error;
     if (code === "auth/email-already-in-use") {
       onError("An account with this email already exists.");
+    } else {
+      onError(error.message || "Failed to create account.");
     }
+    return false;
   }
 };
 
