@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable react/prop-types */
+import { Fragment } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,10 +31,9 @@ function Dashboard({ children }) {
               <BreadcrumbList>
                 {paths.map((path, index) => {
                   return (
-                    <>
+                    <Fragment key={path}>
                       <BreadcrumbItem
                         className="capitalize text-xs md:text-base"
-                        key={path}
                       >
                         {index + 1 > paths.length - 1 ? (
                           <BreadcrumbPage>
@@ -57,7 +57,7 @@ function Dashboard({ children }) {
                       {index + 1 > paths.length - 1 ? null : (
                         <BreadcrumbSeparator />
                       )}
-                    </>
+                    </Fragment>
                   );
                 })}
               </BreadcrumbList>
