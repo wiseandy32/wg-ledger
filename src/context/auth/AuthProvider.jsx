@@ -15,30 +15,39 @@ function AuthProvider({ children }) {
     }
     return "";
   });
-  const { data: user, isLoading } = useQuery({
+  const [authInitialized, setAuthInitialized] = useState(false);
+
+  const { data: user, isLoading: queryIsLoading } = useQuery({
     queryKey: ["uid", uid],
     queryFn: async () => {
-      if (!uid) return null;
+      if (!uid || !auth.currentUser) return null;
       const user = await fetchUserByID(uid);
       return user;
     },
-    enabled: !!uid,
+    enabled: !!uid && authInitialized && !!auth.currentUser,
   });
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.setItem("wglid", user.uid);
+        setUid(user.uid);
+      } else {
+        localStorage.removeItem("wglid");
+        setUid("");
+      }
+      setAuthInitialized(true);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const isLoading = !authInitialized || queryIsLoading;
 
   const values = {
     user,
     uid,
     isLoading,
   };
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        localStorage.setItem("wglid", user?.uid);
-        setUid(user?.uid);
-      }
-    });
-  }, []);
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 }
