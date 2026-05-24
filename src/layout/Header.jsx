@@ -3,8 +3,10 @@ import MobileNav from "../views/components/MobileNav";
 import { useState, useEffect } from "react";
 import ModeToggle from "../components/theme-toggle";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/auth/use-auth";
 
 function Header() {
+  const { user, uid, isLoading } = useAuth();
   const pathname = usePathname();
   const path = pathname.split("/");
   const [scrolled, setScrolled] = useState(false);
@@ -68,20 +70,38 @@ function Header() {
             </ul>
 
             {!path.includes("admin") && !path.includes("user") && (
-              <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50">
+              <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50 min-h-[40px]">
                 <ModeToggle className="text-white hover:bg-white/10" />
-                <Link
-                  href="/auth/login"
-                  className="text-white hover:text-white/80 font-semibold text-sm transition-colors"
-                >
-                  Log In
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="px-5 py-2.5 rounded-lg bg-white dark:bg-brand-icon text-brand-primary dark:text-black font-bold text-sm hover:bg-white/90 dark:hover:bg-brand-icon/90 transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transform hover:-translate-y-0.5"
-                >
-                  Get Started
-                </Link>
+                {!isLoading && (
+                  uid ? (
+                    <>
+                      <span className="text-white/70 text-xs font-medium uppercase tracking-wider hidden lg:inline-block">
+                        Hi, {user?.username || user?.name || "User"}
+                      </span>
+                      <Link
+                        href={user?.isAdmin ? "/admin" : "/user"}
+                        className="px-5 py-2.5 rounded-lg bg-white dark:bg-brand-icon text-brand-primary dark:text-black font-bold text-sm hover:bg-white/90 dark:hover:bg-brand-icon/90 transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transform hover:-translate-y-0.5"
+                      >
+                        Dashboard
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/auth/login"
+                        className="text-white hover:text-white/80 font-semibold text-sm transition-colors"
+                      >
+                        Log In
+                      </Link>
+                      <Link
+                        href="/auth/register"
+                        className="px-5 py-2.5 rounded-lg bg-white dark:bg-brand-icon text-brand-primary dark:text-black font-bold text-sm hover:bg-white/90 dark:hover:bg-brand-icon/90 transition-all hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transform hover:-translate-y-0.5"
+                      >
+                        Get Started
+                      </Link>
+                    </>
+                  )
+                )}
               </div>
             )}
           </nav>

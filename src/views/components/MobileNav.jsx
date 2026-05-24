@@ -7,8 +7,10 @@ import { useRouter, usePathname } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import ModeToggle from "../../components/theme-toggle";
+import { useAuth } from "@/context/auth/use-auth";
 
 function MobileNav() {
+  const { user, uid } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -85,7 +87,26 @@ function MobileNav() {
             </ul>
 
             <div className="flex flex-col gap-6 w-full max-w-xs px-6 relative z-10">
-              {!path.includes("admin") && !path.includes("user") ? (
+              {uid ? (
+                <>
+                  <div className="text-white text-center mb-2 font-medium text-sm">
+                    Logged in as <span className="font-bold">{user?.username || user?.name || user?.email}</span>
+                  </div>
+                  <Link
+                    href={user?.isAdmin ? "/admin" : "/user"}
+                    onClick={() => setIsMenuVisible(false)}
+                    className="w-full h-14 flex items-center justify-center rounded-xl bg-white dark:bg-brand-icon text-brand-primary dark:text-black font-bold hover:bg-white/90 dark:hover:bg-brand-icon/90 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all uppercase tracking-wider text-sm"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="w-full h-14 flex items-center justify-center rounded-xl bg-red-500/10 border border-red-500/50 text-red-500 font-bold hover:bg-red-500/20 transition-all uppercase tracking-wider text-sm"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
                 <>
                   <Link
                     href="/auth/login"
@@ -102,13 +123,6 @@ function MobileNav() {
                     Get Started
                   </Link>
                 </>
-              ) : (
-                <button
-                  onClick={logout}
-                  className="w-full h-14 flex items-center justify-center rounded-xl bg-red-500/10 border border-red-500/50 text-red-500 font-bold hover:bg-red-500/20 transition-all uppercase tracking-wider text-sm"
-                >
-                  Sign Out
-                </button>
               )}
             </div>
           </motion.nav>
