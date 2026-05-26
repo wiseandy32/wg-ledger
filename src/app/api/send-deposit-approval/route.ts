@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     );
 
     await resend.emails.send({
-      from: "Quantum Global System <no-reply@quantumglobal-system.com>",
+      from: "Quantum Global System <support@mail.quantumglobal-system.com>",
       to: email,
       subject: "Deposit Approved",
       html,

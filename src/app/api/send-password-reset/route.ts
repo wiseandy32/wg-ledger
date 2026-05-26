@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const html = await pretty(await render(ForgotPasswordEmail({ resetLink })));
 
     await resend.emails.send({
-      from: "Quantum Global System <no-reply@quantumglobal-system.com>",
+      from: "Quantum Global System <support@mail.quantumglobal-system.com>",
       to: email,
       subject: "Reset Your Password",
       html,
