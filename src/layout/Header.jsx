@@ -73,7 +73,7 @@ function Header() {
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50 min-h-[40px]">
                 <ModeToggle className="text-white hover:bg-white/10" />
                 {!isLoading && (
-                  uid ? (
+                  (uid && user) ? (
                     <>
                       <span className="text-white/70 text-xs font-medium uppercase tracking-wider hidden lg:inline-block">
                         Hi, {user?.username || user?.name || "User"}

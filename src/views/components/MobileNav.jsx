@@ -87,7 +87,7 @@ function MobileNav() {
             </ul>
 
             <div className="flex flex-col gap-6 w-full max-w-xs px-6 relative z-10">
-              {uid ? (
+              {uid && user ? (
                 <>
                   <div className="text-white text-center mb-2 font-medium text-sm">
                     Logged in as <span className="font-bold">{user?.username || user?.name || user?.email}</span>

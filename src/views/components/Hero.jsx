@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
 import Slide from "./Slide";
+import { useAuth } from "@/context/auth/use-auth";
 
 function Hero() {
+  const { uid, user } = useAuth();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-icon dark:bg-brand-dark">
       {/* Background Video with heavy overlay */}
@@ -45,10 +48,10 @@ function Hero() {
               Get Started Now
             </Link>
             <Link
-              href="/auth/login"
+              href={uid && user ? (user?.isAdmin ? "/admin" : "/user") : "/auth/login"}
               className="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-white/20 text-white font-semibold text-lg hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm"
             >
-              Login to Dashboard
+              {uid && user ? "Go to dashboard" : "Login to Dashboard"}
             </Link>
           </div>
 

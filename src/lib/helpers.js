@@ -223,6 +223,7 @@ export const fetchUserByID = async (uid) => {
   if (!uid) return false;
   const currentUser = auth.currentUser;
   const userDoc = await getSingleDocument(uid);
+  if (!userDoc) return null;
   const user = { ...currentUser, ...userDoc };
   return user;
 };
