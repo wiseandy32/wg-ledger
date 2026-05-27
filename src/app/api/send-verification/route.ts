@@ -4,7 +4,7 @@ import { render, pretty } from "@react-email/render";
 import { initAdmin } from "@/lib/firebase-admin";
 import VerificationEmail from "../../../../emails/verification-email";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_AUTH_API_KEY);
 
 export async function POST(req: NextRequest) {
   const { email, uid } = await req.json();
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     );
 
     await resend.emails.send({
-      from: "Quantum Global System <support@mail.quantumglobal-system.com>",
+      from: "Quantum Global System <team@security.quantumglobal-system.com>",
       to: email,
       subject: "Verify Your Email Address",
       html,

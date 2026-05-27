@@ -4,7 +4,7 @@ import { render, pretty } from "@react-email/render";
 import { initAdmin } from "@/lib/firebase-admin";
 import ForgotPasswordEmail from "emails/forgot-password-email";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_AUTH_API_KEY);
 
 const actionCodeSettings = {
   url: "https://www.quantumglobal-system.com/auth/login",
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const html = await pretty(await render(ForgotPasswordEmail({ resetLink })));
 
     await resend.emails.send({
-      from: "Quantum Global System <support@mail.quantumglobal-system.com>",
+      from: "Quantum Global System <team@security.quantumglobal-system.com>",
       to: email,
       subject: "Reset Your Password",
       html,

@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { render, pretty } from "@react-email/render";
 import DepositApprovalEmail from "emails/deposit-approval-email";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_NOTIFICATIONS_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     );
 
     await resend.emails.send({
-      from: "Quantum Global System <support@mail.quantumglobal-system.com>",
+      from: "Quantum Global System <team@notifications.quantumglobal-system.com>",
       to: email,
       subject: "Deposit Approved",
       html,
