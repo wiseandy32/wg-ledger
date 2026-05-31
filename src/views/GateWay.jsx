@@ -299,7 +299,7 @@ function GateWay() {
           type="submit"
           variant="gooeyLeft"
         >
-          I&apos;ve Made the Deposit
+          Done
         </Button>
       </form>
 
