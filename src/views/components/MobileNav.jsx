@@ -46,7 +46,7 @@ function MobileNav() {
   return (
     <>
       <div className="md:hidden z-[10001] relative flex items-center gap-4">
-        <ModeToggle className="text-white hover:bg-white/10" />
+        {/* <ModeToggle className="text-white hover:bg-white/10" /> */}
         <div
           className="cursor-pointer transition-colors p-2 text-white hover:text-white/80"
           onClick={() => setIsMenuVisible((prev) => !prev)}

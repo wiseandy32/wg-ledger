@@ -71,7 +71,7 @@ function Header() {
 
             {!path.includes("admin") && !path.includes("user") && (
               <div className="flex items-center gap-4 ml-8 pl-8 border-l border-brand-dark-lighter/50 min-h-[40px]">
-                <ModeToggle className="text-white hover:bg-white/10" />
+                {/* <ModeToggle className="text-white hover:bg-white/10" /> */}
                 {!isLoading && (
                   (uid && user) ? (
                     <>

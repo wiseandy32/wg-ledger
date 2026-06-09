@@ -16,12 +16,15 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }) {
+  const [theme, setTheme] = useState("dark");
+  /*
   const [theme, setTheme] = useState(
     () =>
       (typeof window !== "undefined"
         ? localStorage.getItem(storageKey)
         : null) || defaultTheme,
   );
+  */
 
   // Animation state
   const [transitioning, setTransitioning] = useState(false);
@@ -32,7 +35,9 @@ export function ThemeProvider({
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
+    root.classList.add("dark");
 
+    /*
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
@@ -44,16 +49,20 @@ export function ThemeProvider({
     }
 
     root.classList.add(theme);
+    */
   }, [theme]);
 
   const updateTheme = (newTheme) => {
+    /*
     if (typeof window !== "undefined") {
       localStorage.setItem(storageKey, newTheme);
     }
     setTheme(newTheme);
+    */
   };
 
   const toggleTheme = async (x, y) => {
+    /*
     let effectiveTheme = theme;
     if (theme === "system") {
       effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -98,6 +107,7 @@ export function ThemeProvider({
     } catch (e) {
       console.error(e);
     }
+    */
   };
 
   const value = {
