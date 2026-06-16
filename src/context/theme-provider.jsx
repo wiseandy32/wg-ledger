@@ -1,6 +1,7 @@
 "use client";
+/* eslint-disable react/prop-types, no-unused-vars */
 import { createContext, useContext, useEffect, useState } from "react";
-import { flushSync } from "react-dom";
+import { usePathname } from "next/navigation";
 
 const initialState = {
   theme: "system",
@@ -16,15 +17,9 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }) {
-  const [theme, setTheme] = useState("dark");
-  /*
-  const [theme, setTheme] = useState(
-    () =>
-      (typeof window !== "undefined"
-        ? localStorage.getItem(storageKey)
-        : null) || defaultTheme,
-  );
-  */
+  const pathname = usePathname();
+  const isDashboard = pathname?.startsWith("/admin") || pathname?.startsWith("/user");
+  const theme = isDashboard ? "dark" : "light";
 
   // Animation state
   const [transitioning, setTransitioning] = useState(false);
@@ -32,24 +27,15 @@ export function ThemeProvider({
   const [nextTheme, setNextTheme] = useState(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
-    root.classList.add("dark");
-
-    /*
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.add("light");
     }
-
-    root.classList.add(theme);
-    */
   }, [theme]);
 
   const updateTheme = (newTheme) => {
