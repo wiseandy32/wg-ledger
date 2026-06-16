@@ -12,7 +12,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { useRouter, usePathname } from "next/navigation";
-import ModeToggle from "@/components/theme-toggle";
 
 function Dashboard({ children }) {
   const pathname = usePathname();

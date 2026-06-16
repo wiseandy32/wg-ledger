@@ -3,18 +3,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "../../services/firebase";
-import ModeToggle from "../../components/theme-toggle";
 import { useAuth } from "@/context/auth/use-auth";
 
 function MobileNav() {
   const { user, uid } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
-  const path = pathname.split("/");
 
   // Lock body scroll when menu is open
   useEffect(() => {

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import MobileNav from "../views/components/MobileNav";
 import { useState, useEffect } from "react";
-import ModeToggle from "../components/theme-toggle";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/auth/use-auth";
 

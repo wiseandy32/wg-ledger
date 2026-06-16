@@ -1,6 +1,5 @@
 "use client";
 import { useCoinData } from "@/context/auth/use-coin-data";
-import { useTheme } from "@/context/theme-provider";
 import { wallets } from "@/data";
 import {
   formatNumberWithCommas,
