@@ -103,8 +103,8 @@ export const getSingleDocument = async (uid, queryKey = "uid") => {
   try {
     const querySnapshot = await getDocs(document);
     if (!querySnapshot.empty) {
-      const doc = querySnapshot.docs[0].data();
-      return doc;
+      const docSnapshot = querySnapshot.docs[0];
+      return { ...docSnapshot.data(), docRef: docSnapshot.id };
     }
   } catch (error) {
     console.error(error);
@@ -430,7 +430,7 @@ export const handleRequestApproval = (
 };
 
 export const deleteUserData = async (uid, user) => {
-  const userDoc = await getSingleDocument("uid", uid);
+  const userDoc = await getSingleDocument(uid);
   await deleteUser(user);
   await deleteDoc(doc(db, "users", userDoc.docRef));
 };
