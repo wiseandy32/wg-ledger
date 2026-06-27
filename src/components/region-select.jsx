@@ -24,14 +24,20 @@ function RegionSelect({
   const [regions, setRegions] = useState([]);
 
   useEffect(() => {
+    if (!countryName) {
+      setRegions([]);
+      return;
+    }
     const regions = countryRegionData.find(
-      (country) => country.countryName === countryName,
+      (country) => country.countryName.toLowerCase() === countryName.toLowerCase(),
     );
 
     if (regions) {
       setRegions(
         filterRegions(regions.regions, priorityOptions, whitelist, blacklist),
       );
+    } else {
+      setRegions([]);
     }
   }, [countryName]);
 
