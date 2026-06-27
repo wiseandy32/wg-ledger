@@ -56,7 +56,6 @@ function Register() {
         username: username,
         email: formData.get("email"),
         uid,
-        isDeleted: false,
         isAdmin: false,
         isAccountVerified: false,
         phone: formData.get("phone"),

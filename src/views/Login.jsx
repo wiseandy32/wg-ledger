@@ -29,11 +29,13 @@ function Login() {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       const userDoc = await getSingleDocument(user.uid);
 
-      if (userDoc.isDeleted) {
+      if (!userDoc) {
         localStorage.removeItem("wglid");
         signOut(auth);
         setIsSubmitting(false);
-        setError("This user does not exist");
+        setError(
+          "We couldn't find an account associated with these credentials. Please contact support if you believe this is an error."
+        );
         return;
       }
 

@@ -3,7 +3,6 @@
 import { useState, useRef, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/auth/use-auth";
-import { updateFirebaseDb } from "@/lib/helpers";
 import { setDataToDb } from "@/utils/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +37,12 @@ function CompleteProfile() {
 
     try {
       setIsSubmitting(true);
+
+      if (!user || !user.docRef) {
+        throw new Error(
+          "Your session appears to be incomplete. Please log out and sign back in, then try again.",
+        );
+      }
 
       const profileData = {
         firstName: formData.get("firstName"),
