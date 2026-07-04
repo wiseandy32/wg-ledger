@@ -5,6 +5,7 @@ import {
   formatNumberWithCommas,
   getSubCollectionDocuments,
 } from "@/lib/helpers";
+import { isV2Enabled, getBalance } from "@/lib/feature-flags";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "@/context/auth/use-auth";
 import TotalAssets from "./components/total-assets";
@@ -72,34 +73,51 @@ function UserDashboard() {
       return wallet;
     }
 
-    const amount = user[wallet.value];
-    const totalBalance = amount ? wallet.balance + +amount : wallet.balance;
-
+    const v2 = isV2Enabled(user) && wallet.amountField;
     const matchingCoin = coinsData?.find((coin) => coin.id === wallet.id);
+
     if (matchingCoin) {
-      // totalBalance is the USD value from DB
-      const coinAmount =
-        matchingCoin.current_price > 0
-          ? totalBalance / matchingCoin.current_price
-          : 0;
+      let usdBalance;
+      let coinAmount;
+
+      if (v2) {
+        const rawCrypto = user[wallet.amountField];
+        coinAmount = rawCrypto ? wallet.balance + +rawCrypto : 0;
+        usdBalance =
+          coinAmount > 0 && matchingCoin.current_price > 0
+            ? coinAmount * matchingCoin.current_price
+            : 0;
+      } else {
+        // V1: stored value is USD, derive crypto
+        const amount = user[wallet.value];
+        usdBalance = amount ? wallet.balance + +amount : wallet.balance;
+        coinAmount =
+          matchingCoin.current_price > 0
+            ? usdBalance / matchingCoin.current_price
+            : 0;
+      }
 
       const walletData = {
         ...wallet,
-        balance: totalBalance.toFixed(2),
+        balance: usdBalance.toFixed(2),
         coinAmount: coinAmount,
       };
 
-      if (totalBalance > 0) {
+      if (usdBalance > 0 && matchingCoin.price_change_percentage_1h_in_currency != null) {
         walletData.last_1h_change_percentage = Number(
           matchingCoin.price_change_percentage_1h_in_currency,
-        ).toFixed(1);
+        ).toFixed(2);
       }
 
       return walletData;
     } else {
+      const rawBalance = getBalance(user, wallet);
+      const usdBalance = rawBalance
+        ? wallet.balance + +rawBalance
+        : wallet.balance;
       return {
         ...wallet,
-        balance: totalBalance,
+        balance: usdBalance,
         coinAmount: 0,
       };
     }
@@ -241,15 +259,16 @@ function UserDashboard() {
                 )}
               </div>
 
-              {wallet?.last_1h_change_percentage && (
+              {wallet?.last_1h_change_percentage &&
+                +wallet.last_1h_change_percentage !== 0 && (
                 <span
                   className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${
-                    wallet.last_1h_change_percentage < 0
+                    +wallet.last_1h_change_percentage < 0
                       ? "bg-red-500/10 text-red-500 border-red-500/20"
                       : "bg-green-500/10 text-green-500 border-green-500/20"
                   }`}
                 >
-                  {wallet.last_1h_change_percentage < 0 ? "" : "+"}
+                  {+wallet.last_1h_change_percentage < 0 ? "" : "+"}
                   {wallet.last_1h_change_percentage}%
                 </span>
               )}

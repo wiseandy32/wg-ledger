@@ -127,6 +127,8 @@ function GateWay() {
       return;
     }
 
+    const coin = (coinsData || []).find((c) => c.id === data.id);
+
     const depositRequestInfo = {
       uid: user.uid,
       userDocRef: user.docRef,
@@ -138,6 +140,8 @@ function GateWay() {
       email: user.email,
       isConfirmed: false,
       transactionHash: transactionHash.trim(),
+      coinId: data.id,
+      priceAtRequest: coin?.current_price || 0,
     };
 
     try {
@@ -146,11 +150,17 @@ function GateWay() {
         depositRequestInfo,
       );
 
+      const coinPrice = coin?.current_price || 0;
       await addDataToSubCollection("users", user.docRef, "transactions", {
         id: depositID,
         coin: data.type,
         type: "deposit",
         amount: parseFloat(amountDeposited),
+        cryptoAmount:
+          coinPrice > 0
+            ? parseFloat(amountDeposited) / coinPrice
+            : 0,
+        coinId: data.id,
         status: "pending",
         userDocRef: user.docRef,
         timestamp: Date.now(),

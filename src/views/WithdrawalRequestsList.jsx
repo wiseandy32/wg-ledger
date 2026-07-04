@@ -68,7 +68,7 @@ function WithdrawalRequestsList() {
               <TableHead>Status</TableHead>
               <TableHead>Method</TableHead>
               <TableHead>Wallet Address</TableHead>
-              <TableHead className="text-right">Amount ($)</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -90,7 +90,17 @@ function WithdrawalRequestsList() {
                 </TableCell>
                 <TableCell className="capitalize">{doc?.coin}</TableCell>
                 <TableCell>{doc.walletAddress}</TableCell>
-                <TableCell className="text-right">{doc.amount}</TableCell>
+                <TableCell className="text-right">
+                  <div className="flex flex-col items-end">
+                    <span>${doc.amount}</span>
+                    {doc?.priceAtRequest > 0 && (
+                      <span className="text-xs text-muted-foreground">
+                        ≈ {(doc.amount / doc.priceAtRequest).toFixed(8)}{" "}
+                        {doc?.coin}
+                      </span>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className="text-center flex gap-2 pl-9 w-fit">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

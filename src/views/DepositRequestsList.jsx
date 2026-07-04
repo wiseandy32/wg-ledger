@@ -62,7 +62,7 @@ function DepositRequestsList() {
               <TableHead>Name</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Coin Type</TableHead>
-              <TableHead className="text-right">Amount ($)</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -83,7 +83,17 @@ function DepositRequestsList() {
                   </Badge>
                 </TableCell>
                 <TableCell className="capitalize">{request?.coin}</TableCell>
-                <TableCell className="text-right">{request?.amount}</TableCell>
+                <TableCell className="text-right">
+                  <div className="flex flex-col items-end">
+                    <span>${request?.amount}</span>
+                    {request?.priceAtRequest > 0 && (
+                      <span className="text-xs text-muted-foreground">
+                        ≈ {(request.amount / request.priceAtRequest).toFixed(8)}{" "}
+                        {request?.coin}
+                      </span>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className="text-center flex gap-2 pl-9 w-fit">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

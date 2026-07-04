@@ -11,8 +11,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@/context/auth/use-auth";
-import { withdrawalOptions } from "@/data";
+import { useCoinData } from "@/context/auth/use-coin-data";
+import { withdrawalOptions, wallets } from "@/data";
 import { addDataToSubCollection, getCurrentDate } from "@/lib/helpers";
+import { isV2Enabled, getBalance } from "@/lib/feature-flags";
 import { auth } from "@/services/firebase";
 import { addDataToDb } from "@/utils/auth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,6 +27,7 @@ import { useRouter } from "next/navigation";
 
 function Withdrawal() {
   const { user } = useAuth();
+  const { coinsData } = useCoinData();
   const qc = useQueryClient();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,8 +41,19 @@ function Withdrawal() {
       setIsSubmitting(true);
 
       const formData = new FormData(e.target);
-      const availableBalance = user[formData.get("WithdrawalMethod")];
-      const withdrawalMethod = formData.get("WithdrawalMethod").split("_");
+      const method = formData.get("WithdrawalMethod");
+      const withdrawalMethod = method.split("_");
+      const wallet = wallets.find((w) => w.value === method);
+
+      const matchingCoin = coinsData?.find((c) => c.id === wallet?.id);
+
+      let availableBalance;
+      if (isV2Enabled(user) && wallet?.amountField) {
+        const cryptoBal = user[wallet.amountField] || 0;
+        availableBalance = +cryptoBal * (matchingCoin?.current_price || 0);
+      } else {
+        availableBalance = user[wallet?.value || method] || 0;
+      }
 
       if (!availableBalance || +formData.get("amount") > +availableBalance) {
         setErrorMessage(
@@ -51,7 +65,7 @@ function Withdrawal() {
 
       const withdrawalRequestInfo = {
         uid: auth.currentUser.uid,
-        method: formData.get("WithdrawalMethod"),
+        method,
         coin: withdrawalMethod[0],
         userDocRef: user.docRef,
         name: user.displayName,
@@ -60,6 +74,8 @@ function Withdrawal() {
         walletAddress: formData.get("walletAddress"),
         email: auth.currentUser.email,
         isConfirmed: false,
+        coinId: wallet?.id || "",
+        priceAtRequest: matchingCoin?.current_price || 0,
       };
 
       const getMethod = () => {
@@ -77,12 +93,18 @@ function Withdrawal() {
         withdrawalRequestInfo,
       );
 
+      const wAmount = +formData.get("amount");
       await addDataToSubCollection("users", user.docRef, "transactions", {
         id: withdrawalID,
         userDocRef: user.docRef,
         coin: getMethod(),
         type: "withdrawal",
-        amount: +formData.get("amount"),
+        amount: wAmount,
+        cryptoAmount:
+          matchingCoin?.current_price > 0
+            ? wAmount / matchingCoin.current_price
+            : 0,
+        coinId: wallet?.id || "",
         status: "pending",
         timestamp: Date.now(),
         creationDate: getCurrentDate(),
@@ -162,14 +184,20 @@ function Withdrawal() {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Withdrawal Method</SelectLabel>
-                {withdrawalOptions.map((option) => (
-                  <SelectItem key={option.title} value={option.value}>
-                    {option.title}
-                    {user?.[option.value] && +user[option.value] > 0
-                      ? ` - $${parseFloat(user[option.value]).toFixed(2)}`
-                      : ""}
-                  </SelectItem>
-                ))}
+                {withdrawalOptions.map((option) => {
+                  const w = wallets.find((x) => x.value === option.value);
+                  const bal = getBalance(user, w);
+                  return (
+                    <SelectItem key={option.title} value={option.value}>
+                      {option.title}
+                      {bal > 0
+                        ? isV2Enabled(user) && w?.amountField
+                          ? ` - ${Number(bal).toFixed(8)} ${w.name}`
+                          : ` - $${parseFloat(bal).toFixed(2)}`
+                        : ""}
+                    </SelectItem>
+                  );
+                })}
               </SelectGroup>
             </SelectContent>
           </Select>

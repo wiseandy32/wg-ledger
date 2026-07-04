@@ -14,6 +14,8 @@ import {
   runTransaction,
 } from "firebase/firestore";
 import { toast } from "sonner";
+import { wallets } from "@/data";
+import { isV2Enabled } from "@/lib/feature-flags";
 
 export const filterCountries = (
   countries = [],
@@ -278,6 +280,30 @@ export const formatNumberWithCommas = (number) => {
 export const capitalizeWord = (word = "jd") =>
   word?.charAt(0)?.toUpperCase() + word.slice(1);
 
+const buildV2CryptoUpdate = async (doc, balanceSign) => {
+  const wallet = wallets.find((w) => w.value === doc.method);
+  if (!wallet?.amountField || !wallet?.id || !doc.amount) return {};
+
+  let price = doc.priceAtRequest;
+  if (price <= 0) {
+    try {
+      const prices = await getCoinsData([wallet.id]);
+      if (prices?.length > 0 && prices[0]?.current_price) {
+        price = prices[0].current_price;
+      }
+    } catch (e) {
+      console.error("Failed to fetch price for v2 crypto update", e);
+    }
+  }
+
+  if (price <= 0) return {};
+
+  const cryptoAmount = doc.amount / price;
+  return {
+    [wallet.amountField]: increment(balanceSign * cryptoAmount),
+  };
+};
+
 export const handleRequestApproval = (
   doc,
   requestType,
@@ -301,14 +327,20 @@ export const handleRequestApproval = (
           onClick: async () => {
             const document = await getSingleDocument(doc?.uid);
 
-            await updateFirebaseDb("users", document.docRef, {
-              [`${doc.method}`]: increment(
-                requestType === "deposit" ? -doc.amount : doc.amount,
-              ),
-              ledger_balance: increment(
-                requestType === "deposit" ? -doc.amount : doc.amount,
-              ),
-            });
+            const balanceSign = requestType === "deposit" ? -1 : 1;
+            const updateData = {
+              [`${doc.method}`]: increment(balanceSign * doc.amount),
+              ledger_balance: increment(balanceSign * doc.amount),
+            };
+
+            if (isV2Enabled(document)) {
+              const v2Update = await buildV2CryptoUpdate(
+                doc, balanceSign,
+              );
+              Object.assign(updateData, v2Update);
+            }
+
+            await updateFirebaseDb("users", document.docRef, updateData);
 
             await updateFirebaseDb(documentId, doc.docRef, {
               isConfirmed: false,
@@ -350,28 +382,34 @@ export const handleRequestApproval = (
       },
       action: {
         label: "Confirm",
-        onClick: async () => {
-          const document = await getSingleDocument(doc?.uid);
-          const transaction = await getTransactionDetail(
-            requestId,
-            `${
-              requestType === "deposit"
-                ? "depositRequests"
-                : "withdrawalRequests"
-            }`,
-          );
-          await updateFirebaseDb("users", document.docRef, {
-            [`${doc.method}`]: increment(
-              requestType === "deposit" ? doc.amount : -doc.amount,
-            ),
-            ledger_balance: increment(
-              requestType === "deposit" ? doc.amount : -doc.amount,
-            ),
+          onClick: async () => {
+            const document = await getSingleDocument(doc?.uid);
+            const transaction = await getTransactionDetail(
+              requestId,
+              `${
+                requestType === "deposit"
+                  ? "depositRequests"
+                  : "withdrawalRequests"
+              }`,
+            );
 
-            withdrawal_balance: increment(
-              requestType === "withdrawal" ? doc.amount : 0,
-            ),
-          });
+            const balanceSign = requestType === "deposit" ? 1 : -1;
+            const updateData = {
+              [`${doc.method}`]: increment(balanceSign * doc.amount),
+              ledger_balance: increment(balanceSign * doc.amount),
+              withdrawal_balance: increment(
+                requestType === "withdrawal" ? doc.amount : 0,
+              ),
+            };
+
+            if (isV2Enabled(document)) {
+              const v2Update = await buildV2CryptoUpdate(
+                doc, balanceSign,
+              );
+              Object.assign(updateData, v2Update);
+            }
+
+            await updateFirebaseDb("users", document.docRef, updateData);
 
           await updateFirebaseDb(documentId, doc.docRef, {
             isConfirmed: true,
@@ -569,6 +607,8 @@ export const convertCoin = async (
   toCoinBalanceField,
   fromQty,
   toQty,
+  fromCoinAmountField,
+  toCoinAmountField,
 ) => {
   if (
     !userId ||
@@ -603,10 +643,17 @@ export const convertCoin = async (
         throw "Insufficient balance!";
       }
 
-      transaction.update(userRef, {
+      const updateData = {
         [fromCoinBalanceField]: increment(-fromAmount),
         [toCoinBalanceField]: increment(toAmount),
-      });
+      };
+
+      if (fromCoinAmountField && toCoinAmountField && isV2Enabled(userData)) {
+        updateData[fromCoinAmountField] = increment(-(fromQty || 0));
+        updateData[toCoinAmountField] = increment(toQty || 0);
+      }
+
+      transaction.update(userRef, updateData);
 
       transaction.set(transactionRef, {
         id: transactionRef.id,
@@ -620,6 +667,8 @@ export const convertCoin = async (
         exchangeRate,
         fromQty: fromQty || 0,
         toQty: toQty || 0,
+        cryptoAmount: fromQty || 0,
+        coin: fromCoinSymbol,
         date: getCurrentDate(),
         timestamp: getTimeInMilliseconds(),
         status: "completed", // Conversions are instant and treated as completed

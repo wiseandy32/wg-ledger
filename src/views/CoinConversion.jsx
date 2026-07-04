@@ -4,6 +4,7 @@ import { useAuth } from "@/context/auth/use-auth";
 import { useCoinData } from "@/context/auth/use-coin-data";
 import { wallets } from "@/data";
 import { convertCoin, formatNumberWithCommas } from "@/lib/helpers";
+import { isV2Enabled, getBalance } from "@/lib/feature-flags";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,7 +57,7 @@ const CoinConversion = () => {
   // Filter wallets where user has balance > 0
   const availableWallets = wallets
     .filter((wallet) => {
-      const balance = user?.[wallet.value] || 0;
+      const balance = getBalance(user, wallet);
       return balance > 0 && wallet.id;
     })
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -108,7 +109,15 @@ const CoinConversion = () => {
 
     const fromWallet = wallets.find((w) => w.id === fromCoin);
     const toWallet = wallets.find((w) => w.id === toCoin);
-    const userBalance = user?.[fromWallet.value] || 0;
+
+    let userBalance;
+    if (isV2Enabled(user) && fromWallet?.amountField) {
+      const cryptoBal = user[fromWallet.amountField] || 0;
+      const fromCoinData = coinsData?.find((c) => c.id === fromCoin);
+      userBalance = +cryptoBal * (fromCoinData?.current_price || 0);
+    } else {
+      userBalance = user?.[fromWallet.value] || 0;
+    }
 
     if (deductedAmount > userBalance) {
       toast.error(`Insufficient ${fromWallet.name} balance`);
@@ -133,6 +142,8 @@ const CoinConversion = () => {
         toWallet.value,
         fromQty,
         toQty,
+        fromWallet.amountField,
+        toWallet.amountField,
       );
 
       if (result.success) {
@@ -194,8 +205,9 @@ const CoinConversion = () => {
                         />
                         <span className="font-medium">{wallet.name}</span>
                         <span className="text-xs text-muted-foreground dark:text-gray-200">
-                          (Balance: $
-                          {formatNumberWithCommas(user?.[wallet.value] || 0)})
+                          {isV2Enabled(user) && wallet.amountField
+                            ? `(${formatNumberWithCommas(Number(getBalance(user, wallet)).toFixed(8))} ${wallet.name})`
+                            : `(Balance: $${formatNumberWithCommas(getBalance(user, wallet))})`}
                         </span>
                       </div>
                     </SelectItem>

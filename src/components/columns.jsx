@@ -37,36 +37,53 @@ export const columns = [
   },
   {
     accessorKey: "amount",
-    header: "Amount ($)",
+    header: "Amount",
     cell: ({ row }) => {
       const type = row.original.type;
       const amount =
         type === "conversion" ? row.original.fromAmount : row.original.amount;
+      const cryptoAmount = row.original.cryptoAmount;
+      const coinSymbol = row.original.coin || "";
 
-      // For conversions, we just show the USD value involved
       if (type === "conversion") {
-        return <span>${formatNumberWithCommas(amount)}</span>;
+        return (
+          <div className="flex flex-col">
+            <span>${formatNumberWithCommas(amount)}</span>
+            {cryptoAmount ? (
+              <span className="text-xs text-muted-foreground">
+                {parseFloat(cryptoAmount).toFixed(6)} {coinSymbol}
+              </span>
+            ) : null}
+          </div>
+        );
       }
 
       return (
-        <p className="flex gap-1 items-center">
-          {type === "deposit" ? (
-            <Plus className="text-green-500 w-2" />
-          ) : (
-            <Minus className="text-red-500 w-2" />
-          )}
-          <span
-            className={`${
-              type === "deposit" && row.original.status === "confirmed"
-                ? "text-green-500"
-                : type === "withdrawal" && row.original.status === "confirmed"
-                  ? "text-red-500"
-                  : ""
-            }`}
-          >
-            {`$${formatNumberWithCommas(amount)}`}
-          </span>
-        </p>
+        <div className="flex flex-col gap-0.5">
+          <p className="flex gap-1 items-center">
+            {type === "deposit" ? (
+              <Plus className="text-green-500 w-2" />
+            ) : (
+              <Minus className="text-red-500 w-2" />
+            )}
+            <span
+              className={`${
+                type === "deposit" && row.original.status === "confirmed"
+                  ? "text-green-500"
+                  : type === "withdrawal" && row.original.status === "confirmed"
+                    ? "text-red-500"
+                    : ""
+              }`}
+            >
+              {`$${formatNumberWithCommas(amount)}`}
+            </span>
+          </p>
+          {cryptoAmount ? (
+            <span className="text-xs text-muted-foreground ml-4">
+              {parseFloat(cryptoAmount).toFixed(6)} {coinSymbol}
+            </span>
+          ) : null}
+        </div>
       );
     },
   },

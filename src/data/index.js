@@ -146,6 +146,7 @@ export const wallets = [
     icon: btcIcon,
     balance: 0.0,
     value: "BTC_balance",
+    amountField: "BTC_amount",
   },
   {
     name: "ETH",
@@ -153,6 +154,7 @@ export const wallets = [
     icon: ethIcon,
     balance: 0.0,
     value: "ETH_balance",
+    amountField: "ETH_amount",
   },
   {
     name: "USDT",
@@ -160,6 +162,7 @@ export const wallets = [
     icon: usdtIcon,
     balance: 0.0,
     value: "USDT_balance",
+    amountField: "USDT_amount",
   },
   {
     name: "XLM",
@@ -167,6 +170,7 @@ export const wallets = [
     icon: xlmIcon,
     balance: 0.0,
     value: "XLM_balance",
+    amountField: "XLM_amount",
   },
   {
     name: "XRP",
@@ -174,13 +178,15 @@ export const wallets = [
     icon: xrpIcon,
     balance: 0.0,
     value: "XRP_balance",
+    amountField: "XRP_amount",
   },
   {
     name: "DOGE",
-    id: "doge",
+    id: "dogecoin",
     icon: dogeIcon,
     balance: 0.0,
     value: "DOGE_balance",
+    amountField: "DOGE_amount",
   },
   {
     name: "LTC",
@@ -188,6 +194,7 @@ export const wallets = [
     icon: ltcIcon,
     balance: 0.0,
     value: "litecoin_balance",
+    amountField: "litecoin_amount",
   },
   {
     name: "ALGO",
@@ -195,6 +202,7 @@ export const wallets = [
     icon: algoIcon,
     balance: 0.0,
     value: "ALGO_balance",
+    amountField: "ALGO_amount",
   },
   {
     name: "SOL",
@@ -202,6 +210,7 @@ export const wallets = [
     icon: solIcon,
     balance: 0.0,
     value: "SOL_balance",
+    amountField: "SOL_amount",
   },
   {
     name: "BNB",
@@ -209,6 +218,7 @@ export const wallets = [
     icon: bnbIcon,
     balance: 0.0,
     value: "bnb_balance",
+    amountField: "bnb_amount",
   },
   {
     name: "QTUM",
@@ -216,6 +226,7 @@ export const wallets = [
     icon: qtumIcon,
     balance: 0.0,
     value: "qtum_balance",
+    amountField: "qtum_amount",
   },
   {
     name: "TEZOS",
@@ -223,6 +234,7 @@ export const wallets = [
     icon: tezosIcon,
     balance: 0.0,
     value: "tezos_balance",
+    amountField: "tezos_amount",
   },
   {
     name: "THETA",
@@ -230,6 +242,7 @@ export const wallets = [
     icon: thetaIcon,
     balance: 0.0,
     value: "theta_balance",
+    amountField: "theta_amount",
   },
   {
     name: "Filecoin",
@@ -237,6 +250,7 @@ export const wallets = [
     icon: fileCoinIcon,
     balance: 0.0,
     value: "filecoin_balance",
+    amountField: "filecoin_amount",
   },
   {
     name: "NANO",
@@ -244,6 +258,7 @@ export const wallets = [
     icon: nanoIcon,
     balance: 0.0,
     value: "nano_balance",
+    amountField: "nano_amount",
   },
   {
     name: "SHIBA",
@@ -251,6 +266,7 @@ export const wallets = [
     icon: shibaIcon,
     balance: 0.0,
     value: "shiba_balance",
+    amountField: "shiba_amount",
   },
   {
     name: "ADA",
@@ -258,6 +274,7 @@ export const wallets = [
     icon: adaIcon,
     balance: 0.0,
     value: "ada_balance",
+    amountField: "ada_amount",
   },
   {
     name: "XDCE",
@@ -265,6 +282,7 @@ export const wallets = [
     icon: xdceIcon,
     balance: 0.0,
     value: "xdce_balance",
+    amountField: "xdce_amount",
   },
   {
     name: "Total Withdrawals",
@@ -280,7 +298,7 @@ export const depositMethods = [
   { name: "XRP", id: "ripple", icon: xrpIcon, path: "xrp" },
   { name: "XLM", id: "stellar", icon: xlmIcon, path: "xlm" },
   { name: "USDT TRC20", id: "tether", icon: usdtIcon, path: "usdt" },
-  { name: "DOGEcoin", id: "doge", icon: dogeIcon, path: "dogecoin" },
+  { name: "DOGEcoin", id: "dogecoin", icon: dogeIcon, path: "dogecoin" },
   { name: "ALGO", id: "algorand", icon: algoIcon, path: "algo" },
   { name: "Solana", id: "solana", icon: solIcon, path: "sol" },
   { name: "ADA", id: "cardano", icon: adaIcon, path: "cardano" },
@@ -333,7 +351,7 @@ export const paymentGateways = [
   {
     type: "dogecoin",
     value: "DOGE_balance",
-    id: "doge",
+    id: "dogecoin",
     qrCode: dogeQRCode,
     icon: dogeIcon,
     walletAddress: "DLFyTv52jgjptxXxzwaDwUQUYAZ72vZjKE",
