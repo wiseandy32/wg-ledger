@@ -10,7 +10,7 @@ import {
   formatNumberWithCommas,
 } from "@/lib/helpers";
 import { addDataToDb } from "@/utils/auth";
-import { Check, CopyIcon, Info } from "lucide-react";
+import { Check, CopyIcon, Info, Loader2 } from "lucide-react";
 import { useState, useRef, useMemo } from "react";
 import Modal from "react-responsive-modal";
 import { paymentGateways } from "@/data";
@@ -25,6 +25,7 @@ function GateWay() {
 
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isHashModalOpen, setIsHashModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [transactionHash, setTransactionHash] = useState("");
   const [amountDeposited, setAmountDeposited] = useState("");
   const { user } = useAuth();
@@ -127,6 +128,8 @@ function GateWay() {
       return;
     }
 
+    setIsSubmitting(true);
+
     const coin = (coinsData || []).find((c) => c.id === data.id);
 
     const depositRequestInfo = {
@@ -176,6 +179,8 @@ function GateWay() {
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit deposit request");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -358,10 +363,12 @@ function GateWay() {
           <div className="flex flex-col gap-3 pt-2">
             <Button
               onClick={handleFinalSubmit}
+              disabled={isSubmitting}
               className="w-full h-12 font-bold shadow-lg shadow-brand-primary/20"
               variant="gooeyLeft"
             >
-              Submit for Verification
+              {isSubmitting && <Loader2 className="animate-spin mr-2 h-5 w-5" />}
+              {isSubmitting ? "Submitting..." : "Submit for Verification"}
             </Button>
             <Button
               variant="ghost"
