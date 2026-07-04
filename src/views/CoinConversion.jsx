@@ -4,7 +4,7 @@ import { useAuth } from "@/context/auth/use-auth";
 import { useCoinData } from "@/context/auth/use-coin-data";
 import { wallets } from "@/data";
 import { convertCoin, formatNumberWithCommas } from "@/lib/helpers";
-import { isV2Enabled, getBalance } from "@/lib/feature-flags";
+import { getBalance } from "@/lib/helpers";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -111,7 +111,7 @@ const CoinConversion = () => {
     const toWallet = wallets.find((w) => w.id === toCoin);
 
     let userBalance;
-    if (isV2Enabled(user) && fromWallet?.amountField) {
+    if (fromWallet?.amountField) {
       const cryptoBal = user[fromWallet.amountField] || 0;
       const fromCoinData = coinsData?.find((c) => c.id === fromCoin);
       userBalance = +cryptoBal * (fromCoinData?.current_price || 0);
@@ -205,7 +205,7 @@ const CoinConversion = () => {
                         />
                         <span className="font-medium">{wallet.name}</span>
                         <span className="text-xs text-muted-foreground dark:text-gray-200">
-                          {isV2Enabled(user) && wallet.amountField
+                          {wallet.amountField
                             ? `(${formatNumberWithCommas(Number(getBalance(user, wallet)).toFixed(8))} ${wallet.name})`
                             : `(Balance: $${formatNumberWithCommas(getBalance(user, wallet))})`}
                         </span>

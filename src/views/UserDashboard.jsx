@@ -5,7 +5,7 @@ import {
   formatNumberWithCommas,
   getSubCollectionDocuments,
 } from "@/lib/helpers";
-import { isV2Enabled, getBalance } from "@/lib/feature-flags";
+import { getBalance } from "@/lib/helpers";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "@/context/auth/use-auth";
 import TotalAssets from "./components/total-assets";
@@ -73,29 +73,15 @@ function UserDashboard() {
       return wallet;
     }
 
-    const v2 = isV2Enabled(user) && wallet.amountField;
     const matchingCoin = coinsData?.find((coin) => coin.id === wallet.id);
 
     if (matchingCoin) {
-      let usdBalance;
-      let coinAmount;
-
-      if (v2) {
-        const rawCrypto = user[wallet.amountField];
-        coinAmount = rawCrypto ? wallet.balance + +rawCrypto : 0;
-        usdBalance =
-          coinAmount > 0 && matchingCoin.current_price > 0
-            ? coinAmount * matchingCoin.current_price
-            : 0;
-      } else {
-        // V1: stored value is USD, derive crypto
-        const amount = user[wallet.value];
-        usdBalance = amount ? wallet.balance + +amount : wallet.balance;
-        coinAmount =
-          matchingCoin.current_price > 0
-            ? usdBalance / matchingCoin.current_price
-            : 0;
-      }
+      const rawCrypto = wallet.amountField ? user[wallet.amountField] : null;
+      const coinAmount = rawCrypto ? wallet.balance + +rawCrypto : 0;
+      const usdBalance =
+        coinAmount > 0 && matchingCoin.current_price > 0
+          ? coinAmount * matchingCoin.current_price
+          : 0;
 
       const walletData = {
         ...wallet,

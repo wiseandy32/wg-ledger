@@ -14,7 +14,7 @@ import { useAuth } from "@/context/auth/use-auth";
 import { useCoinData } from "@/context/auth/use-coin-data";
 import { withdrawalOptions, wallets } from "@/data";
 import { addDataToSubCollection, getCurrentDate } from "@/lib/helpers";
-import { isV2Enabled, getBalance } from "@/lib/feature-flags";
+import { getBalance } from "@/lib/helpers";
 import { auth } from "@/services/firebase";
 import { addDataToDb } from "@/utils/auth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -48,7 +48,7 @@ function Withdrawal() {
       const matchingCoin = coinsData?.find((c) => c.id === wallet?.id);
 
       let availableBalance;
-      if (isV2Enabled(user) && wallet?.amountField) {
+      if (wallet?.amountField) {
         const cryptoBal = user[wallet.amountField] || 0;
         availableBalance = +cryptoBal * (matchingCoin?.current_price || 0);
       } else {
@@ -191,7 +191,7 @@ function Withdrawal() {
                     <SelectItem key={option.title} value={option.value}>
                       {option.title}
                       {bal > 0
-                        ? isV2Enabled(user) && w?.amountField
+                        ? w?.amountField
                           ? ` - ${Number(bal).toFixed(8)} ${w.name}`
                           : ` - $${parseFloat(bal).toFixed(2)}`
                         : ""}

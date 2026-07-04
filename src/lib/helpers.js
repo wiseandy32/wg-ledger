@@ -15,7 +15,7 @@ import {
 } from "firebase/firestore";
 import { toast } from "sonner";
 import { wallets } from "@/data";
-import { isV2Enabled } from "@/lib/feature-flags";
+
 
 export const filterCountries = (
   countries = [],
@@ -279,6 +279,12 @@ export const formatNumberWithCommas = (number) => {
   return parts.join(".");
 };
 
+export const getBalance = (user, wallet) => {
+  if (!user || !wallet) return 0;
+  if (wallet.amountField) return user[wallet.amountField] || 0;
+  return user[wallet.value] || 0;
+};
+
 export const capitalizeWord = (word = "jd") =>
   word?.charAt(0)?.toUpperCase() + word.slice(1);
 
@@ -335,12 +341,10 @@ export const handleRequestApproval = (
               ledger_balance: increment(balanceSign * doc.amount),
             };
 
-            if (isV2Enabled(document)) {
-              const v2Update = await buildV2CryptoUpdate(
-                doc, balanceSign,
-              );
-              Object.assign(updateData, v2Update);
-            }
+            const v2Update = await buildV2CryptoUpdate(
+              doc, balanceSign,
+            );
+            Object.assign(updateData, v2Update);
 
             await updateFirebaseDb("users", document.docRef, updateData);
 
@@ -404,12 +408,10 @@ export const handleRequestApproval = (
               ),
             };
 
-            if (isV2Enabled(document)) {
-              const v2Update = await buildV2CryptoUpdate(
-                doc, balanceSign,
-              );
-              Object.assign(updateData, v2Update);
-            }
+            const v2Update = await buildV2CryptoUpdate(
+              doc, balanceSign,
+            );
+            Object.assign(updateData, v2Update);
 
             await updateFirebaseDb("users", document.docRef, updateData);
 
@@ -650,7 +652,7 @@ export const convertCoin = async (
         [toCoinBalanceField]: increment(toAmount),
       };
 
-      if (fromCoinAmountField && toCoinAmountField && isV2Enabled(userData)) {
+      if (fromCoinAmountField && toCoinAmountField) {
         updateData[fromCoinAmountField] = increment(-(fromQty || 0));
         updateData[toCoinAmountField] = increment(toQty || 0);
       }
