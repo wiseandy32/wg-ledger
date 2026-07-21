@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { toast } from "sonner";
 import { wallets } from "@/data";
+import { getProfileImage } from "@/lib/image-store";
 
 
 export const filterCountries = (
@@ -226,7 +227,8 @@ export const fetchUserByID = async (uid) => {
   const currentUser = auth.currentUser;
   const userDoc = await getSingleDocument(uid);
   if (!userDoc) return null;
-  const user = { ...currentUser, ...userDoc };
+  const profileImageBlob = await getProfileImage(uid);
+  const user = { ...currentUser, ...userDoc, profileImageBlob };
   return user;
 };
 
@@ -263,7 +265,7 @@ export const updateSubCollectionDocument = async (
   try {
     await updateDoc(docRef, data);
   } catch (error) {
-    console.Console(error);
+    console.error(error);
   }
 };
 

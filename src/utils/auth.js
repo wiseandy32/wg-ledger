@@ -35,6 +35,7 @@ export const addDataToDb = async (field, data) => {
     return docRef.id;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -49,6 +50,7 @@ export const setDataToDb = async (field, docId, data) => {
     return docId;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -57,6 +59,7 @@ export const updateUserProfile = async (newInfo) => {
     await updateProfile(auth.currentUser, newInfo);
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
