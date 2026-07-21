@@ -1,8 +1,6 @@
 "use client";
-/* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AuthContext } from "./use-auth";
-import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +14,8 @@ function AuthProvider({ children }) {
     return "";
   });
   const [authInitialized, setAuthInitialized] = useState(false);
+  const [userImage, setUserImage] = useState("");
+  const userImageUrlRef = useRef(null);
 
   const { data: user, isLoading: queryIsLoading } = useQuery({
     queryKey: ["uid", uid],
@@ -41,12 +41,27 @@ function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (userImageUrlRef.current) {
+      URL.revokeObjectURL(userImageUrlRef.current);
+      userImageUrlRef.current = null;
+    }
+    if (user?.profileImageBlob) {
+      const url = URL.createObjectURL(user.profileImageBlob);
+      userImageUrlRef.current = url;
+      setUserImage(url);
+    } else {
+      setUserImage("");
+    }
+  }, [user?.profileImageBlob]);
+
   const isLoading = !authInitialized || queryIsLoading;
 
   const values = {
     user,
     uid,
     isLoading,
+    userImage,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

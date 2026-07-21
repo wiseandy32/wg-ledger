@@ -4,6 +4,7 @@ import { useState, useRef, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/auth/use-auth";
 import { setDataToDb } from "@/utils/auth";
+import { saveProfileImage } from "@/lib/image-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, Info } from "lucide-react";
@@ -11,12 +12,15 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import RegionSelect from "@/components/region-select";
 
+const MAX_FILE_SIZE = 1 * 1024 * 1024;
+
 function CompleteProfile() {
   const { user, uid } = useContext(AuthContext);
   const router = useRouter();
   const qc = useQueryClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [displayPicture, setDisplayPicture] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imageError, setImageError] = useState("");
   const [region, setRegion] = useState(user?.region || "");
   const fileInputRef = useRef(null);
 
@@ -24,11 +28,15 @@ function CompleteProfile() {
     const file = e.target.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setDisplayPicture(reader.result);
-    };
-    reader.readAsDataURL(file);
+    if (file.size > MAX_FILE_SIZE) {
+      setImageError("Image must be 1MB or smaller");
+      e.target.value = "";
+      setSelectedFile(null);
+      return;
+    }
+
+    setImageError("");
+    setSelectedFile(file);
   };
 
   const onSubmit = async (e) => {
@@ -52,20 +60,17 @@ function CompleteProfile() {
         zipCode: formData.get("zipCode"),
         city: formData.get("city"),
         displayName: `${formData.get("firstName")} ${formData.get("lastName")}`,
-        isProfileCompleted: true, // Mark profile as completed
+        isProfileCompleted: true,
       };
 
-      if (displayPicture) {
-        profileData.photo = displayPicture;
+      if (selectedFile) {
+        await saveProfileImage(uid, selectedFile);
       }
 
       await setDataToDb("users", user.docRef, profileData);
 
       toast.success("Profile completed successfully!");
-      // Await invalidation to ensure next route sees fresh data
-      await qc.invalidateQueries({ queryKey: ["uid", uid] });
-      // Small buffer to allow context to update
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await qc.refetchQueries({ queryKey: ["uid", uid] });
       router.push("/user");
     } catch (error) {
       console.error(error);
@@ -142,6 +147,11 @@ function CompleteProfile() {
                   ref={fileInputRef}
                   className="h-12 bg-slate-50 dark:bg-brand-dark-lighter/50 border-gray-300 dark:border-brand-dark-lighter rounded-xl file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/10 file:text-brand-primary hover:file:bg-brand-primary/20 cursor-pointer"
                 />
+                {imageError && (
+                  <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+                    {imageError}
+                  </p>
+                )}
               </div>
             </div>
 

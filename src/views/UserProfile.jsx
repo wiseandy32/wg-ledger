@@ -2,7 +2,7 @@
 import CountrySelect from "@/components/country-select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/auth/use-auth";
@@ -12,12 +12,15 @@ import {
   processData,
   updateFirebaseDb,
 } from "@/lib/helpers";
+import { getProfileImage, saveProfileImage } from "@/lib/image-store";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { auth } from "@/services/firebase";
 import { updatePassword } from "firebase/auth";
 import { Loader2 } from "lucide-react";
 import RegionSelect from "@/components/region-select";
+
+const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
 function UserProfile() {
   const { user } = useAuth();
@@ -38,10 +41,32 @@ function UserProfile() {
   const fileInputRef = useRef(null);
   const formRef = useRef(null);
   const [displayPicture, setDisplayPicture] = useState("");
+  const [imageError, setImageError] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
+  const [stagedImageFile, setStagedImageFile] = useState(null);
+
+  useEffect(() => {
+    if (!user?.uid) return;
+    let revokeUrl = null;
+    getProfileImage(user.uid).then((blob) => {
+      if (blob) {
+        const url = URL.createObjectURL(blob);
+        revokeUrl = url;
+        setDisplayPicture(url);
+      }
+    });
+    return () => {
+      if (revokeUrl) URL.revokeObjectURL(revokeUrl);
+    };
+  }, [user?.uid]);
+
   const handleSubmit = async () => {
-    // updating the dp here will exceed the maximum size of a document in firebase
+    if (stagedImageFile) {
+      await saveProfileImage(user.uid, stagedImageFile);
+      setStagedImageFile(null);
+    }
+
     const newProfileDetails = {
       phone: phoneNumber,
       country: country,
@@ -61,40 +86,43 @@ function UserProfile() {
       currentProfileDetails,
     );
 
-    await updateFirebaseDb("users", user.docRef, updatedProfileDetails);
-    toast.success("Profile updated successfully.");
+    if (updatedProfileDetails) {
+      await updateFirebaseDb("users", user.docRef, updatedProfileDetails);
+    }
     qc.invalidateQueries({ queryKey: ["uid"] });
+    toast.success("Profile updated successfully.");
+  };
+
+  const handleCancel = async () => {
+    setIsNotEditing(true);
+    setIsTouched(false);
+    setStagedImageFile(null);
+    setImageError("");
+    setPhoneNumber("");
+    setWalletAddress("");
+    setCountry(user?.country || "");
+    setCountryRegion(user?.region || "");
+    const blob = await getProfileImage(user.uid);
+    if (blob) {
+      setDisplayPicture(URL.createObjectURL(blob));
+    } else {
+      setDisplayPicture("");
+    }
   };
 
   const handleFileChange = (e) => {
-    if (isNotEditing) {
-      return;
-    }
-
+    if (isNotEditing) return;
     const file = e.target.files[0];
     if (!file) return;
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.result === user?.photo) {
-          return;
-        }
-
-        updateFirebaseDb(
-          "users",
-          user.docRef,
-          {
-            photo: reader.result,
-          },
-          () => setDisplayPicture(user?.photo),
-        );
-
-        setDisplayPicture(reader.result);
-      };
-      reader.readAsDataURL(file);
+    if (file.size > MAX_FILE_SIZE) {
+      setImageError("Image must be 1MB or smaller");
+      e.target.value = "";
+      return;
     }
+    setImageError("");
+    setStagedImageFile(file);
+    setIsTouched(true);
+    setDisplayPicture(URL.createObjectURL(file));
   };
 
   return (
@@ -105,37 +133,42 @@ function UserProfile() {
           Profile
         </h1>
       </div>
-      <div className="bg-muted/50 p-5 rounded-md flex items-center gap-2">
-        {/* <div className="border-solid border-2 border-red-500 before:content-[hello] before:h-[5px] before:w-full before:border-b-[100px] bg-black bottom-[0]"> */}
-        <Avatar
-          className={`w-14 h-14 object-contain object-center ${
-            isNotEditing === false && "cursor-pointer"
-          }`}
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <AvatarImage
-            className="object-contain object-center"
-            src={displayPicture || user?.photo}
+      <div className="bg-muted/50 p-5 rounded-md">
+        <div className="flex items-center gap-2">
+          <Avatar
+            className={`w-14 h-14 object-contain object-center ${
+              isNotEditing === false && "cursor-pointer"
+            }`}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <AvatarImage
+              className="object-contain object-center"
+              src={displayPicture}
+            />
+            <AvatarFallback>
+              {capitalizeFirstLettersOfName(user?.name)}
+            </AvatarFallback>
+          </Avatar>
+          <input
+            className="hidden"
+            type="file"
+            id="avatar"
+            accept="image/png, image/jpeg, image/webp"
+            name="avatar"
+            ref={fileInputRef}
+            disabled={isNotEditing}
+            onChange={handleFileChange}
           />
-          <AvatarFallback>
-            {capitalizeFirstLettersOfName(user?.name)}
-          </AvatarFallback>
-        </Avatar>
-        <input
-          className="hidden"
-          type="file"
-          id="avatar"
-          accept="image/png, image/jpeg, image/webp"
-          name="avatar"
-          ref={fileInputRef}
-          disabled={isNotEditing}
-          onChange={handleFileChange}
-        />
-        <div className="mr-2 text-sm grid gap-1">
-          <p className="font-extrabold">{user?.displayName}</p>
-          <p className="text-slate-400">@{user?.username}</p>
-        </div>
-        <div className=" ml-auto">
+          <div className="mr-2 text-sm grid gap-1">
+            <p className="font-extrabold">{user?.displayName}</p>
+            <p className="text-slate-400">@{user?.username}</p>
+          </div>
+          <div className="ml-auto flex gap-2">
+            {!isNotEditing && (
+            <Button variant="outline" onClick={handleCancel}>
+              Cancel
+            </Button>
+          )}
           <Button
             onClick={() => {
               setIsNotEditing((prev) => !prev);
@@ -149,6 +182,15 @@ function UserProfile() {
             {isNotEditing ? "Edit" : "Update"}
           </Button>
         </div>
+        </div>
+        {imageError && (
+          <p className="text-sm text-red-600 dark:text-red-400 mt-2">{imageError}</p>
+        )}
+        {!isNotEditing && (
+          <p className="text-xs text-muted-foreground mt-1">
+            Max file size: 1MB. PNG, JPEG, or WebP.
+          </p>
+        )}
       </div>
       <form ref={formRef}>
         <fieldset className="bg-muted/50 rounded-md">
