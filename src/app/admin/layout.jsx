@@ -15,9 +15,7 @@ export default function AdminLayout({ children }) {
   useEffect(() => {
     if (!isLoading) {
       if (!uid) {
-        router.push(
-          `/auth/login?from=${encodeURIComponent(window.location.pathname)}`,
-        );
+        router.push("/auth/login");
       } else if (user && !user.isAdmin) {
         router.push("/user");
       } else if (user?.isAdmin) {

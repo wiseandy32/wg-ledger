@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { loginFormFields } from "../data";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { useState, useEffect } from "react";
@@ -15,7 +15,6 @@ function Login() {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const login = async (e) => {
@@ -39,8 +38,7 @@ function Login() {
         return;
       }
 
-      const from = searchParams.get("from") || "/user";
-      router.push(from);
+      router.push("/user");
     } catch (error) {
       const { code } = error;
       console.error(error);
