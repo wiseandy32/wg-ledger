@@ -58,6 +58,11 @@ function PasswordChangeSection({ email }) {
                   return;
                 }
 
+                if (newPassword.length < 6) {
+                  setError("Password must be at least 6 characters");
+                  return;
+                }
+
                 if (newPassword !== confirmNewPassword) {
                   setError(
                     "Passwords do not match. Please ensure both fields are identical",
