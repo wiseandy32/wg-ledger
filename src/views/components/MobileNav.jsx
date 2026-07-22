@@ -24,10 +24,10 @@ function MobileNav() {
 
   const logout = async () => {
     try {
+      router.push("/auth/login");
       await signOut(auth);
       localStorage.removeItem("wglid");
       setIsMenuVisible(false);
-      router.push("/");
     } catch (error) {
       console.error(error);
     }
