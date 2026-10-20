@@ -321,7 +321,7 @@ export const paymentGateways = [
     id: "ripple",
     qrCode: xrpQRCode,
     icon: xrpIcon,
-    walletAddress: "r9VvmZmL7VASmBb8p3ByjnjxdKJ62BQme1",
+    walletAddress: "rL1LpUZvVn9XdE1vJ3Ck8b5chKg7JRMpn1",
   },
   {
     type: "XLM",
@@ -329,7 +329,7 @@ export const paymentGateways = [
     id: "stellar",
     qrCode: xlmQRCode,
     icon: xlmIcon,
-    walletAddress: "GDPNUJUQV6KMBEXDEE3M3EHW6IQPFHIF6LWA45IQOG4Q4NIRKSNV2QZ5",
+    walletAddress: "GDCUQAYL3YGFHDBIDWA3NS2QR45WD6K6CWVVZC32XPTJ3VXXDU2JBIZ4",
   },
   {
     type: "ethereum",
