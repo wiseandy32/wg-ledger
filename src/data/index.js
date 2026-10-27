@@ -15,6 +15,7 @@ const ltcIcon = "/assets/ltc-logo.png";
 const algoIcon = "/assets/algo-logo.png";
 const solIcon = "/assets/sol-logo.png";
 const bnbIcon = "/assets/bnb-logo.png";
+const bnbQRCode = "/assets/bnb-qr.jpg";
 const qtumIcon = "/assets/qtum-logo.png";
 const tezosIcon = "/assets/tezos-logo.png";
 const thetaIcon = "/assets/theta-logo.png";
@@ -34,6 +35,8 @@ const solQRCode = "/assets/sol-qr.jpg";
 const adaQRCode = "/assets/ada-qr.jpg";
 const xdceQRCode = "/assets/xdce-qr.jpg";
 const shibaQRCode = "/assets/shiba-qr.jpeg";
+const tronQRCode = "/assets/tron-qr.jpg";
+const tronIcon = "/assets/tron-logo.webp";
 
 export const registrationFormField = [
   {
@@ -285,6 +288,14 @@ export const wallets = [
     amountField: "xdce_amount",
   },
   {
+    name: "Tron",
+    id: "tron",
+    icon: tronIcon,
+    balance: 0.0,
+    value: "tron_balance",
+    amountField: "tron_amount",
+  },
+  {
     name: "Total Withdrawals",
     icon: thetaIcon,
     balance: 0.0,
@@ -304,6 +315,8 @@ export const depositMethods = [
   { name: "ADA", id: "cardano", icon: adaIcon, path: "cardano" },
   { name: "XDCE", id: "xdce-crowd-sale", icon: xdceIcon, path: "xdce" },
   { name: "SHIBA", id: "shiba-inu", icon: shibaIcon, path: "shiba" },
+  { name: "Tron", id: "tron", icon: tronIcon, path: "tron" },
+  { name: "BnB", id: "binancecoin", icon: bnbIcon, path: "bnb" },
 ];
 
 export const paymentGateways = [
@@ -313,7 +326,7 @@ export const paymentGateways = [
     value: "BTC_balance",
     qrCode: bitcoinQRCode,
     icon: btcIcon,
-    walletAddress: "bc1qx4np0tgsl0ys7jcqes4cva9y40wjhf5nfhv066",
+    walletAddress: "bc1qjhp3lglp9l7sc3nsgpky9vynk5mwmf90rj7lf2",
   },
   {
     type: "XRP",
@@ -337,7 +350,7 @@ export const paymentGateways = [
     id: "ethereum",
     qrCode: ethQRCode,
     icon: ethIcon,
-    walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
+    walletAddress: "0xB49C6E9a8662857feD134DDEF54A44482547e744",
   },
   {
     type: "USDT",
@@ -354,7 +367,7 @@ export const paymentGateways = [
     id: "dogecoin",
     qrCode: dogeQRCode,
     icon: dogeIcon,
-    walletAddress: "DLFyTv52jgjptxXxzwaDwUQUYAZ72vZjKE",
+    walletAddress: "DTjsBukiFhtVbTSTYfAyDpbCxtScxwo7ou",
   },
   {
     type: "Sol",
@@ -362,7 +375,7 @@ export const paymentGateways = [
     id: "solana",
     icon: solIcon,
     qrCode: solQRCode,
-    walletAddress: "BsfZQAEfvbkxfDQFFGqXfQNVV7y8L6rCprs7MY3VykSf",
+    walletAddress: "2urLB8ZkLJW2jjxuZNYhSradhN5H4KZtC49pad8KBbJa",
   },
   {
     type: "Algo",
@@ -380,7 +393,7 @@ export const paymentGateways = [
     icon: adaIcon,
     qrCode: adaQRCode,
     walletAddress:
-      "addr1q8lvmeymcwq3nrm6rzwnyn73t6edlvzppt6qzp735x08hvzshcgz0a2vlgd0mhr4nwlw89r3zkg36me9hf99rz04j9nqwncmvs",
+      "addr1q9uyn0gfvf5h2tss2gg4rp0zprc6vhxhmv0enrlfku77x4mcfx7sjcnfw5hpq5s32xz7yz835ewd0kclnx87ndeaudts9ge74r",
   },
   {
     type: "XDCE",
@@ -398,6 +411,22 @@ export const paymentGateways = [
     icon: shibaIcon,
     qrCode: shibaQRCode,
     walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
+  },
+  {
+    type: "tron",
+    value: "tron_balance",
+    id: "tron",
+    icon: tronIcon,
+    qrCode: tronQRCode,
+    walletAddress: "TLp9dbyUM5D5cqfy8GhJhvU5LcZDfqEEk6",
+  },
+  {
+    type: "bnb",
+    value: "bnb_balance",
+    id: "binancecoin",
+    icon: bnbIcon,
+    qrCode: bnbQRCode,
+    walletAddress: "0xB49C6E9a8662857feD134DDEF54A44482547e744",
   },
 ];
 
@@ -473,5 +502,9 @@ export const withdrawalOptions = [
   {
     title: "XDCE (ERC20)",
     value: "xdce_balance",
+  },
+  {
+    title: "TRON",
+    value: "tron_balance",
   },
 ];
