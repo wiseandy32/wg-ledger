@@ -12,6 +12,7 @@ const xlmIcon = "/assets/xlm-logo.png";
 const xrpIcon = "/assets/xrp-logo.png";
 const dogeIcon = "/assets/doge-logo.png";
 const ltcIcon = "/assets/ltc-logo.png";
+const ltcQRCode = "/assets/ltc-qr.jpg";
 const algoIcon = "/assets/algo-logo.png";
 const solIcon = "/assets/sol-logo.png";
 const bnbIcon = "/assets/bnb-logo.png";
@@ -34,7 +35,7 @@ const algoQRCode = "/assets/algo-qr.jpg";
 const solQRCode = "/assets/sol-qr.jpg";
 const adaQRCode = "/assets/ada-qr.jpg";
 const xdceQRCode = "/assets/xdce-qr.jpg";
-const shibaQRCode = "/assets/shiba-qr.jpeg";
+const shibaQRCode = "/assets/shiba-qr.jpg";
 const tronQRCode = "/assets/tron-qr.jpg";
 const tronIcon = "/assets/tron-logo.webp";
 
@@ -317,6 +318,7 @@ export const depositMethods = [
   { name: "SHIBA", id: "shiba-inu", icon: shibaIcon, path: "shiba" },
   { name: "Tron", id: "tron", icon: tronIcon, path: "tron" },
   { name: "BnB", id: "binancecoin", icon: bnbIcon, path: "bnb" },
+  { name: "Litecoin", id: "litecoin", icon: ltcIcon, path: "litecoin" },
 ];
 
 export const paymentGateways = [
@@ -410,7 +412,7 @@ export const paymentGateways = [
     id: "shiba-inu",
     icon: shibaIcon,
     qrCode: shibaQRCode,
-    walletAddress: "0xFb23Bf97A6e70A978F8dC518EC7d83E57aad7584",
+    walletAddress: "0xB49C6E9a8662857feD134DDEF54A44482547e744",
   },
   {
     type: "tron",
@@ -427,6 +429,14 @@ export const paymentGateways = [
     icon: bnbIcon,
     qrCode: bnbQRCode,
     walletAddress: "0xB49C6E9a8662857feD134DDEF54A44482547e744",
+  },
+  {
+    type: "ltc",
+    value: "litecoin_balance",
+    id: "litecoin",
+    icon: ltcIcon,
+    qrCode: ltcQRCode,
+    walletAddress: "LcGgYF7mrigjVWsdZh6tYhzTWDQZcraMvt",
   },
 ];
 
